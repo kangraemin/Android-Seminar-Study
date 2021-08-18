@@ -2,4 +2,12 @@
     <string name="app_name">AndroidSeminarStudy</string>
     <string name="first_week_test_driven_development_title">1 week - TDD</string>
     <string name="first_week_test_driven_development_password_rating_format">점수 : %d</string>
+
+    <string name="date_just_moment_ago">방금전</string>
+    <string name="date_minutes_ago">%d분전</string>
+    <string name="date_hours_ago">%d시간전</string>
+    <string name="date_one_day_ago">어제</string>
+    <string name="date_two_day_ago">그제</string>
+    <string name="date_n_day_ago">%d일전</string>
+    <string name="date_a_week_ago">일주일전</string>
 </resources>

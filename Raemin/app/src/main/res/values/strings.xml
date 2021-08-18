@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">AndroidSeminarStudy</string>
     <string name="first_week_test_driven_development_title">1 week - TDD</string>
+    <string name="first_week_test_driven_development_password_rating_format">점수 : %d</string>
 </resources>

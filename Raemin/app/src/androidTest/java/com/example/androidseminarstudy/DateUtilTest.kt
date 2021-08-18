@@ -72,6 +72,38 @@ class DateUtilTest {
         }
     }
 
+    private enum class UpdatedDateTestForNoInjection(
+        private val dateUnit: Int,
+        private val amount: Int,
+        val expectedText: String
+    ) {
+        ERROR_FOR_PAST_TIME(Calendar.SECOND, 100, "asdf"),
+        FIFTY_NINE_SECONDS_AGO(Calendar.SECOND, -59, "방금전"),
+        ONE_SECOND_AGO(Calendar.SECOND, -1, "방금전"),
+        SIXTY_SECONDS_AGO(Calendar.SECOND, -60, "1분전"),
+        FIVE_MINUTES_AGO(Calendar.MINUTE, -5, "5분전"),
+        FIFTY_NINE_MINUTES_AGO(Calendar.MINUTE, -59, "59분전"),
+        SIXTY_MINUTES_AGO(Calendar.MINUTE, -60, "1시간전"),
+        ONE_MINUTE_BEFORE_DAY(Calendar.MINUTE, -(60 * 24 - 1), "23시간전"),
+        ONE_DAY_AGO(Calendar.DATE, -1, "어제"),
+        ONE_MINUTE_AFTER_DAY(Calendar.MINUTE, -(60 * 24 + 1), "어제"),
+        TWO_DAY_AGO(Calendar.DATE, -2, "2일전"),
+        THREE_DAYS_AGO(Calendar.DATE, -3, "3일전"),
+        SIX_DAYS_AGO(Calendar.DATE, -6, "6일전"),
+        SEVEN_DAY_AGO(Calendar.DATE, -7, "2021.8.12"),
+        EIGHT_DAY_AGO(Calendar.DATE, -8, "2021.8.11");
+
+        private val dateFormat =
+            SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss", Locale.getDefault()).apply {
+                timeZone = TimeZone.getTimeZone("GMT")
+            }
+
+        val updatedDateForTest: String = dateFormat.format(Calendar.getInstance().run {
+            add(dateUnit, amount)
+            return@run time
+        })
+    }
+
     @Before
     fun setUp() {
         instrumentContext = ApplicationProvider.getApplicationContext()
@@ -253,6 +285,171 @@ class DateUtilTest {
                 context = instrumentContext,
                 updated = UpdatedDateTest.EIGHT_DAY_AGO.updatedDateForTest,
                 instant = UpdatedDateTest.instant
+            )
+        )
+    }
+
+    @Test(expected = DateUtils.InvalidUpdateTime::class)
+    fun testForErrorForPastTimeNoInstantInjection() {
+        assertEquals(
+            UpdatedDateTestForNoInjection.ERROR_FOR_PAST_TIME.expectedText,
+            DateUtils.convertToUpdateDate(
+                context = instrumentContext,
+                updated = UpdatedDateTestForNoInjection.ERROR_FOR_PAST_TIME.updatedDateForTest
+            )
+        )
+    }
+
+    @Test
+    fun testForFiftyNineSecondsAgoNoInstantInjection() {
+        assertEquals(
+            UpdatedDateTestForNoInjection.FIFTY_NINE_SECONDS_AGO.expectedText,
+            DateUtils.convertToUpdateDate(
+                context = instrumentContext,
+                updated = UpdatedDateTestForNoInjection.FIFTY_NINE_SECONDS_AGO.updatedDateForTest
+            )
+        )
+    }
+
+    @Test
+    fun testForOneSecondAgoNoInstantInjection() {
+        assertEquals(
+            UpdatedDateTestForNoInjection.ONE_SECOND_AGO.expectedText,
+            DateUtils.convertToUpdateDate(
+                context = instrumentContext,
+                updated = UpdatedDateTestForNoInjection.ONE_SECOND_AGO.updatedDateForTest
+            )
+        )
+    }
+
+    @Test
+    fun testForSixtySecondsAgoNoInstantInjection() {
+        assertEquals(
+            UpdatedDateTestForNoInjection.SIXTY_SECONDS_AGO.expectedText,
+            DateUtils.convertToUpdateDate(
+                context = instrumentContext,
+                updated = UpdatedDateTestForNoInjection.SIXTY_SECONDS_AGO.updatedDateForTest
+            )
+        )
+    }
+
+    @Test
+    fun testForFiveMinutesAgoNoInstantInjection() {
+        assertEquals(
+            UpdatedDateTestForNoInjection.FIVE_MINUTES_AGO.expectedText,
+            DateUtils.convertToUpdateDate(
+                context = instrumentContext,
+                updated = UpdatedDateTestForNoInjection.FIVE_MINUTES_AGO.updatedDateForTest
+            )
+        )
+    }
+
+    @Test
+    fun testForFiftyNineMinutesAgoNoInstantInjection() {
+        assertEquals(
+            UpdatedDateTestForNoInjection.FIFTY_NINE_MINUTES_AGO.expectedText,
+            DateUtils.convertToUpdateDate(
+                context = instrumentContext,
+                updated = UpdatedDateTestForNoInjection.FIFTY_NINE_MINUTES_AGO.updatedDateForTest
+            )
+        )
+    }
+
+    @Test
+    fun testForSixtyMinutesAgoNoInstantInjection() {
+        assertEquals(
+            UpdatedDateTestForNoInjection.SIXTY_MINUTES_AGO.expectedText,
+            DateUtils.convertToUpdateDate(
+                context = instrumentContext,
+                updated = UpdatedDateTestForNoInjection.SIXTY_MINUTES_AGO.updatedDateForTest
+            )
+        )
+    }
+
+    @Test
+    fun testForOneMinuteBeforeDayNoInstantInjection() {
+        assertEquals(
+            UpdatedDateTestForNoInjection.ONE_MINUTE_BEFORE_DAY.expectedText,
+            DateUtils.convertToUpdateDate(
+                context = instrumentContext,
+                updated = UpdatedDateTestForNoInjection.ONE_MINUTE_BEFORE_DAY.updatedDateForTest
+            )
+        )
+    }
+
+    @Test
+    fun testForOneDayAgoNoInstantInjection() {
+        assertEquals(
+            UpdatedDateTestForNoInjection.ONE_DAY_AGO.expectedText,
+            DateUtils.convertToUpdateDate(
+                context = instrumentContext,
+                updated = UpdatedDateTestForNoInjection.ONE_DAY_AGO.updatedDateForTest
+            )
+        )
+    }
+
+    @Test
+    fun testForOneMinuteAfterDayNoInstantInjection() {
+        assertEquals(
+            UpdatedDateTestForNoInjection.ONE_MINUTE_AFTER_DAY.expectedText,
+            DateUtils.convertToUpdateDate(
+                context = instrumentContext,
+                updated = UpdatedDateTestForNoInjection.ONE_MINUTE_AFTER_DAY.updatedDateForTest
+            )
+        )
+    }
+
+    @Test
+    fun testForTwoDayAgoNoInstantInjection() {
+        assertEquals(
+            UpdatedDateTestForNoInjection.TWO_DAY_AGO.expectedText,
+            DateUtils.convertToUpdateDate(
+                context = instrumentContext,
+                updated = UpdatedDateTestForNoInjection.TWO_DAY_AGO.updatedDateForTest
+            )
+        )
+    }
+
+    @Test
+    fun testForThreeDaysAgoNoInstantInjection() {
+        assertEquals(
+            UpdatedDateTestForNoInjection.THREE_DAYS_AGO.expectedText,
+            DateUtils.convertToUpdateDate(
+                context = instrumentContext,
+                updated = UpdatedDateTestForNoInjection.THREE_DAYS_AGO.updatedDateForTest
+            )
+        )
+    }
+
+    @Test
+    fun testForSixDaysAgoNoInstantInjection() {
+        assertEquals(
+            UpdatedDateTestForNoInjection.SIX_DAYS_AGO.expectedText,
+            DateUtils.convertToUpdateDate(
+                context = instrumentContext,
+                updated = UpdatedDateTestForNoInjection.SIX_DAYS_AGO.updatedDateForTest
+            )
+        )
+    }
+
+    @Test
+    fun testForSevenDayAgoNoInstantInjection() {
+        assertEquals(
+            UpdatedDateTestForNoInjection.SEVEN_DAY_AGO.expectedText,
+            DateUtils.convertToUpdateDate(
+                context = instrumentContext,
+                updated = UpdatedDateTestForNoInjection.SEVEN_DAY_AGO.updatedDateForTest
+            )
+        )
+    }
+
+    @Test
+    fun testForEightDayAgoNoInstantInjection() {
+        assertEquals(
+            UpdatedDateTestForNoInjection.EIGHT_DAY_AGO.expectedText,
+            DateUtils.convertToUpdateDate(
+                context = instrumentContext,
+                updated = UpdatedDateTestForNoInjection.EIGHT_DAY_AGO.updatedDateForTest
             )
         )
     }

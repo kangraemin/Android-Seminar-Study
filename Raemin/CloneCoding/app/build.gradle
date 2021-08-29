@@ -47,6 +47,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     // RxJava
     implementation "io.reactivex.rxjava2:rxkotlin:$rxkotlin_version"
+    implementation 'com.jakewharton.rxbinding3:rxbinding:3.1.0'
     // Kotlin
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"

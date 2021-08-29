@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">DeliveryCloneCoding</string>
+
+    <!-- Splash UI -->
+    <string name="splash_title">배달의민족</string>
+    <string name="splash_subtitle">대한민국 1등 배달어플</string>
+
 </resources>

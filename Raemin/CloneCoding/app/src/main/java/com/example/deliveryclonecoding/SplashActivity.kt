@@ -14,8 +14,8 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setSplashTitle()
         binding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
+        setSplashTitle()
     }
 
     private fun setSplashTitle() {

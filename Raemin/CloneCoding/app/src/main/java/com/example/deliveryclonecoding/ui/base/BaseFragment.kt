@@ -1,4 +1,4 @@
-package com.example.deliveryclonecoding.base
+package com.example.deliveryclonecoding.ui.base
 
 import androidx.fragment.app.Fragment
 import io.reactivex.disposables.CompositeDisposable

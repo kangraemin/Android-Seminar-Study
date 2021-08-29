@@ -7,7 +7,7 @@ import android.text.style.AbsoluteSizeSpan
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.fragment.findNavController
 import com.example.deliveryclonecoding.R
-import com.example.deliveryclonecoding.base.BaseFragment
+import com.example.deliveryclonecoding.ui.base.BaseFragment
 import com.example.deliveryclonecoding.databinding.FragmentSplashBinding
 import io.reactivex.Completable
 import io.reactivex.android.schedulers.AndroidSchedulers

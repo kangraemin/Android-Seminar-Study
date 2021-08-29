@@ -19,6 +19,24 @@
             android:exported="true">
 
         </activity>
+
+        <activity
+            android:name=".mvc.MvcMainActivity"
+            android:exported="true">
+
+        </activity>
+
+        <activity
+            android:name=".mvp.MvpMainActivity"
+            android:exported="true">
+
+        </activity>
+
+        <activity
+            android:name=".mvvm.MvvmMainActivity"
+            android:exported="true">
+
+        </activity>
     </application>
 
 </manifest>

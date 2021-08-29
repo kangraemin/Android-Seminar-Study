@@ -1,25 +1,26 @@
-package com.example.deliveryclonecoding
+package com.example.deliveryclonecoding.ui
 
-import android.content.Intent
 import android.os.Bundle
 import android.text.SpannableString
-import android.text.Spanned.SPAN_INCLUSIVE_INCLUSIVE
+import android.text.Spanned
 import android.text.style.AbsoluteSizeSpan
 import androidx.databinding.DataBindingUtil
-import com.example.deliveryclonecoding.base.BaseActivity
-import com.example.deliveryclonecoding.databinding.ActivitySplashBinding
+import androidx.navigation.fragment.findNavController
+import com.example.deliveryclonecoding.R
+import com.example.deliveryclonecoding.base.BaseFragment
+import com.example.deliveryclonecoding.databinding.FragmentSplashBinding
 import io.reactivex.Completable
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
 import java.util.concurrent.TimeUnit
 
-class SplashActivity : BaseActivity() {
+class SplashFragment : BaseFragment() {
 
-    private lateinit var binding: ActivitySplashBinding
-    private val mainIntent: Intent by lazy { Intent(this, MainActivity::class.java) }
+    private lateinit var binding: FragmentSplashBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_splash)
+        binding = DataBindingUtil.setContentView(requireActivity(), R.layout.fragment_splash)
         setSplashTitle()
         startSplashTimer()
     }
@@ -27,8 +28,9 @@ class SplashActivity : BaseActivity() {
     private fun startSplashTimer() {
         Completable
             .timer(2000, TimeUnit.MILLISECONDS)
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
-                startActivity(mainIntent)
+                findNavController().navigate(R.id.action_splashFragment_to_mainFragment)
             }, { it.printStackTrace() })
             .addTo(compositeDisposable)
     }
@@ -39,8 +41,9 @@ class SplashActivity : BaseActivity() {
                 setSpan(
                     AbsoluteSizeSpan(
                         resources.getDimension(R.dimen.splash_title_particle_size).toInt()
-                    ), 2, 3, SPAN_INCLUSIVE_INCLUSIVE
+                    ), 2, 3, Spanned.SPAN_INCLUSIVE_INCLUSIVE
                 )
             }
     }
+
 }

@@ -16,7 +16,8 @@
     <application>
         <activity
             android:name=".DeliveryMainActivity"
-            android:exported="true" />
+            android:exported="true"
+            android:theme="@style/Theme.AndroidStudy.Delivery" />
     </application>
 
 </manifest>

@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">BaeminApp</string>
+    <string name="app_name">배달의민족</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search">검색</string>
+    <string name="dibs">찜</string>
+    <string name="home">배민</string>
+    <string name="orders">주문내역</string>
+    <string name="mypage">My배민</string>
 </resources>

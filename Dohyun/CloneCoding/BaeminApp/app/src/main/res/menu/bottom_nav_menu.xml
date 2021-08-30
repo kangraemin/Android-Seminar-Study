@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_search"
+        android:title="@string/search"
+        android:icon="@drawable/search"
+        android:checkable="false"/>
+
+    <item
+        android:id="@+id/nav_dibs"
+        android:title="@string/dibs"
+        android:icon="@drawable/heart"
+        android:checkable="false"/>
+
+    <item
+        android:id="@+id/nav_home"
+        android:title=""
+        android:enabled="false"
+        android:checkable="false"/>
+
+    <item
+        android:id="@+id/nav_orders"
+        android:title="@string/orders"
+        android:icon="@drawable/invoice"
+        android:checkable="false"/>
+
+    <item
+        android:id="@+id/nav_mypage"
+        android:title="@string/mypage"
+        android:icon="@drawable/yummy"
+        android:checkable="false"/>
+</menu>

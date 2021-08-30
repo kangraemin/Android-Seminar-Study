@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.dohyun.baeminapp.R
+import com.dohyun.baeminapp.ToolbarUtil
 
 class OrdersFragment : Fragment() {
 
@@ -14,6 +15,7 @@ class OrdersFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_orders, container, false)
+        ToolbarUtil.initToolbar(activity, R.id.orders_toolbar, view)
         return view
     }
 }

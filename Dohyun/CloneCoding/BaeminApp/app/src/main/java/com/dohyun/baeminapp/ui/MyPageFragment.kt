@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.dohyun.baeminapp.R
+import com.dohyun.baeminapp.ToolbarUtil
 
 class MyPageFragment : Fragment() {
 
@@ -14,6 +15,7 @@ class MyPageFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_my_page, container, false)
+        ToolbarUtil.initToolbar(activity, R.id.mypage_toolbar, view)
         return view
     }
 }

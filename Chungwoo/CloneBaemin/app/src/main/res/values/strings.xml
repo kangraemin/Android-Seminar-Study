@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">CloneBaemin</string>
+    <string name="splash_title">대한민국 1등 배달어플</string>
+    <string name="company_name">우아한형제들</string>
 </resources>

@@ -14,7 +14,8 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.AndroidStudy.Delivery" parent="Theme.AppCompat.NoActionBar">
-
+    <style name="Theme.AndroidStudy.Delivery" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:statusBarColor">@color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
     </style>
 </resources>

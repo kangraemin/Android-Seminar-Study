@@ -13,6 +13,7 @@
         android:id="@+id/item_title_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:gravity="center"
         tools:drawableTopCompat="@drawable/ic_search"
         tools:text="검색" />
 

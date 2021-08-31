@@ -2,6 +2,7 @@ package com.terry.delivery
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.findNavController
 import com.terry.delivery.base.BaseFragment
 import com.terry.delivery.databinding.FragmentMainBinding
 
@@ -14,6 +15,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
         super.onViewCreated(view, savedInstanceState)
 
         initBottomMenu()
+        bindViews()
     }
 
     private fun initBottomMenu() {
@@ -32,4 +34,31 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
         }
     }
 
+    private fun bindViews() {
+        binding?.let { binding ->
+            binding.layoutSearchContainer.parentViewGroup.setOnClickListener {
+                findNavController().navigate(
+                    MainFragmentDirections.actionMainFragmentToSearchFragment()
+                )
+            }
+
+            binding.layoutFavoriteContainer.parentViewGroup.setOnClickListener {
+                findNavController().navigate(
+                    MainFragmentDirections.actionMainFragmentToFavoriteFragment()
+                )
+            }
+
+            binding.layoutOrderContainer.parentViewGroup.setOnClickListener {
+                findNavController().navigate(
+                    MainFragmentDirections.actionMainFragmentToOrderListFragment()
+                )
+            }
+
+            binding.layoutMyContainer.parentViewGroup.setOnClickListener {
+                findNavController().navigate(
+                    MainFragmentDirections.actionMainFragmentToMyFragment()
+                )
+            }
+        }
+    }
 }

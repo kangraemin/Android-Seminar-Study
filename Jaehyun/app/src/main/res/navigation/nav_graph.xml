@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/splashFragment">
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="android.anjahyun.study.view.SplashFragment"
+        tools:layout="@layout/fragment_splash"
+        app:popUpToInclusive="true"
+        android:label="SplashFragment" >
+        <action
+            android:id="@+id/action_splashFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favFragment"
+        android:name="android.anjahyun.study.view.FavFragment"
+        tools:layout="@layout/fragment_fav"
+        android:label="FavFragment" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="android.anjahyun.study.view.SearchFragment"
+        tools:layout="@layout/fragment_search"
+        android:label="SearchFragment" />
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="android.anjahyun.study.view.MainFragment"
+        tools:layout="@layout/fragment_main"
+        android:label="MainFragment" />
+    <fragment
+        android:id="@+id/orderListFragment"
+        android:name="android.anjahyun.study.view.OrderListFragment"
+        tools:layout="@layout/fragment_orderList"
+        android:label="OrderListFragment" />
+    <fragment
+        android:id="@+id/myFragment"
+        android:name="android.anjahyun.study.view.MyFragment"
+        tools:layout="@layout/fragment_my"
+        android:label="MyFragment" />
+</navigation>

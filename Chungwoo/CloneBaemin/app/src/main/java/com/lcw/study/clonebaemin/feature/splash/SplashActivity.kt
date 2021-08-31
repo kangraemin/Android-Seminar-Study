@@ -1,8 +1,10 @@
-package com.lcw.study.clonebaemin
+package com.lcw.study.clonebaemin.feature.splash
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.lcw.study.clonebaemin.R
+import com.lcw.study.clonebaemin.feature.main.MainActivity
 import java.util.*
 import kotlin.concurrent.timer
 

@@ -5,18 +5,20 @@
     android:layout_width="0dp"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:layout_width="wrap_content">
 
-    <ImageView
-        android:id="@+id/item_image_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        tools:src="@drawable/ic_search" />
+    <!--    <ImageView-->
+    <!--        android:id="@+id/item_image_view"-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        tools:src="@drawable/ic_search" />-->
 
     <TextView
         android:id="@+id/item_title_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        tools:drawableTopCompat="@drawable/ic_search"
         tools:text="검색" />
 
 </LinearLayout>

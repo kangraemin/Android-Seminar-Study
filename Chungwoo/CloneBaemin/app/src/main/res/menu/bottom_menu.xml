@@ -1,42 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
         android:id="@+id/search_tab"
-        app:showAsAction="always"
-        android:enabled="true"
         android:icon="@drawable/ic_search"
         android:title="@string/search" />
     <item
         android:id="@+id/favorite_tab"
-        app:showAsAction="always"
-        android:enabled="true"
         android:icon="@drawable/ic_favorite"
-        android:title="@string/favorite"/>
+        android:title="@string/favorite" />
 
     <item
         android:id="@+id/home_tab"
-        app:showAsAction="always"
-        android:enabled="true"
-        android:title="@string/baemin">
-    </item>
+        android:title="@string/baemin" />
 
     <item
         android:id="@+id/orderlist_tab"
-        app:showAsAction="always"
-        android:enabled="true"
         android:icon="@drawable/ic_order"
-        android:title="@string/baemin">
-    </item>
+        android:title="@string/orderlist" />
 
     <item
         android:id="@+id/myinfo_tab"
-        app:showAsAction="always"
-        android:enabled="true"
         android:icon="@drawable/ic_mybamin"
-        android:title="@string/myinfo">
-    </item>
+        android:title="@string/myinfo" />
 
 </menu>

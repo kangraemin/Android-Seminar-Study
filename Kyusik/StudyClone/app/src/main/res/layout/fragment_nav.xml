@@ -19,4 +19,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_menu" />
 
+    <include layout="@layout/fragment_home" />
 </androidx.constraintlayout.widget.ConstraintLayout>

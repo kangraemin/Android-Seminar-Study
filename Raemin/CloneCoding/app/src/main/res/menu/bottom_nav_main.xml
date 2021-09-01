@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/nav_search"
+        android:title="@string/nav_item_search" />
+
+    <item
+        android:id="@+id/nav_favorite"
+        android:title="@string/nav_item_favorite" />
+
+    <item
+        android:id="@+id/nav_order_history"
+        android:title="@string/nav_item_order_history" />
+
+    <item
+        android:id="@+id/nav_customer"
+        android:title="@string/nav_item_customer" />
+
+</menu>

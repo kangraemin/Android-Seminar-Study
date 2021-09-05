@@ -1,9 +1,10 @@
-package com.dohyun.baeminapp
+package com.dohyun.baeminapp.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commitNow
+import com.dohyun.baeminapp.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

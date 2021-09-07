@@ -33,9 +33,9 @@ abstract class BaseFragment<B : ViewBinding>(
     }
 
     override fun onDestroyView() {
-        binding = null
         compositeDisposable.clear()
         super.onDestroyView()
+        binding = null
     }
 
     override fun onDestroy() {

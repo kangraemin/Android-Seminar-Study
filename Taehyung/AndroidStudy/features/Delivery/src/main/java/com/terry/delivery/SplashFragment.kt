@@ -1,5 +1,7 @@
 package com.terry.delivery
 
+import android.os.Bundle
+import android.view.View
 import com.terry.delivery.base.BaseFragment
 import com.terry.delivery.databinding.FragmentSplashBinding
 
@@ -8,6 +10,8 @@ import com.terry.delivery.databinding.FragmentSplashBinding
  */
 class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding::inflate) {
 
-
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
 
 }

@@ -7,6 +7,10 @@
         android:layout_height="match_parent"
         tools:context=".CustomerFragment">
 
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -14,4 +18,5 @@
             android:text="@string/customer_fragment_temp_text" />
 
     </FrameLayout>
+
 </layout>

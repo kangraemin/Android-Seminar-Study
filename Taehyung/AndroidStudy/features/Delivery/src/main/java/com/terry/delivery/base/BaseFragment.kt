@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
+import io.reactivex.disposables.CompositeDisposable
 
 /*
  * Created by Taehyung Kim on 2021-08-29
@@ -16,6 +17,8 @@ abstract class BaseFragment<B : ViewBinding>(
 
     protected var binding: B? = null
         private set
+
+    protected val compositeDisposable = CompositeDisposable()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,7 +33,13 @@ abstract class BaseFragment<B : ViewBinding>(
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         binding = null
+        compositeDisposable.clear()
+        super.onDestroyView()
+    }
+
+    override fun onDestroy() {
+        compositeDisposable.dispose()
+        super.onDestroy()
     }
 }

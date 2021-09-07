@@ -49,4 +49,6 @@ dependencies {
 
     implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
+
+    implementation "io.reactivex.rxjava2:rxkotlin:$rootProject.rxkotlinVersion"
 }

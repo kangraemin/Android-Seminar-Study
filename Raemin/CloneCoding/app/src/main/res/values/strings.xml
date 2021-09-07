@@ -5,6 +5,9 @@
     <string name="splash_title">배달의민족</string>
     <string name="splash_subtitle">대한민국 1등 배달어플</string>
 
+    <!-- Temp text for main fragment -->
+    <string name="main_fragment_temp_text">main fragment</string>
+
     <!-- Temp text for detail fragment -->
     <string name="customer_fragment_temp_text">customer fragment</string>
     <string name="favorite_fragment_temp_text">favorite fragment</string>

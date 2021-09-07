@@ -48,7 +48,7 @@
             app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_mainFragment_to_myFragment"
-            app:destination="@id/myFragment"
+            app:destination="@id/myPageFragment"
             app:enterAnim="@anim/slide_in_right"
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
@@ -74,9 +74,19 @@
         tools:layout="@layout/fragment_order_list" />
 
     <fragment
-        android:id="@+id/myFragment"
-        android:name="com.terry.delivery.MyFragment"
-        android:label="MyFragment"
-        tools:layout="@layout/fragment_my" />
+        android:id="@+id/myPageFragment"
+        android:name="com.terry.delivery.MyPageFragment"
+        android:label="@string/my_page"
+        tools:layout="@layout/fragment_my_page">
+        <action
+            android:id="@+id/action_myPageFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.terry.delivery.LoginFragment"
+        android:label="LoginFragment"
+        tools:layout="@layout/fragment_login" />
 
 </navigation>

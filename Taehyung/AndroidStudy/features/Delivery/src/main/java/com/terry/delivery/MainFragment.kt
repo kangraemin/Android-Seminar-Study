@@ -2,8 +2,6 @@ package com.terry.delivery
 
 import android.os.Bundle
 import android.view.View
-import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.navigation.fragment.findNavController
 import com.terry.delivery.base.BaseFragment
 import com.terry.delivery.databinding.FragmentMainBinding
@@ -32,8 +30,8 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
             binding.layoutOrderContainer.itemTitleTextView.setTopDrawable(R.drawable.ic_order)
             binding.layoutOrderContainer.itemTitleTextView.text = getString(R.string.order_list)
 
-            binding.layoutMyContainer.itemTitleTextView.setTopDrawable(R.drawable.ic_my_baemin)
-            binding.layoutMyContainer.itemTitleTextView.text = getString(R.string.my_baemin)
+            binding.layoutMyContainer.itemTitleTextView.setTopDrawable(R.drawable.ic_my_page)
+            binding.layoutMyContainer.itemTitleTextView.text = getString(R.string.my_page)
         }
     }
 

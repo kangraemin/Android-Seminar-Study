@@ -1,4 +1,4 @@
-package com.terry.delivery.remote
+package com.terry.delivery.api
 
 import com.terry.delivery.BuildConfig
 import okhttp3.OkHttpClient

@@ -1,4 +1,4 @@
-package com.terry.delivery.remote.entity
+package com.terry.delivery.entity
 
 data class Message(
     val message: String,

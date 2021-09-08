@@ -1,10 +1,10 @@
-package com.terry.delivery.viewmodels
+package com.terry.delivery.ui.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.terry.delivery.base.BaseViewModel
-import com.terry.delivery.remote.entity.Token
-import com.terry.delivery.remote.provideLoginService
+import com.terry.delivery.entity.Token
+import com.terry.delivery.api.provideLoginService
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo

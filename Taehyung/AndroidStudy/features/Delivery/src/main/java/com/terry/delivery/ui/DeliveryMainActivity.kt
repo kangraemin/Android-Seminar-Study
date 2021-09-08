@@ -1,4 +1,4 @@
-package com.terry.delivery
+package com.terry.delivery.ui
 
 import android.os.Bundle
 import com.terry.delivery.base.BaseActivity

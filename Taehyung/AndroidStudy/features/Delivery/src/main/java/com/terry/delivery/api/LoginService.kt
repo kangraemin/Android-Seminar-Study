@@ -1,8 +1,8 @@
-package com.terry.delivery.remote
+package com.terry.delivery.api
 
-import com.terry.delivery.remote.entity.RefreshToken
-import com.terry.delivery.remote.entity.Token
-import com.terry.delivery.remote.entity.VerifyToken
+import com.terry.delivery.entity.RefreshToken
+import com.terry.delivery.entity.Token
+import com.terry.delivery.entity.VerifyToken
 import io.reactivex.Single
 import retrofit2.http.*
 

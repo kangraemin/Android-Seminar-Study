@@ -2,6 +2,7 @@ package com.terry.delivery.viewmodels
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.terry.delivery.getOrAwaitValue
+import com.terry.delivery.ui.login.LoginViewModel
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.schedulers.Schedulers

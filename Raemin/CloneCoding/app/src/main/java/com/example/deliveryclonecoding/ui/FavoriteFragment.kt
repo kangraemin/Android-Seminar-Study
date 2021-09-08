@@ -1,22 +1,22 @@
-package com.example.deliveryclonecoding
+package com.example.deliveryclonecoding.ui
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.deliveryclonecoding.databinding.FragmentSearchBinding
+import com.example.deliveryclonecoding.databinding.FragmentFavoriteBinding
 
-class SearchFragment : Fragment() {
+class FavoriteFragment : Fragment() {
 
-    private var _binding: FragmentSearchBinding? = null
+    private var _binding: FragmentFavoriteBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentSearchBinding.inflate(inflater, container, false)
+        _binding = FragmentFavoriteBinding.inflate(inflater, container, false)
         return binding.root
     }
 

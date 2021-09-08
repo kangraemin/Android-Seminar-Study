@@ -1,4 +1,4 @@
-package com.example.deliveryclonecoding
+package com.example.deliveryclonecoding.ui
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
+import com.example.deliveryclonecoding.R
 import com.example.deliveryclonecoding.databinding.FragmentCustomerBinding
 
 class CustomerFragment : Fragment() {
@@ -20,6 +21,9 @@ class CustomerFragment : Fragment() {
     ): View {
         _binding = FragmentCustomerBinding.inflate(inflater, container, false)
         setToolbarSettings()
+        binding.layoutLogin.setOnClickListener {
+            findNavController().navigate(R.id.action_customerFragment_to_loginFragment)
+        }
         return binding.root
     }
 

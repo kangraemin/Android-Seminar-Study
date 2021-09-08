@@ -7,7 +7,7 @@
 
     <activity
         android:id="@+id/mainActivity"
-        android:name="com.example.deliveryclonecoding.MainActivity"
+        android:name="com.example.deliveryclonecoding.ui.MainActivity"
         android:label="activity_main"
         tools:layout="@layout/activity_main" />
 
@@ -44,26 +44,35 @@
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.example.deliveryclonecoding.SearchFragment"
+        android:name="com.example.deliveryclonecoding.ui.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
 
     <fragment
         android:id="@+id/favoriteFragment"
-        android:name="com.example.deliveryclonecoding.FavoriteFragment"
+        android:name="com.example.deliveryclonecoding.ui.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
 
     <fragment
         android:id="@+id/customerFragment"
-        android:name="com.example.deliveryclonecoding.CustomerFragment"
+        android:name="com.example.deliveryclonecoding.ui.CustomerFragment"
         android:label="fragment_customer"
-        tools:layout="@layout/fragment_customer" />
+        tools:layout="@layout/fragment_customer">
+        <action
+            android:id="@+id/action_customerFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/orderHistoryFragment"
-        android:name="com.example.deliveryclonecoding.OrderHistoryFragment"
+        android:name="com.example.deliveryclonecoding.ui.OrderHistoryFragment"
         android:label="fragment_order_history"
         tools:layout="@layout/fragment_order_history" />
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.deliveryclonecoding.ui.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
 
 </navigation>

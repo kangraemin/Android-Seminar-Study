@@ -12,5 +12,7 @@
     <color name="splash_subtitle">#666666</color>
 
     <color name="bottom_nav_item">#666666</color>
+    <color name="light_gray_background">#EEEEEE</color>
+    <color name="login_bottom_line_color">#CCCCCC</color>
 
 </resources>

@@ -4,4 +4,12 @@
     <string name="favorite">찜</string>
     <string name="order_list">주문내역</string>
     <string name="my_page">My배민</string>
+    <string name="login">로그인</string>
+    <string name="divider">|</string>
+    <string name="find_id">아이디 찾기</string>
+    <string name="find_password">비밀번호 찾기</string>
+    <string name="guide_sign_in">혹시, 배달의민족이 처음이신가요?</string>
+    <string name="sign_in">회원가입</string>
+    <string name="id_email_hint">아이디 또는 이메일</string>
+    <string name="password">비밀번호</string>
 </resources>

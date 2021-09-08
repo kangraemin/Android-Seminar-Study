@@ -2,12 +2,10 @@ package com.terry.delivery.viewmodels
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.terry.delivery.getOrAwaitValue
-import com.terry.delivery.remote.LoginService
 import io.reactivex.android.plugins.RxAndroidPlugins
 import io.reactivex.plugins.RxJavaPlugins
 import io.reactivex.schedulers.Schedulers
 import org.junit.*
-import org.mockito.Mock
 import org.mockito.junit.MockitoJUnit
 import org.mockito.junit.MockitoRule
 
@@ -47,6 +45,23 @@ class LoginViewModelTest {
         // Then
         loginViewModel.token.getOrAwaitValue()
         Assert.assertNotNull(loginViewModel.token.value?.access)
+    }
+
+    @Test
+    fun `Access Token을 이용한 Refresh 토큰 요청하기`() {
+        // When
+        loginViewModel.getAccessToken("delivery", "dev_baemin")
+
+        loginViewModel.token.getOrAwaitValue()
+
+        val accessToken = loginViewModel.token.value?.refresh
+        Assert.assertNotNull(accessToken) // Refresh 토큰 검증
+
+        loginViewModel.refreshAccessToken(accessToken!!)
+
+        // Then
+        loginViewModel.refreshToken.getOrAwaitValue()
+        Assert.assertNotNull(loginViewModel.refreshToken.value)
     }
 }
 

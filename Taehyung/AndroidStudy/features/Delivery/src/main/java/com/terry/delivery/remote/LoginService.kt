@@ -17,9 +17,10 @@ interface LoginService {
         @Field("password") password: String
     ): Single<Token>
 
-    @GET("api/token/refresh/")
+    @FormUrlEncoded
+    @POST("api/token/refresh/")
     fun refreshAccessToken(
-        @Header("Authorization") accessToken: String
+        @Field("refresh") accessToken: String
     ): Single<RefreshToken>
 
 }

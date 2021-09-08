@@ -2,6 +2,7 @@ package com.terry.delivery.remote
 
 import com.terry.delivery.remote.entity.RefreshToken
 import com.terry.delivery.remote.entity.Token
+import com.terry.delivery.remote.entity.VerifyToken
 import io.reactivex.Single
 import retrofit2.http.*
 
@@ -23,4 +24,8 @@ interface LoginService {
         @Field("refresh") accessToken: String
     ): Single<RefreshToken>
 
+    @GET("test/")
+    fun verifyAccessToken(
+        @Header("authorization") accessToken: String
+    ): Single<VerifyToken>
 }

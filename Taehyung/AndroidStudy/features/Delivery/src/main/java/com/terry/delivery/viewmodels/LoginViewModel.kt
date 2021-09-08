@@ -25,6 +25,10 @@ class LoginViewModel : BaseViewModel() {
     val refreshToken: LiveData<String>
         get() = _refreshToken
 
+    private val _verifyToken = MutableLiveData<Boolean>()
+    val verifyToken: LiveData<Boolean>
+        get() = _verifyToken
+
     fun getAccessToken(userName: String, password: String) {
         loginService.getAccessToken(userName, password)
             .subscribeOn(Schedulers.io())
@@ -57,6 +61,25 @@ class LoginViewModel : BaseViewModel() {
             }
             .subscribe({ refreshedToken ->
                 _refreshToken.value = refreshedToken
+            }, {
+                it.printStackTrace()
+            })
+            .addTo(disposable)
+    }
+
+    fun verifyAccessToken(accessToken: String) {
+        loginService.verifyAccessToken("Bearer $accessToken")
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .flatMap { verifyToken ->
+                if (verifyToken.detail.isNullOrEmpty()) {
+                    Single.just(true)
+                } else {
+                    Single.error(IllegalStateException(verifyToken.detail))
+                }
+            }
+            .subscribe({
+                _verifyToken.value = it
             }, {
                 it.printStackTrace()
             })

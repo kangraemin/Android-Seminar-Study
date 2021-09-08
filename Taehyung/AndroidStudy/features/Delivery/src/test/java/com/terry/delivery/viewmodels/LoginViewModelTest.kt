@@ -54,14 +54,31 @@ class LoginViewModelTest {
 
         loginViewModel.token.getOrAwaitValue()
 
-        val accessToken = loginViewModel.token.value?.refresh
-        Assert.assertNotNull(accessToken) // Refresh 토큰 검증
+        val refreshToken = loginViewModel.token.value?.refresh
+        Assert.assertNotNull(refreshToken) // Refresh 토큰 검증
 
-        loginViewModel.refreshAccessToken(accessToken!!)
+        loginViewModel.refreshAccessToken(refreshToken!!)
 
         // Then
         loginViewModel.refreshToken.getOrAwaitValue()
         Assert.assertNotNull(loginViewModel.refreshToken.value)
+    }
+
+    @Test
+    fun `Access Token 검증하기`() {
+        // When
+        loginViewModel.getAccessToken("delivery", "dev_baemin")
+
+        loginViewModel.token.getOrAwaitValue()
+
+        val accessToken = loginViewModel.token.value?.access
+        Assert.assertNotNull(accessToken) // Refresh 토큰 검증
+
+        loginViewModel.verifyAccessToken(accessToken!!)
+
+        // Then
+        loginViewModel.verifyToken.getOrAwaitValue()
+        Assert.assertTrue(loginViewModel.verifyToken.value!!)
     }
 }
 

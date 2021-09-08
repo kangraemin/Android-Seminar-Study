@@ -3,16 +3,20 @@ package com.terry.delivery
 import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.terry.delivery.base.BaseFragment
 import com.terry.delivery.databinding.FragmentLoginBinding
 import com.terry.delivery.util.SnackbarUtil
+import com.terry.delivery.viewmodels.LoginViewModel
 
 /*
  * Created by Taehyung Kim on 2021-09-07
  */
 class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
+
+    private val loginViewModel by activityViewModels<LoginViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -36,11 +36,6 @@ dependencies {
     implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
     implementation "androidx.fragment:fragment-ktx:$rootProject.fragmentKtxVersion"
 
-    testImplementation "junit:junit:$rootProject.junitVersion"
-    androidTestImplementation "androidx.test.ext:junit:$rootProject.androidJunitVersion"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.androidExpressoCoreVersion"
-    androidTestImplementation "androidx.annotation:annotation:$rootProject.androidAnnotationVersion"
-
     implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
 
@@ -51,4 +46,18 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofitVersion"
 
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp3Version"
+
+    implementation "androidx.fragment:fragment-ktx:$rootProject.fragmentVersion"
+
+    implementation "androidx.lifecycle:lifecycle-livedata-core-ktx:$rootProject.lifecycleVersion"
+
+    testImplementation "junit:junit:$rootProject.junitVersion"
+    androidTestImplementation "androidx.test.ext:junit:$rootProject.androidJunitVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.androidExpressoCoreVersion"
+    androidTestImplementation "androidx.annotation:annotation:$rootProject.androidAnnotationVersion"
+
+    testImplementation "org.hamcrest:hamcrest-all:$rootProject.hamcrestAllVersion"
+    testImplementation "org.mockito:mockito-core:$rootProject.mockitoCoreVersion"
+    testImplementation "androidx.arch.core:core-testing:$rootProject.archCoreTestingVersion"
 }

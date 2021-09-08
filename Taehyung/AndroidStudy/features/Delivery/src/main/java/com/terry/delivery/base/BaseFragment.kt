@@ -18,7 +18,7 @@ abstract class BaseFragment<B : ViewBinding>(
     protected var binding: B? = null
         private set
 
-    protected val compositeDisposable = CompositeDisposable()
+    protected val disposable = CompositeDisposable()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,13 +33,13 @@ abstract class BaseFragment<B : ViewBinding>(
     }
 
     override fun onDestroyView() {
-        compositeDisposable.clear()
+        disposable.clear()
         super.onDestroyView()
         binding = null
     }
 
     override fun onDestroy() {
-        compositeDisposable.dispose()
+        disposable.dispose()
         super.onDestroy()
     }
 }

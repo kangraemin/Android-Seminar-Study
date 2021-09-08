@@ -30,7 +30,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding
             }, {
                 it.printStackTrace()
             })
-            .addTo(compositeDisposable)
+            .addTo(disposable)
     }
 
 }

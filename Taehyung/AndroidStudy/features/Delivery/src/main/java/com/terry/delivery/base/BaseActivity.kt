@@ -15,7 +15,7 @@ abstract class BaseActivity<B : ViewBinding>(
     protected lateinit var binding: B
         private set
 
-    protected val compositeDisposable = CompositeDisposable()
+    protected val disposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +26,7 @@ abstract class BaseActivity<B : ViewBinding>(
     }
 
     override fun onDestroy() {
-        compositeDisposable.dispose()
+        disposable.dispose()
         super.onDestroy()
     }
 }

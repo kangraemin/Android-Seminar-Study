@@ -16,4 +16,11 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+    <style name="EditTextStyle" parent="Widget.Design.TextInputLayout">
+        <item name="colorControlNormal">@color/light_gray</item>
+        <item name="boxStrokeColor">@color/black</item>
+        <item name="android:textCursorDrawable">@color/black</item>
+
+        <item name="errorTextColor">@color/red</item>
+    </style>
 </resources>

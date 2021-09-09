@@ -29,6 +29,10 @@ class LoginViewModel : BaseViewModel() {
     val verifyToken: LiveData<Boolean>
         get() = _verifyToken
 
+    private val _loginError = MutableLiveData<Unit>()
+    val loginError: LiveData<Unit>
+        get() = _loginError
+
     fun getAccessToken(userName: String, password: String) {
         loginService.getAccessToken(userName, password)
             .subscribeOn(Schedulers.io())
@@ -44,6 +48,7 @@ class LoginViewModel : BaseViewModel() {
                 _token.value = token
             }, {
                 it.printStackTrace()
+                _loginError.value = Unit
             })
             .addTo(disposable)
     }

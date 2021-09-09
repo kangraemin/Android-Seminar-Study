@@ -13,4 +13,7 @@ object SnackbarUtil {
     @SuppressLint("ShowToast")
     fun showErrorMessage(view: View, message: String) =
         Snackbar.make(view, message, Snackbar.LENGTH_LONG).showError()
+
+    fun showMessage(view: View, message: String) =
+        Snackbar.make(view, message, Snackbar.LENGTH_LONG).show()
 }

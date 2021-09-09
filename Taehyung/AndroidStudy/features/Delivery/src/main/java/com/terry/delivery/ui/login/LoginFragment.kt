@@ -9,6 +9,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.terry.delivery.R
 import com.terry.delivery.base.BaseFragment
 import com.terry.delivery.databinding.FragmentLoginBinding
+import com.terry.delivery.util.KeyboardHelper
 import com.terry.delivery.util.SnackbarUtil
 
 /*
@@ -26,7 +27,46 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             return
         }
 
+        bindViews(binding)
+        bindObserver()
         initToolbar(binding)
+    }
+
+    private fun bindViews(binding: FragmentLoginBinding) {
+        binding.loginButton.setOnClickListener {
+            context?.let { context -> KeyboardHelper.hideKeyboard(context, binding.root) }
+
+            // Check Null or Empty
+            val isVerifyUserName = verifyUserName(binding)
+            val isVerifyPassword = verifyPassword(binding)
+
+            if (isVerifyUserName && isVerifyPassword) {
+                loginViewModel.getAccessToken(
+                    binding.idEditText.text.toString(),
+                    binding.passwordEditText.text.toString()
+                )
+
+                return@setOnClickListener
+            }
+
+            SnackbarUtil.showErrorMessage(binding.root, "아이디, 비밀번호 확인 !")
+        }
+    }
+
+    private fun bindObserver() {
+        with(loginViewModel) {
+            token.observe(viewLifecycleOwner) {
+                binding?.let { binding ->
+                    SnackbarUtil.showMessage(binding.root, "로그인 성공 !")
+                }
+            }
+
+            loginError.observe(viewLifecycleOwner) {
+                binding?.let { binding ->
+                    SnackbarUtil.showErrorMessage(binding.root, "로그인 실패 !!")
+                }
+            }
+        }
     }
 
     private fun initToolbar(binding: FragmentLoginBinding) {
@@ -38,5 +78,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             title = ""
         }
     }
+
+    private fun verifyUserName(binding: FragmentLoginBinding) =
+        binding.idEditText.text.isNullOrEmpty().not()
+
+    private fun verifyPassword(binding: FragmentLoginBinding) =
+        binding.passwordEditText.text.isNullOrEmpty().not()
 
 }

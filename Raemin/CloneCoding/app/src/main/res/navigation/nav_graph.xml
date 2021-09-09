@@ -71,7 +71,7 @@
         tools:layout="@layout/fragment_order_history" />
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.deliveryclonecoding.ui.LoginFragment"
+        android:name="com.example.deliveryclonecoding.ui.login.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" />
 

@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.deliveryModuleButton.setOnClickListener {
-            startModuleActivity("com.terry.delivery.DeliveryMainActivity")
+            startModuleActivity("com.terry.delivery.ui.DeliveryMainActivity")
         }
     }
 }

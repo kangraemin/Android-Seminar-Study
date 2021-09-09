@@ -3,6 +3,7 @@ package com.terry.delivery.ui
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.terry.delivery.R
 import com.terry.delivery.base.BaseFragment
 import com.terry.delivery.databinding.FragmentMyPageBinding

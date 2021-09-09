@@ -51,4 +51,12 @@ dependencies {
     // Kotlin
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    // retrofit-rxJava
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+    // gson converter
+    implementation 'com.squareup.retrofit2:converter-gson:2.4.0'
+    // OkHttp
+    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
 }

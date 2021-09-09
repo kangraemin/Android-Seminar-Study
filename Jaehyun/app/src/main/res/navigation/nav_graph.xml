@@ -33,11 +33,20 @@
     <fragment
         android:id="@+id/orderListFragment"
         android:name="android.anjahyun.study.view.OrderListFragment"
-        tools:layout="@layout/fragment_orderList"
+        tools:layout="@layout/fragment_orderlist"
         android:label="OrderListFragment" />
     <fragment
         android:id="@+id/myFragment"
         android:name="android.anjahyun.study.view.MyFragment"
         tools:layout="@layout/fragment_my"
-        android:label="MyFragment" />
+        android:label="MyFragment" >
+        <action
+            android:id="@+id/action_myFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="android.anjahyun.study.view.LoginFragment"
+        tools:layout="@layout/fragment_login"
+        android:label="LoginFragment" />
 </navigation>

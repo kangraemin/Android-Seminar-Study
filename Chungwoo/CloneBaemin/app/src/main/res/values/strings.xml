@@ -14,4 +14,7 @@
 
     <!--Myinfo-->
     <string name="login_request">로그인해주세요</string>
+
+    <!--LoginFragment-->
+    <string name="login">로그인</string>
 </resources>

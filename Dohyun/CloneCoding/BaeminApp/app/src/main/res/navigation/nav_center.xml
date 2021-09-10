@@ -11,6 +11,8 @@
         android:label="SplashFragment" >
         <action
             android:id="@+id/action_splash_to_mainNav"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"
             app:destination="@id/mainNavFragment" />
     </fragment>
 

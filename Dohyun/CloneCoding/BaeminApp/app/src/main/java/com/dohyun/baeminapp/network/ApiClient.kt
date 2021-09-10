@@ -7,7 +7,7 @@ import retrofit2.http.*
 
 interface ApiClient {
 
-    @POST("api/token")
+    @POST("api/token/")
     fun login(@Body user: UserInfo) : Flowable<Token>
 
 }

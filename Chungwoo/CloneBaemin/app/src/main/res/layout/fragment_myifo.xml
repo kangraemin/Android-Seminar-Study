@@ -1,13 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/myinfo" />
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
 
-</FrameLayout>
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:scaleType="center"
+            android:background="@drawable/shape_circle"
+            android:src="@drawable/ic_profile" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:textColor="@color/gray"
+            android:text="@string/login_request"
+            android:textSize="20dp"/>
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_arrow_right"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

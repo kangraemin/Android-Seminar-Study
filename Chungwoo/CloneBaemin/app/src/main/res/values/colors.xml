@@ -14,4 +14,7 @@
     <color name="light_blue_A400">#FF00B0FF</color>
     <color name="black_overlay">#66000000</color>
     <color name="bg_profile">#92AAC4</color>
+    <color name="light_green_main">#25B9B4</color>
+    <color name="light_gray">#CCCCCC</color>
+
 </resources>

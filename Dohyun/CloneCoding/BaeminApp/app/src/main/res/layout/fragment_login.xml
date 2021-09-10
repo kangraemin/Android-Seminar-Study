@@ -37,7 +37,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:boxBackgroundMode="none"
-                android:hint="아이디 또는 이메일"
+                android:hint="@string/edit_id_hint"
                 style="@style/EditTextStyle"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
@@ -63,7 +63,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:boxBackgroundMode="none"
-                android:hint="비밀번호"
+                android:hint="@string/edit_pw_hint"
                 style="@style/EditTextStyle"
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
@@ -90,7 +90,7 @@
                 android:layout_marginStart="20dp"
                 android:layout_marginEnd="20dp"
                 android:layout_marginBottom="24dp"
-                android:text="로그인"
+                android:text="@string/login_btn"
                 android:textColor="@color/white"
                 android:textSize="17sp"
                 android:textStyle="bold"
@@ -106,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="100dp"
                 android:layout_marginBottom="80dp"
-                android:text="아이디 찾기"
+                android:text="@string/find_id_btn"
                 app:layout_constraintBottom_toTopOf="@+id/facebook_btn"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -115,7 +115,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="80dp"
-                android:text="|"
+                android:text="@string/divider"
                 android:textSize="22sp"
                 app:layout_constraintBottom_toTopOf="@+id/facebook_btn"
                 app:layout_constraintEnd_toStartOf="@+id/login_find_pw_btn"
@@ -128,7 +128,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="92dp"
                 android:layout_marginBottom="80dp"
-                android:text="비밀번호 찾기"
+                android:text="@string/find_pw_btn"
                 app:layout_constraintBottom_toTopOf="@+id/facebook_btn"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -145,7 +145,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:text="페이스북으로 로그인"
+                app:text="@string/login_facebook"
                 app:textColor="@color/black" />
 
             <com.dohyun.baeminapp.CustomLoginButton
@@ -161,7 +161,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:text="페이스북으로 로그인"
+                app:text="@string/login_naver"
                 app:textColor="@color/black" />
 
             <com.dohyun.baeminapp.CustomLoginButton
@@ -177,7 +177,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:text="페이스북으로 로그인"
+                app:text="@string/login_apple"
                 app:textColor="@color/main" />
 
             <TextView
@@ -186,7 +186,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="56dp"
                 android:layout_marginBottom="16dp"
-                android:text="혹시, 배달의민족이 처음이신가요?"
+                android:text="@string/join_title"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/login_join_btn"
                 app:layout_constraintHorizontal_bias="0.35"
@@ -198,7 +198,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="72dp"
                 android:layout_marginBottom="16dp"
-                android:text="회원가입"
+                android:text="@string/join_btn"
                 android:textColor="@color/main"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />

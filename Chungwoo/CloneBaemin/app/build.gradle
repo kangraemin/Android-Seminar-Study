@@ -22,6 +22,11 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField("String", "BASE_URL", '"https://r5670326j8.execute-api.ap-northeast-2.amazonaws.com/delivery_server/"')
+        }
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -30,7 +35,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
-    buildFeatures{
+    buildFeatures {
         dataBinding true
     }
 }
@@ -59,4 +64,6 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
     // Rxjava2
     implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofit_version"
+    //logging
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.9.1'
 }

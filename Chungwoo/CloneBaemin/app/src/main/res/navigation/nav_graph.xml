@@ -13,7 +13,9 @@
 
         <action
             android:id="@+id/action_splashFragment_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
 
@@ -54,6 +56,16 @@
         android:id="@+id/myifoFragment"
         android:name="com.lcw.study.clonebaemin.feature.myinfo.MyifoFragment"
         android:label="MyifoFragment"
-        tools:layout="@layout/fragment_myifo" />
+        tools:layout="@layout/fragment_myifo" >
+        <action
+            android:id="@+id/action_myifoFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.lcw.study.clonebaemin.feature.myinfo.login.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
 
 </navigation>

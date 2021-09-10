@@ -42,7 +42,7 @@ class LoginViewModel : BaseViewModel() {
 
     private fun login(id: String, pw: String) {
         RetrofitBuilder.apiClient.login(UserInfo(id, pw))
-            .subscribeOn(Schedulers.computation())
+            .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe( {
                 // token 저장하기
@@ -51,6 +51,11 @@ class LoginViewModel : BaseViewModel() {
             }, {
                 // error
                 Log.e("LoginViewModel", "error : ${it.message}")
+                when (it.message!!.split(" ")[1]) {
+                    "401" -> {
+
+                    }
+                }
                 _loginErrorMsg.value = Unit
             })
     }

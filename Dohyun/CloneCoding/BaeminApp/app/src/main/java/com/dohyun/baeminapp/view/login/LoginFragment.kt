@@ -61,6 +61,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
     }
 
     private fun successLogin() {
+        showToast(getString(R.string.success_login_msg))
         findNavController().popBackStack()
     }
 

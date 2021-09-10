@@ -1,4 +1,4 @@
-package com.clonecodingbm.bottom
+package com.clonecodingbm.view.bottom
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

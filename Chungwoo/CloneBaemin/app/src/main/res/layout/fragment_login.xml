@@ -1,43 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingHorizontal="20dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <EditText
+    <data>
+        <variable
+            name="vm"
+            type="com.lcw.study.clonebaemin.feature.myinfo.login.LoginViewModel" />
+
+        <variable
+            name="id"
+            type="String" />
+
+    </data>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
-        android:hint="아이디 또는 이메일"
-        android:maxLines="1"
-        android:paddingStart="10dp"
-        android:textColorHint="@color/light_gray"
-        android:textSize="14dp" />
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="20dp">
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:hint="비밀번호"
-        android:maxLines="1"
-        android:paddingStart="10dp"
-        android:textColorHint="@color/light_gray"
-        android:textSize="14dp" />
+        <EditText
+            android:id="@+id/et_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="100dp"
+            android:hint="아이디 또는 이메일"
+            android:maxLines="1"
+            android:paddingStart="10dp"
+            android:text="@{id}"
+            android:textColorHint="@color/light_gray"
+            android:textSize="14dp" />
 
-    <com.google.android.material.button.MaterialButton
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:backgroundTint="@color/light_green_main"
-        android:paddingVertical="14dp"
-        android:text="@string/login"
-        android:textColor="@color/white"
-        android:textSize="18dp"
-        android:textStyle="bold"
-        app:cornerRadius="5dp"
-        app:rippleColor="@color/white" />
+        <EditText
+            android:id="@+id/et_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:hint="비밀번호"
+            android:maxLines="1"
+            android:paddingStart="10dp"
+            android:textColorHint="@color/light_gray"
+            android:textSize="14dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:backgroundTint="@color/light_green_main"
+            android:paddingVertical="14dp"
+            android:text="@string/login"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:cornerRadius="5dp"
+            app:rippleColor="@color/white"
+            android:onClick="@{()->vm.requestLogin(id,id)}"/>
 
 
-</LinearLayout>
+    </LinearLayout>
+</layout>

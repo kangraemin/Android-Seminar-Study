@@ -7,7 +7,7 @@ import retrofit2.http.Body
 import retrofit2.http.POST
 
 interface ApiService {
-    @POST("api/token")
+    @POST("api/token/")
     fun requestLogin(@Body requestLoginInfoData: RequestLoginInfoData):Single<LoginData>
 
 }

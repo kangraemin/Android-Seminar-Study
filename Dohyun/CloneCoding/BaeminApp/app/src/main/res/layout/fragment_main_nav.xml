@@ -6,13 +6,13 @@
     <data>
         <variable
             name="mainNav"
-            type="com.dohyun.baeminapp.view.MainNavFragment" />
+            type="com.dohyun.baeminapp.ui.MainNavFragment" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.MainNavFragment">
+        tools:context=".ui.MainNavFragment">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">

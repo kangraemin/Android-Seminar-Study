@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.dohyun.baeminapp.view.SplashFragment"
+        android:name="com.dohyun.baeminapp.ui.SplashFragment"
         android:label="SplashFragment" >
         <action
             android:id="@+id/action_splash_to_mainNav"
@@ -18,7 +18,7 @@
 
     <fragment
         android:id="@+id/mainNavFragment"
-        android:name="com.dohyun.baeminapp.view.MainNavFragment"
+        android:name="com.dohyun.baeminapp.ui.MainNavFragment"
         android:label="MainNavFragment">
 
         <action
@@ -41,22 +41,22 @@
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.dohyun.baeminapp.view.search.SearchFragment"
+        android:name="com.dohyun.baeminapp.ui.view.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/dibsFragment"
-        android:name="com.dohyun.baeminapp.view.dibs.DibsFragment"
+        android:name="com.dohyun.baeminapp.ui.view.dibs.DibsFragment"
         android:label="fragment_dibs"
         tools:layout="@layout/fragment_dibs" />
     <fragment
         android:id="@+id/ordersFragment"
-        android:name="com.dohyun.baeminapp.view.orders.OrdersFragment"
+        android:name="com.dohyun.baeminapp.ui.view.orders.OrdersFragment"
         android:label="fragment_orders"
         tools:layout="@layout/fragment_orders" />
     <fragment
         android:id="@+id/myPageFragment"
-        android:name="com.dohyun.baeminapp.view.mypage.MyPageFragment"
+        android:name="com.dohyun.baeminapp.ui.view.mypage.MyPageFragment"
         android:label="fragment_my_page"
         tools:layout="@layout/fragment_my_page" >
         <action
@@ -65,7 +65,7 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.dohyun.baeminapp.view.login.LoginFragment"
+        android:name="com.dohyun.baeminapp.ui.view.login.LoginFragment"
         android:label="LoginFragment" />
 
 </navigation>

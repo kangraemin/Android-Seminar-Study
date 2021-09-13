@@ -6,13 +6,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.dohyun.baeminapp.view.login.LoginViewModel" />
+            type="com.dohyun.baeminapp.ui.view.login.LoginViewModel" />
     </data>
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".view.login.LoginFragment">
+        tools:context=".ui.view.login.LoginFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -132,7 +132,7 @@
                 app:layout_constraintBottom_toTopOf="@+id/facebook_btn"
                 app:layout_constraintEnd_toEndOf="parent" />
 
-            <com.dohyun.baeminapp.CustomLoginButton
+            <com.dohyun.baeminapp.ui.utils.CustomLoginButton
                 android:id="@+id/facebook_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -148,7 +148,7 @@
                 app:text="@string/login_facebook"
                 app:textColor="@color/black" />
 
-            <com.dohyun.baeminapp.CustomLoginButton
+            <com.dohyun.baeminapp.ui.utils.CustomLoginButton
                 android:id="@+id/naver_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -164,7 +164,7 @@
                 app:text="@string/login_naver"
                 app:textColor="@color/black" />
 
-            <com.dohyun.baeminapp.CustomLoginButton
+            <com.dohyun.baeminapp.ui.utils.CustomLoginButton
                 android:id="@+id/apple_btn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

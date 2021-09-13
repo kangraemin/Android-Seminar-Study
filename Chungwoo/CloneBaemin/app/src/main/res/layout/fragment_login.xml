@@ -3,14 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
         <variable
             name="vm"
             type="com.lcw.study.clonebaemin.feature.myinfo.login.LoginViewModel" />
-
-        <variable
-            name="id"
-            type="String" />
-
     </data>
 
     <LinearLayout
@@ -27,7 +23,6 @@
             android:hint="아이디 또는 이메일"
             android:maxLines="1"
             android:paddingStart="10dp"
-            android:text="@{id}"
             android:textColorHint="@color/light_gray"
             android:textSize="14dp" />
 
@@ -47,14 +42,14 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:backgroundTint="@color/light_green_main"
+            android:onClick="@{() -> vm.requestLogin()}"
             android:paddingVertical="14dp"
             android:text="@string/login"
             android:textColor="@color/white"
             android:textSize="18dp"
             android:textStyle="bold"
             app:cornerRadius="5dp"
-            app:rippleColor="@color/white"
-            android:onClick="@{()->vm.requestLogin(id,id)}"/>
+            app:rippleColor="@color/white" />
 
 
     </LinearLayout>

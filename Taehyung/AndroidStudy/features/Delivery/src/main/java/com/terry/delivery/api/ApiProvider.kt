@@ -13,18 +13,20 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 const val BASE_URL = "https://r5670326j8.execute-api.ap-northeast-2.amazonaws.com/delivery_server/"
 
-fun provideOkHttpClient() = OkHttpClient.Builder()
+val retrofit = provideRetrofit()
+
+fun provideLoginService(): LoginService = retrofit.create(LoginService::class.java)
+
+private fun provideOkHttpClient() = OkHttpClient.Builder()
     .addInterceptor(HttpLoggingInterceptor().apply {
         level =
             if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE
     })
     .build()
 
-fun provideRetrofit(): Retrofit = Retrofit.Builder()
+private fun provideRetrofit(): Retrofit = Retrofit.Builder()
     .baseUrl(BASE_URL)
     .client(provideOkHttpClient())
     .addConverterFactory(GsonConverterFactory.create())
     .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
     .build()
-
-fun provideLoginService() = provideRetrofit().create(LoginService::class.java)

@@ -5,22 +5,22 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.lcw.study.clonebaemin.data.RetrofitClient
-import com.lcw.study.clonebaemin.data.login.LoginDatasourceImpl
 import com.lcw.study.clonebaemin.data.login.RequestLoginInfoData
+import com.lcw.study.clonebaemin.feature.base.BaseViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class LoginViewModel : ViewModel() {
-    private val compositeDisposable = CompositeDisposable()
-
+class LoginViewModel : BaseViewModel() {
 
     private val _success: MutableLiveData<Boolean> = MutableLiveData()
     val success: LiveData<Boolean> get() = _success
 
 
-    fun requestLogin() {
-        RetrofitClient.getService().requestLogin(RequestLoginInfoData("delivery", "dev_baemin"))
+    fun requestLogin(userName: String, password: String) {
+        //RetrofitClient.getService().requestLogin(RequestLoginInfoData("delivery", "dev_baemin"))
+        RetrofitClient.getService()
+            .requestLogin(RequestLoginInfoData(username = userName, password = password))
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
@@ -31,10 +31,4 @@ class LoginViewModel : ViewModel() {
             })
 
     }
-
-    override fun onCleared() {
-        super.onCleared()
-        compositeDisposable.clear()
-    }
-
 }

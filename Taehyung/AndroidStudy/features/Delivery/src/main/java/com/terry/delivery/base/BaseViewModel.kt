@@ -1,7 +1,5 @@
 package com.terry.delivery.base
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import io.reactivex.disposables.CompositeDisposable
 
@@ -11,10 +9,6 @@ import io.reactivex.disposables.CompositeDisposable
 abstract class BaseViewModel : ViewModel() {
 
     protected val disposable = CompositeDisposable()
-
-    protected val _isLoading = MutableLiveData<Boolean>()
-    val isLoading: LiveData<Boolean>
-        get() = _isLoading
 
     override fun onCleared() {
         disposable.dispose()

@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/loginToolbar"
+        android:id="@+id/tb_login"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
@@ -14,7 +14,7 @@
         app:navigationIcon="@drawable/ic_close" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/idTextInputLayout"
+        android:id="@+id/layout_login_id"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
@@ -24,10 +24,10 @@
         app:hintEnabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/loginToolbar">
+        app:layout_constraintTop_toBottomOf="@id/tb_login">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/idEditText"
+            android:id="@+id/et_login_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/id_email_hint" />
@@ -35,7 +35,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/passwordTextInputLayout"
+        android:id="@+id/layout_login_password"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -43,12 +43,12 @@
         app:endIconMode="clear_text"
         app:hintEnabled="false"
         app:hintTextColor="@color/md_grey_900"
-        app:layout_constraintEnd_toEndOf="@id/idTextInputLayout"
-        app:layout_constraintStart_toStartOf="@id/idTextInputLayout"
-        app:layout_constraintTop_toBottomOf="@id/idTextInputLayout">
+        app:layout_constraintEnd_toEndOf="@id/layout_login_id"
+        app:layout_constraintStart_toStartOf="@id/layout_login_id"
+        app:layout_constraintTop_toBottomOf="@id/layout_login_id">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/passwordEditText"
+            android:id="@+id/et_login_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/password"
@@ -57,7 +57,7 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/loginButton"
+        android:id="@+id/bt_login"
         android:layout_width="0dp"
         android:layout_height="58dp"
         android:layout_marginTop="24dp"
@@ -66,42 +66,42 @@
         android:textColor="@color/white"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@id/idTextInputLayout"
-        app:layout_constraintStart_toStartOf="@id/idTextInputLayout"
-        app:layout_constraintTop_toBottomOf="@id/passwordTextInputLayout" />
+        app:layout_constraintEnd_toEndOf="@id/layout_login_id"
+        app:layout_constraintStart_toStartOf="@id/layout_login_id"
+        app:layout_constraintTop_toBottomOf="@id/layout_login_password" />
 
     <TextView
-        android:id="@+id/dividerTextView"
+        android:id="@+id/tv_divider"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:text="@string/divider"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/loginButton" />
+        app:layout_constraintTop_toBottomOf="@id/bt_login" />
 
     <TextView
-        android:id="@+id/findIdTextView"
+        android:id="@+id/tv_login_find_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="18dp"
         android:text="@string/find_id"
-        app:layout_constraintBottom_toBottomOf="@id/dividerTextView"
-        app:layout_constraintEnd_toStartOf="@id/dividerTextView"
-        app:layout_constraintTop_toTopOf="@id/dividerTextView" />
+        app:layout_constraintBottom_toBottomOf="@id/tv_divider"
+        app:layout_constraintEnd_toStartOf="@id/tv_divider"
+        app:layout_constraintTop_toTopOf="@id/tv_divider" />
 
     <TextView
-        android:id="@+id/findPasswordTextView"
+        android:id="@+id/tv_login_find_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="18dp"
         android:text="@string/find_password"
-        app:layout_constraintBottom_toBottomOf="@id/dividerTextView"
-        app:layout_constraintStart_toEndOf="@id/dividerTextView"
-        app:layout_constraintTop_toTopOf="@id/dividerTextView" />
+        app:layout_constraintBottom_toBottomOf="@id/tv_divider"
+        app:layout_constraintStart_toEndOf="@id/tv_divider"
+        app:layout_constraintTop_toTopOf="@id/tv_divider" />
 
     <TextView
-        android:id="@+id/guideTextView"
+        android:id="@+id/tv_login_guide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
@@ -110,12 +110,12 @@
         android:text="@string/guide_sign_in"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/signInTextView"
+        app:layout_constraintEnd_toStartOf="@id/tv_login_sign_in"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/signInTextView"
+        android:id="@+id/tv_login_sign_in"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
@@ -127,6 +127,6 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/guideTextView" />
+        app:layout_constraintStart_toEndOf="@id/tv_login_guide" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

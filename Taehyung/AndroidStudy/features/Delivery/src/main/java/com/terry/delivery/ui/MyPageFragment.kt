@@ -26,18 +26,18 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(FragmentMyPageBinding
         initToolbar(binding)
 
         // TODO: 2021-09-07 REMOVE
-        binding.userNameTextView.text = "로그인해주세요"
+        binding.tvUserName.text = "로그인해주세요"
     }
 
     private fun bindViews(binding: FragmentMyPageBinding) {
-        binding.loginContainerLayout.setOnClickListener {
+        binding.constraintLayoutLoginContainer.setOnClickListener {
             findNavController().navigate(R.id.action_myPageFragment_to_loginFragment)
         }
     }
 
     private fun initToolbar(binding: FragmentMyPageBinding) {
-        binding.myPageToolbar.setupWithNavController(findNavController())
-        binding.myPageToolbar.title = ""
+        binding.tbMyPage.setupWithNavController(findNavController())
+        binding.tbMyPage.title = ""
     }
 
 }

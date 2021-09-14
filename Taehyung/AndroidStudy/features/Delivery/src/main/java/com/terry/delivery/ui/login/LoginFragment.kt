@@ -33,7 +33,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
     private fun bindViews(binding: FragmentLoginBinding) {
-        binding.loginButton.setOnClickListener {
+        binding.btLogin.setOnClickListener {
             context?.let { context -> KeyboardHelper.hideKeyboard(context, binding.root) }
 
             // Check Null or Empty
@@ -42,8 +42,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
 
             if (isVerifyUserName && isVerifyPassword) {
                 loginViewModel.getAccessToken(
-                    binding.idEditText.text.toString(),
-                    binding.passwordEditText.text.toString()
+                    binding.etLoginId.text.toString(),
+                    binding.etLoginPassword.text.toString()
                 )
 
                 return@setOnClickListener
@@ -70,7 +70,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
     private fun initToolbar(binding: FragmentLoginBinding) {
-        with(binding.loginToolbar) {
+        with(binding.tbLogin) {
             setupWithNavController(findNavController())
             context?.let { context ->
                 navigationIcon = ContextCompat.getDrawable(context, R.drawable.ic_close)
@@ -80,9 +80,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
     private fun verifyUserName(binding: FragmentLoginBinding) =
-        binding.idEditText.text.isNullOrEmpty().not()
+        binding.etLoginId.text.isNullOrEmpty().not()
 
     private fun verifyPassword(binding: FragmentLoginBinding) =
-        binding.passwordEditText.text.isNullOrEmpty().not()
+        binding.etLoginPassword.text.isNullOrEmpty().not()
 
 }

@@ -11,28 +11,18 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.lcw.study.clonebaemin.R
 import com.lcw.study.clonebaemin.databinding.FragmentLoginBinding
+import com.lcw.study.clonebaemin.feature.base.BaseFragment
 
-class LoginFragment : Fragment() {
+class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
 
-    private lateinit var binding : FragmentLoginBinding
     private val loginViewModel: LoginViewModel by viewModels()
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-
-
-
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.vm = loginViewModel
-        loginViewModel.success.observe(viewLifecycleOwner, Observer {
+
+        loginViewModel.success.observe(viewLifecycleOwner) {
             Log.d("LoginFragment","value : $it")
-        })
+        }
     }
 }

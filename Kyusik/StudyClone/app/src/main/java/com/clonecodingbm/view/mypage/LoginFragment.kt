@@ -13,7 +13,6 @@ import com.clonecodingbm.R
 import com.clonecodingbm.base.BaseFragment
 import com.clonecodingbm.databinding.FragmentLoginBinding
 import com.clonecodingbm.viewmodel.LoginViewModel
-import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
     private lateinit var viewModel: LoginViewModel
@@ -26,8 +25,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
             }
         })
         viewModel.loginData.observe(viewLifecycleOwner, {
-            refresh.text = it.refresh
-            access.text = it.access
+            binding.refresh.text = it.refresh
+            binding.access.text = it.access
             findNavController().popBackStack()
         })
         viewModel.isLoading.observe(viewLifecycleOwner, { isLoading ->
@@ -42,7 +41,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
             findNavController().popBackStack()
         }
         binding.loginButton.setOnClickListener {
-            viewModel.doLoginRequest(id_input.text.toString(), password_input.text.toString())
+            viewModel.doLoginRequest(binding.idInput.text.toString(), binding.passwordInput.text.toString())
         }
     }
 

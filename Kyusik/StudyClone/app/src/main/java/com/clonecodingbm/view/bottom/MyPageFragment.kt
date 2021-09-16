@@ -9,7 +9,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.clonecodingbm.R
 import com.clonecodingbm.databinding.FragmentMyPageBinding
-import kotlinx.android.synthetic.main.fragment_my_page.*
 
 class MyPageFragment : Fragment() {
     lateinit var binding: FragmentMyPageBinding
@@ -26,7 +25,7 @@ class MyPageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        move_login.setOnClickListener{
+        binding.moveLogin.setOnClickListener{
             findNavController().navigate(R.id.action_myPageFragment_to_loginFragment)
         }
     }

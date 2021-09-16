@@ -17,7 +17,7 @@ abstract class BaseViewModel : ViewModel() {
     }
 
     protected fun showProgress() {
-        _isLoading.value = true
+        _isLoading.postValue(true)
     }
 
     protected fun hideProgress() {

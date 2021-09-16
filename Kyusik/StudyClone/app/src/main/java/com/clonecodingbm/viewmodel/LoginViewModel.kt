@@ -39,8 +39,8 @@ class LoginViewModel : BaseViewModel() {
                 compositeDisposable.add(
                     apiService
                         .login(LoginInfo(id, password))
-                        .doOnSubscribe { showProgress() }
                         .subscribeOn(Schedulers.io())
+                        .doOnSubscribe { showProgress() }
                         .observeOn(AndroidSchedulers.mainThread())
                         .doOnSuccess { hideProgress() }
                         .subscribe({

@@ -3,14 +3,18 @@ package com.dohyun.baeminapp.ui.view.login
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.dohyun.baeminapp.base.BaseViewModel
-import com.dohyun.baeminapp.entity.UserInfo
-import com.dohyun.baeminapp.network.RetrofitBuilder
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.dohyun.baeminapp.ui.base.BaseViewModel
+import com.dohyun.baeminapp.data.entity.UserInfo
+import com.dohyun.baeminapp.data.repository.LoginRepository
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import retrofit2.HttpException
 import java.lang.IllegalArgumentException
 
-class LoginViewModel : BaseViewModel() {
+class LoginViewModel constructor(
+    private val repository: LoginRepository
+) : BaseViewModel() {
 
     val id: MutableLiveData<String> = MutableLiveData("")
     val pw: MutableLiveData<String> = MutableLiveData("")
@@ -40,13 +44,11 @@ class LoginViewModel : BaseViewModel() {
         }
     }
 
-    private fun login(id: String, pw: String) {
-        RetrofitBuilder.apiClient.login(UserInfo(id, pw))
-            .subscribeOn(Schedulers.io())
+    fun login(id: String, pw: String) {
+        repository.login(UserInfo(id, pw))
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe( {
-                // token 저장하기
-                Log.d("LoginViewModel", "$it")
+            .subscribe({
+                repository.saveTokens(it)
                 _successLogin.value = Unit
             }, {
                 if (it is HttpException) {

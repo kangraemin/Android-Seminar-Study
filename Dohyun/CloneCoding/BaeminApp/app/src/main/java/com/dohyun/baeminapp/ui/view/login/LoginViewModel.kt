@@ -7,8 +7,8 @@ import com.dohyun.baeminapp.base.BaseViewModel
 import com.dohyun.baeminapp.entity.UserInfo
 import com.dohyun.baeminapp.network.RetrofitBuilder
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
-import io.reactivex.rxjava3.schedulers.Schedulers
-import io.reactivex.rxjava3.schedulers.Schedulers.io
+import retrofit2.HttpException
+import java.lang.IllegalArgumentException
 
 class LoginViewModel : BaseViewModel() {
 
@@ -49,10 +49,12 @@ class LoginViewModel : BaseViewModel() {
                 Log.d("LoginViewModel", "$it")
                 _successLogin.value = Unit
             }, {
-                // error
-                Log.e("LoginViewModel", "error : ${it.message}")
-                when (it.message!!.split(" ")[1]) {
-                    "401" -> {
+                if (it is HttpException) {
+                    when (it.code()) {
+                        401 -> _loginErrorMsg.value = Unit
+                    }
+                }
+            })
 
     }
 }

@@ -11,11 +11,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         bindViews(binding)
+
+        binding.deliveryModuleButton.performClick()
     }
 
     private fun bindViews(binding: ActivityMainBinding) {
-        binding.testCodeModulebutton.setOnClickListener {
+        binding.testCodeModuleButton.setOnClickListener {
             startModuleActivity("com.terry.testcode.TestCodeMainActivity")
+        }
+
+        binding.deliveryModuleButton.setOnClickListener {
+            startModuleActivity("com.terry.delivery.ui.DeliveryMainActivity")
         }
     }
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/parentViewGroup"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:elevation="3dp"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:layout_width="wrap_content">
+
+    <TextView
+        android:id="@+id/item_title_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        tools:drawableTopCompat="@drawable/ic_search"
+        tools:text="검색" />
+
+</LinearLayout>

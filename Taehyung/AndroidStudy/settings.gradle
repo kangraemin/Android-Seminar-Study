@@ -9,3 +9,4 @@ dependencyResolutionManagement {
 rootProject.name = "AndroidStudy"
 include ':app'
 include ':features:TestCode'
+include ':features:Delivery'

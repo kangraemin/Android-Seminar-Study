@@ -1,0 +1,63 @@
+plugins {
+    id 'com.android.dynamic-feature'
+    id 'kotlin-android'
+    id 'androidx.navigation.safeargs.kotlin'
+}
+android {
+    compileSdk 30
+
+    defaultConfig {
+        applicationId "com.terry.delivery"
+        minSdk 23
+        targetSdk 30
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation project(":app")
+    implementation "androidx.core:core-ktx:$rootProject.androidCoreKtxVersion"
+    implementation "androidx.appcompat:appcompat:$rootProject.appCompatVersion"
+    implementation "com.google.android.material:material:$rootProject.materialVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
+    implementation "androidx.fragment:fragment-ktx:$rootProject.fragmentKtxVersion"
+
+    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
+
+    implementation "io.reactivex.rxjava2:rxkotlin:$rootProject.rxkotlinVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxAndroidVersion"
+
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofitVersion"
+
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp3Version"
+
+    implementation "androidx.fragment:fragment-ktx:$rootProject.fragmentVersion"
+
+    implementation "androidx.lifecycle:lifecycle-livedata-core-ktx:$rootProject.lifecycleVersion"
+
+    testImplementation "junit:junit:$rootProject.junitVersion"
+    androidTestImplementation "androidx.test.ext:junit:$rootProject.androidJunitVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.androidExpressoCoreVersion"
+    androidTestImplementation "androidx.annotation:annotation:$rootProject.androidAnnotationVersion"
+
+    testImplementation "org.hamcrest:hamcrest-all:$rootProject.hamcrestAllVersion"
+    testImplementation "org.mockito:mockito-core:$rootProject.mockitoCoreVersion"
+    testImplementation "androidx.arch.core:core-testing:$rootProject.archCoreTestingVersion"
+}

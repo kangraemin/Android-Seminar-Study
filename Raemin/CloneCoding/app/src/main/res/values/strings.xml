@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">DeliveryCloneCoding</string>
+
+    <!-- Splash UI -->
+    <string name="splash_title">배달의민족</string>
+    <string name="splash_subtitle">대한민국 1등 배달어플</string>
+
+    <!-- Temp text for main fragment -->
+    <string name="main_fragment_temp_text">main fragment</string>
+
+    <!-- Temp text for detail fragment -->
+    <string name="customer_fragment_temp_text">customer fragment</string>
+    <string name="favorite_fragment_temp_text">favorite fragment</string>
+    <string name="order_history_fragment_temp_text">order history fragment</string>
+    <string name="search_fragment_temp_text">search fragment</string>
+
+    <!-- Button title for bottom UI -->
+    <string name="nav_item_search">검색</string>
+    <string name="nav_item_favorite">찜</string>
+    <string name="nav_item_order_history">주문내역</string>
+    <string name="nav_item_customer">my배민</string>
+
 </resources>

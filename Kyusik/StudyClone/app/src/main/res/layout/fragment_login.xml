@@ -10,13 +10,13 @@
         tools:context=".view.UserLoginActivity">
 
         <Button
-            android:id="@+id/close_btn"
+            android:id="@+id/bt_login_close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="close"/>
 
         <EditText
-            android:id="@+id/id_input"
+            android:id="@+id/et_login_idInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -26,7 +26,7 @@
             android:text="delivery" />
 
         <EditText
-            android:id="@+id/password_input"
+            android:id="@+id/et_login_pwInput"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -36,7 +36,7 @@
             android:text="dev_baemin" />
 
         <TextView
-            android:id="@+id/refresh"
+            android:id="@+id/tv_login_refresh"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -44,7 +44,7 @@
             android:textStyle="bold" />
 
         <TextView
-            android:id="@+id/access"
+            android:id="@+id/tv_login_access"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -52,7 +52,7 @@
             android:textStyle="bold" />
 
         <Button
-            android:id="@+id/login_button"
+            android:id="@+id/bt_login_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"

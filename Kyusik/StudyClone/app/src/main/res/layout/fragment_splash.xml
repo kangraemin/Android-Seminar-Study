@@ -7,21 +7,21 @@
     tools:context=".SplashFragment">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tv_splash_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/euljiro_font"
         android:text="배달의민족"
         android:textColor="@color/black"
         android:textSize="25sp"
-        app:layout_constraintBottom_toTopOf="@+id/textView2"
+        app:layout_constraintBottom_toTopOf="@+id/tv_splash_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/tv_splash_content"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/kiranghaerang_font"
@@ -31,6 +31,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_splash_title" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

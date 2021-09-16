@@ -25,7 +25,7 @@ class MyPageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.moveLogin.setOnClickListener{
+        binding.btMyPageLogin.setOnClickListener{
             findNavController().navigate(R.id.action_myPageFragment_to_loginFragment)
         }
     }

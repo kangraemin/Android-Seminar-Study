@@ -25,8 +25,8 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
             }
         })
         viewModel.loginData.observe(viewLifecycleOwner, {
-            binding.refresh.text = it.refresh
-            binding.access.text = it.access
+            binding.tvLoginRefresh.text = it.refresh
+            binding.tvLoginAccess.text = it.access
             findNavController().popBackStack()
         })
         viewModel.isLoading.observe(viewLifecycleOwner, { isLoading ->
@@ -37,11 +37,11 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
             }
         })
 
-        binding.closeBtn.setOnClickListener {
+        binding.btLoginClose.setOnClickListener {
             findNavController().popBackStack()
         }
-        binding.loginButton.setOnClickListener {
-            viewModel.doLoginRequest(binding.idInput.text.toString(), binding.passwordInput.text.toString())
+        binding.btLoginLogin.setOnClickListener {
+            viewModel.doLoginRequest(binding.etLoginIdInput.text.toString(), binding.etLoginPwInput.text.toString())
         }
     }
 

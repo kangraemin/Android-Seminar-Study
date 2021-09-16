@@ -10,7 +10,7 @@
         tools:context=".view.bottom.MyPageFragment">
 
         <Button
-            android:id="@+id/move_login"
+            android:id="@+id/bt_myPage_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintTop_toTopOf="parent"

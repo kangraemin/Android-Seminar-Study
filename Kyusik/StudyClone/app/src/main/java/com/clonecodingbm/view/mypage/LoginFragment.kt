@@ -10,27 +10,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.clonecodingbm.R
+import com.clonecodingbm.base.BaseFragment
 import com.clonecodingbm.databinding.FragmentLoginBinding
 import com.clonecodingbm.viewmodel.LoginViewModel
 import kotlinx.android.synthetic.main.fragment_login.*
 
-class LoginFragment : Fragment() {
-    companion object {
-        private const val TAG = "LoginFragment"
-    }
+class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
+    private lateinit var viewModel: LoginViewModel
 
-    lateinit var binding: FragmentLoginBinding
-    lateinit var viewModel: LoginViewModel
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
+    override fun init() {
         viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
-        binding.lifecycleOwner = this
-
         viewModel.message.observe(viewLifecycleOwner, {
             it.getContentIfNotHandled()?.let {
                 Toast.makeText(context, it, Toast.LENGTH_LONG).show()
@@ -41,19 +30,23 @@ class LoginFragment : Fragment() {
             access.text = it.access
             findNavController().popBackStack()
         })
+        viewModel.isLoading.observe(viewLifecycleOwner, { isLoading ->
+            if (isLoading) {
+                showToast("isLoading: true")
+            } else {
+                showToast("isLoading: false")
+            }
+        })
 
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        close_btn.setOnClickListener{
+        binding.closeBtn.setOnClickListener {
             findNavController().popBackStack()
         }
-
-        login_button.setOnClickListener{
+        binding.loginButton.setOnClickListener {
             viewModel.doLoginRequest(id_input.text.toString(), password_input.text.toString())
         }
+    }
+
+    companion object {
+        private const val TAG = "LoginFragment"
     }
 }

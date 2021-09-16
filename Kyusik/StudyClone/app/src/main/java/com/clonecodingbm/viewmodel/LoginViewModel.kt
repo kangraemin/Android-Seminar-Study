@@ -3,6 +3,7 @@ package com.clonecodingbm.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.clonecodingbm.base.BaseViewModel
 import com.clonecodingbm.data.Event
 import com.clonecodingbm.data.login.LoginDataItem
 import com.clonecodingbm.data.login.LoginInfo
@@ -12,13 +13,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class LoginViewModel : ViewModel() {
-    companion object {
-        const val TAG = "UserLoginViewModel"
-    }
-
+class LoginViewModel : BaseViewModel() {
     private val apiService: ApiService = RetrofitClient.getApiService
-    private val compositeDisposable = CompositeDisposable()
 
     private val _message = MutableLiveData<Event<String>>()
     private val _loginData = MutableLiveData<LoginDataItem>()
@@ -43,8 +39,10 @@ class LoginViewModel : ViewModel() {
                 compositeDisposable.add(
                     apiService
                         .login(LoginInfo(id, password))
+                        .doOnSubscribe { showProgress() }
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
+                        .doOnSuccess { hideProgress() }
                         .subscribe({
                             _loginData.postValue(it)
                         }, {
@@ -56,8 +54,7 @@ class LoginViewModel : ViewModel() {
         }
     }
 
-    override fun onCleared() {
-        super.onCleared()
-        compositeDisposable.clear()
+    companion object {
+        private const val TAG = "LoginViewModel"
     }
 }

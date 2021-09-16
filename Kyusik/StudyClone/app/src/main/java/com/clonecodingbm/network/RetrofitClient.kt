@@ -10,30 +10,29 @@ import java.util.concurrent.TimeUnit
 object RetrofitClient {
     private const val BASE_URL =
         "https://r5670326j8.execute-api.ap-northeast-2.amazonaws.com/delivery_server/"
-    private var retrofit: Retrofit? = null
 
-    private fun getRetrofitClient(): Retrofit {
+    private val okHttpClient: OkHttpClient by lazy {
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
 
-        val okHttpClient: OkHttpClient = OkHttpClient.Builder()
+        OkHttpClient.Builder()
             .readTimeout((60 * 2).toLong(), TimeUnit.SECONDS)
             .connectTimeout((60 * 2).toLong(), TimeUnit.SECONDS)
             .writeTimeout((60 * 2).toLong(), TimeUnit.SECONDS)
             .addInterceptor(interceptor)
             .build()
-
-        if (retrofit == null) {
-            retrofit = Retrofit.Builder()
-                .baseUrl(BASE_URL)
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(okHttpClient)
-                .build()
-        }
-        return retrofit!!
     }
 
-    val getApiService: ApiService
-        get() = getRetrofitClient().create(ApiService::class.java)
+    private val buildRetrofitClient: Retrofit by lazy {
+        Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .client(okHttpClient)
+            .build()
+    }
+
+    val getApiService: ApiService by lazy {
+        buildRetrofitClient.create(ApiService::class.java)
+    }
 }

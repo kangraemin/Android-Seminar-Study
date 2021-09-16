@@ -6,6 +6,7 @@ import com.example.deliveryclonecoding.data.Repository
 import com.example.deliveryclonecoding.ui.base.BaseViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
+import io.reactivex.subjects.PublishSubject
 import retrofit2.HttpException
 
 class LoginViewModel(
@@ -15,9 +16,14 @@ class LoginViewModel(
     private val _loginResult: MutableLiveData<Boolean> = MutableLiveData()
     val loginResult: LiveData<Boolean> = _loginResult
 
-    fun login(id: String, password: String) {
-        repository
-            .login(id, password)
+    private val loginSubject = PublishSubject.create<Pair<String, String>>()
+
+    init {
+        loginSubject
+            .flatMapCompletable {
+                repository
+                    .login(it.first, it.second)
+            }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({
                 _loginResult.value = true
@@ -29,5 +35,9 @@ class LoginViewModel(
                 }
             })
             .addTo(compositeDisposable)
+    }
+
+    fun login(id: String, password: String) {
+        loginSubject.onNext(Pair(id, password))
     }
 }

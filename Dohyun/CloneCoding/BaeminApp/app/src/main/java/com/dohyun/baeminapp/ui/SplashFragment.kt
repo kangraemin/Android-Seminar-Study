@@ -30,7 +30,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(R.layout.fragment_spl
                 findNavController().navigate(R.id.action_splash_to_mainNav)
             },{
                 Log.e("SplashFragment", "${it.message}")
-            })
+            }).dispose()
     }
 
 }

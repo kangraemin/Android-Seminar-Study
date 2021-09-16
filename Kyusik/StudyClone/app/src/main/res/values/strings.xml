@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">StudyClone</string>
+
+    <string name="search">검색</string>
+    <string name="favorite">찜</string>
+    <string name="order_list">주문내역</string>
+    <string name="my">My배민</string>
+
+    <string name="login_id_hint">아이디 또는 이메일</string>
+    <string name="login_password_hint">비밀번호</string>
+    <string name="login">로그인</string>
+</resources>

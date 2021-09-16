@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">CloneBaemin</string>
+
+    <!--Splash-->
+    <string name="splash_title">대한민국 1등 배달어플</string>
+    <string name="company_name">우아한형제들</string>
+
+    <!--MainActivity-->
+    <string name="search">검색</string>
+    <string name="favorite">찜</string>
+    <string name="baemin">배민</string>
+    <string name="orderlist">주문내역</string>
+    <string name="myinfo">my배민</string>
+
+    <!--Myinfo-->
+    <string name="login_request">로그인해주세요</string>
+
+    <!--LoginFragment-->
+    <string name="login">로그인</string>
+</resources>

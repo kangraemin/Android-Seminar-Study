@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/search_tab"
+        android:icon="@drawable/ic_search"
+        android:title="@string/search" />
+    <item
+        android:id="@+id/favorite_tab"
+        android:icon="@drawable/ic_favorite"
+        android:title="@string/favorite" />
+
+    <item
+        android:id="@+id/home_tab"
+        android:title="@string/baemin" />
+
+    <item
+        android:id="@+id/orderlist_tab"
+        android:icon="@drawable/ic_order"
+        android:title="@string/orderlist" />
+
+    <item
+        android:id="@+id/myinfo_tab"
+        android:icon="@drawable/ic_mybamin"
+        android:title="@string/myinfo" />
+
+</menu>

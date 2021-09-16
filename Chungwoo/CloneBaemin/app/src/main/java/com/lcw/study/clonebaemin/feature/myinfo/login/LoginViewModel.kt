@@ -18,11 +18,10 @@ class LoginViewModel : BaseViewModel() {
 
 
     fun requestLogin(userName: String, password: String) {
-        //RetrofitClient.getService().requestLogin(RequestLoginInfoData("delivery", "dev_baemin"))
         RetrofitClient.getService()
             .requestLogin(RequestLoginInfoData(username = userName, password = password))
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+            .subscribeOn(Schedulers.io())  //상위스트림
+            //.observeOn(AndroidSchedulers.mainThread()) //하위스트림
             .subscribe({
                 _success.postValue(true)
                 Log.d("LoginViewmodel", "response success: $it ")

@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:backgroundTint="@color/light_green_main"
-            android:onClick="@{() -> vm.requestLogin()}"
+            android:onClick="@{() -> vm.requestLogin(etId.getText().toString(),etPwd.getText().toString())}"
             android:paddingVertical="14dp"
             android:text="@string/login"
             android:textColor="@color/white"

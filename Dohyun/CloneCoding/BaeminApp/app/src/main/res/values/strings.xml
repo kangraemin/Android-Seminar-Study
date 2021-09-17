@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">배달의민족</string>
+    <string name="splash_title">대한민국 1등 배달어플</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="search">검색</string>
+    <string name="dibs">찜</string>
+    <string name="home">배민</string>
+    <string name="orders">주문내역</string>
+    <string name="mypage">My배민</string>
+
+    <!-- Error Msg -->
+    <string name="id_empty_error_msg">아이디를 입력해주세요</string>
+    <string name="pw_empty_error_msg">비밀번호를 입력해주세요</string>
+    <string name="failure_login_msg">로그인에 실패하였습니다</string>
+
+    <string name="success_login_msg">로그인에 성공하였습니다</string>
+
+    <!-- Layout strings -->
+    <string name="edit_id_hint">아이디 또는 이메일</string>
+    <string name="edit_pw_hint">비밀번호</string>
+    <string name="login_btn">로그인</string>
+    <string name="find_id_btn">아이디 찾기</string>
+    <string name="divider">|</string>
+    <string name="find_pw_btn">비밀번호 찾기</string>
+    <string name="join_btn">회원가입</string>
+    <string name="join_title">혹시, 배달의민족이 처음이신가요?</string>
+    <string name="login_facebook">페이스북으로 로그인</string>
+    <string name="login_naver">네이버로 로그인</string>
+    <string name="login_apple">Apple로 로그인</string>
+</resources>

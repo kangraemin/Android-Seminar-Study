@@ -4,8 +4,9 @@ import com.example.deliveryclonecoding.data.local.token.LocalTokenDataSource
 import com.example.deliveryclonecoding.data.local.token.LocalTokenMapper.mappingRemoteDataToLocal
 import com.example.deliveryclonecoding.data.remote.login.LoginDataSource
 import io.reactivex.Completable
+import javax.inject.Inject
 
-class RepositoryImpl(
+class RepositoryImpl @Inject constructor(
     private val localTokenDataSource: LocalTokenDataSource,
     private val loginDataSource: LoginDataSource
 ) : Repository {

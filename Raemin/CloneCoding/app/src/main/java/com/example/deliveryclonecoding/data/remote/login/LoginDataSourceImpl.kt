@@ -2,8 +2,9 @@ package com.example.deliveryclonecoding.data.remote.login
 
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class LoginDataSourceImpl(
+class LoginDataSourceImpl @Inject constructor(
     private val loginApi: LoginApi
 ) : LoginDataSource {
     override fun login(id: String, password: String): Single<LoginDataItem> {

@@ -1,19 +1,27 @@
-package com.example.deliveryclonecoding.data.remote
+package com.example.deliveryclonecoding.di
 
 import com.example.deliveryclonecoding.data.remote.login.LoginApi
+import dagger.Module
+import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Singleton
 
-object RetrofitClient {
-
-    private val baseURL =
+@InstallIn(SingletonComponent::class)
+@Module
+object RetrofitModule {
+    private const val baseURL =
         "https://r5670326j8.execute-api.ap-northeast-2.amazonaws.com/delivery_server/"
 
-    private val okHttpClient: OkHttpClient by lazy {
-        OkHttpClient
+    @Provides
+    @Singleton
+    fun okHttpClient(): OkHttpClient {
+        return OkHttpClient
             .Builder()
             .addInterceptor(HttpLoggingInterceptor().apply {
                 level = HttpLoggingInterceptor.Level.BODY
@@ -21,8 +29,10 @@ object RetrofitClient {
             .build()
     }
 
-    private val buildRetrofitClient: Retrofit by lazy {
-        Retrofit
+    @Provides
+    @Singleton
+    fun buildRetrofitClient(okHttpClient: OkHttpClient): Retrofit {
+        return Retrofit
             .Builder()
             .baseUrl(baseURL)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -31,5 +41,9 @@ object RetrofitClient {
             .build()
     }
 
-    val loginAPI: LoginApi by lazy { buildRetrofitClient.create(LoginApi::class.java) }
+    @Provides
+    @Singleton
+    fun loginAPI(retrofit: Retrofit): LoginApi {
+        return retrofit.create(LoginApi::class.java)
+    }
 }

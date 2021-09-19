@@ -4,22 +4,19 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import com.example.deliveryclonecoding.R
-import com.example.deliveryclonecoding.data.RepositoryFactory
 import com.example.deliveryclonecoding.databinding.FragmentLoginBinding
 import com.example.deliveryclonecoding.ui.base.BaseFragment
 import com.jakewharton.rxbinding3.view.clicks
+import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxkotlin.addTo
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
 
-    private val loginViewModel by lazy {
-        LoginViewModel(
-            RepositoryFactory.getRepository(
-                requireActivity().applicationContext
-            )
-        )
-    }
+    @Inject
+    lateinit var loginViewModel: LoginViewModel
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

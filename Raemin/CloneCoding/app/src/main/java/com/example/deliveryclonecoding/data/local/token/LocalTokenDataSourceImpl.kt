@@ -3,8 +3,9 @@ package com.example.deliveryclonecoding.data.local.token
 import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class LocalTokenDataSourceImpl(
+class LocalTokenDataSourceImpl @Inject constructor(
     private val localTokenDao: LocalTokenDao
 ) : LocalTokenDataSource {
     override fun getToken(): Single<LocalTokenItem> {

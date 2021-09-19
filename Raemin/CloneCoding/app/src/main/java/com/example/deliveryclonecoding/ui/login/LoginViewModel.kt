@@ -8,8 +8,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.subjects.PublishSubject
 import retrofit2.HttpException
+import javax.inject.Inject
 
-class LoginViewModel(
+class LoginViewModel @Inject constructor(
     private val repository: Repository
 ) : BaseViewModel() {
 

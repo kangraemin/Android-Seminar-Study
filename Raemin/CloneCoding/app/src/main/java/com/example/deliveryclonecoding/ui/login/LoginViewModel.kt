@@ -3,7 +3,9 @@ package com.example.deliveryclonecoding.ui.login
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.deliveryclonecoding.data.Repository
+import com.example.deliveryclonecoding.data.remote.base.NetworkCallResult
 import com.example.deliveryclonecoding.ui.base.BaseViewModel
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.subjects.PublishSubject
@@ -21,20 +23,24 @@ class LoginViewModel @Inject constructor(
 
     init {
         loginSubject
-            .flatMapCompletable {
+            .flatMapSingle {
                 repository
                     .login(it.first, it.second)
+                    .andThen(Single.just(NetworkCallResult<Unit>()))
+                    .onErrorReturn { NetworkCallResult(throwable = it) }
             }
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                _loginResult.value = true
-            }, {
-                if (it is HttpException && it.code() == 401) {
-                    _loginResult.value = false
-                } else {
-                    it.printStackTrace()
+            .subscribe {
+                it.throwable?.let { throwable ->
+                    if (throwable is HttpException && throwable.code() == 401) {
+                        _loginResult.value = false
+                    } else {
+                        throwable.printStackTrace()
+                    }
+                } ?: run {
+                    _loginResult.value = true
                 }
-            })
+            }
             .addTo(compositeDisposable)
     }
 

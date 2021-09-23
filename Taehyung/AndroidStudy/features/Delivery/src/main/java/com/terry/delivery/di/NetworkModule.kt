@@ -1,7 +1,7 @@
 package com.terry.delivery.di
 
 import com.terry.delivery.BuildConfig
-import com.terry.delivery.api.LoginService
+import com.terry.delivery.data.remote.LoginService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

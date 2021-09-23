@@ -2,20 +2,23 @@ package com.terry.delivery.ui.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.terry.delivery.api.LoginService
 import com.terry.delivery.base.BaseViewModel
 import com.terry.delivery.entity.Token
-import com.terry.delivery.api.provideLoginService
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
 /*
  * Created by Taehyung Kim on 2021-09-08
  */
-class LoginViewModel : BaseViewModel() {
-
-    private val loginService = provideLoginService()
+@HiltViewModel
+class LoginViewModel @Inject constructor(
+    private val loginService: LoginService
+) : BaseViewModel() {
 
     private val _token = MutableLiveData<Token>()
     val token: LiveData<Token>

@@ -14,6 +14,7 @@ buildscript {
         rxAndroidVersion = "2.1.1"
 
         retrofitVersion = "2.9.0"
+        roomVersion = "2.3.0"
         okhttp3Version = "4.9.1"
         hiltVersion = "2.38.1"
 

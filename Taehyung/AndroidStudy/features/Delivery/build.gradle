@@ -48,6 +48,9 @@ dependencies {
     implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofitVersion"
 
+    implementation "androidx.room:room-runtime:$rootProject.roomVersion"
+    kapt "androidx.room:room-ktx:$rootProject.roomVersion"
+
     implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp3Version"
 
     implementation "com.google.dagger:hilt-android:$rootProject.hiltVersion"

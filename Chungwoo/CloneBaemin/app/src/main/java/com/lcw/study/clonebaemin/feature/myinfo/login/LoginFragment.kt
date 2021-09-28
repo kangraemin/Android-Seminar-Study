@@ -12,7 +12,10 @@ import androidx.lifecycle.Observer
 import com.lcw.study.clonebaemin.R
 import com.lcw.study.clonebaemin.databinding.FragmentLoginBinding
 import com.lcw.study.clonebaemin.feature.base.BaseFragment
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
 
     private val loginViewModel: LoginViewModel by viewModels()

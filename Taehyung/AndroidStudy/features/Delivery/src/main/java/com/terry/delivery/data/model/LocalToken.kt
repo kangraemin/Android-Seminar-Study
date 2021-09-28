@@ -9,7 +9,7 @@ import androidx.room.PrimaryKey
  */
 @Entity
 data class LocalToken(
-    @PrimaryKey val id: Long?,
+    @PrimaryKey val id: Long? = 0,
     @ColumnInfo(name = "accessToken") val accessToken: String,
     @ColumnInfo(name = "refreshToken") val refreshToken: String
 )

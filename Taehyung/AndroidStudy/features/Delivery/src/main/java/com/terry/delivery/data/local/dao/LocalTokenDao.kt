@@ -1,10 +1,9 @@
 package com.terry.delivery.data.local.dao
 
 import androidx.room.Dao
-import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import com.terry.delivery.data.model.LocalToken
+import com.terry.delivery.data.local.model.LocalToken
 import io.reactivex.Completable
 import io.reactivex.Single
 
@@ -14,12 +13,12 @@ import io.reactivex.Single
 @Dao
 interface LocalTokenDao {
 
-    @Query("SELECT * FROM LocalToken")
+    @Query("SELECT * FROM local_token")
     fun getLocalToken(): Single<LocalToken>
 
     @Insert
     fun saveTokens(localToken: LocalToken): Completable
 
-    @Query("DELETE FROM LocalToken")
+    @Query("DELETE FROM local_token")
     fun deleteAllTokens(): Completable
 }

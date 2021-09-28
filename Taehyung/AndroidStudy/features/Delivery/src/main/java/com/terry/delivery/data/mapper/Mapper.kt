@@ -1,6 +1,6 @@
 package com.terry.delivery.data.mapper
 
-import com.terry.delivery.data.model.LocalToken
+import com.terry.delivery.data.local.model.LocalToken
 import com.terry.delivery.entity.Token
 
 /*

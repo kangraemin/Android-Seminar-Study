@@ -2,7 +2,7 @@ package com.dohyun.baeminapp.ui.view.login
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import com.dohyun.baeminapp.R
@@ -14,9 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
 
-    private val viewModel: LoginViewModel by viewModels {
-        LoginViewModelFactory((requireActivity().application as BaminApplication).repository)
-    }
+    private val viewModel by activityViewModels<LoginViewModel>()
 
     override fun onCreateBinding(
         inflater: LayoutInflater,
@@ -34,34 +32,39 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
             findNavController().popBackStack()
         }
 
+        observeData()
+    }
+
+    private fun observeData() {
         with(viewModel) {
-            isIdEmpty.observe(viewLifecycleOwner, Observer {
+            loginState.observe(viewLifecycleOwner, Observer {
                 when (it) {
-                    true -> setIdEmptyError()
-                    false -> requireDataBinding().loginIdTextInputLayout.isErrorEnabled = false
+                    true -> successLogin()
+                    false -> showToast(getString(R.string.failure_login_msg))
                 }
             })
-            isPwEmpty.observe(viewLifecycleOwner, Observer {
-                when(it) {
-                    true -> setPwEmptyError()
-                    false -> requireDataBinding().loginPwTextInputLayout.isErrorEnabled = false
+
+            requireDataBinding().loginBtn.setOnClickListener {
+                if (validation(requireDataBinding().loginIdTextInputLayout) &&
+                    validation(requireDataBinding().loginPwTextInputLayout)) {
+
+                    val id = requireDataBinding().loginEditId.text.toString()
+                    val pw = requireDataBinding().loginEditPw.text.toString()
+
+                    startLogin(id, pw)
                 }
-            })
-            loginErrorMsg.observe(viewLifecycleOwner, Observer {
-                showToast(getString(R.string.failure_login_msg))
-            })
-            successLogin.observe(viewLifecycleOwner, Observer {
-                successLogin()
-            })
+            }
+
+
         }
     }
 
-    private fun setIdEmptyError() {
-        requireDataBinding().loginIdTextInputLayout.error = getString(R.string.id_empty_error_msg)
-    }
-
-    private fun setPwEmptyError() {
-        requireDataBinding().loginPwTextInputLayout.error = getString(R.string.pw_empty_error_msg)
+    private fun validation(input: TextInputLayout): Boolean {
+        if (input.editText!!.text.isNullOrEmpty()) {
+            input.error = "입력을 확인해주세요!"
+            return false
+        }
+        return true
     }
 
     private fun successLogin() {

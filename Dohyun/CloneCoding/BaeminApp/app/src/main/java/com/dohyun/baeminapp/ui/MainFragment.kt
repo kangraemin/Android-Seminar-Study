@@ -5,7 +5,9 @@ import android.view.ViewGroup
 import com.dohyun.baeminapp.R
 import com.dohyun.baeminapp.ui.base.BaseFragment
 import com.dohyun.baeminapp.databinding.FragmentMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
 
     override fun onCreateBinding(

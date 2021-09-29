@@ -7,7 +7,9 @@ import com.dohyun.baeminapp.R
 import com.dohyun.baeminapp.ui.base.BaseFragment
 import com.dohyun.baeminapp.databinding.FragmentMainNavBinding
 import com.dohyun.baeminapp.ui.view.home.HomeFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainNavFragment : BaseFragment<FragmentMainNavBinding>(R.layout.fragment_main_nav) {
 
     override fun onCreateBinding(

@@ -6,7 +6,9 @@ import com.dohyun.baeminapp.R
 import com.dohyun.baeminapp.ui.utils.ToolbarUtil
 import com.dohyun.baeminapp.ui.base.BaseFragment
 import com.dohyun.baeminapp.databinding.FragmentSearchBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_search) {
 
     override fun onCreateBinding(

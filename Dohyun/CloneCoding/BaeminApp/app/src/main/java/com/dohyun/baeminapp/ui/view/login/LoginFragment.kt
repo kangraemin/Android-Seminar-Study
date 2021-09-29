@@ -8,8 +8,10 @@ import androidx.navigation.fragment.findNavController
 import com.dohyun.baeminapp.R
 import com.dohyun.baeminapp.ui.base.BaseFragment
 import com.dohyun.baeminapp.databinding.FragmentLoginBinding
-import com.dohyun.baeminapp.BaminApplication
+import com.google.android.material.textfield.TextInputLayout
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
 
     private val viewModel: LoginViewModel by viewModels {

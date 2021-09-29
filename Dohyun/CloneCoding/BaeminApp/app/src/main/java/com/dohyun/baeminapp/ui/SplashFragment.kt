@@ -7,10 +7,12 @@ import androidx.navigation.fragment.findNavController
 import com.dohyun.baeminapp.R
 import com.dohyun.baeminapp.ui.base.BaseFragment
 import com.dohyun.baeminapp.databinding.FragmentSplashBinding
+import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Completable
 import java.util.concurrent.TimeUnit
 
+@AndroidEntryPoint
 class SplashFragment : BaseFragment<FragmentSplashBinding>(R.layout.fragment_splash) {
 
     override fun onCreateBinding(
@@ -30,7 +32,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(R.layout.fragment_spl
                 findNavController().navigate(R.id.action_splash_to_mainNav)
             },{
                 Log.e("SplashFragment", "${it.message}")
-            }).dispose()
+            })
     }
 
 }

@@ -9,7 +9,9 @@ import com.dohyun.baeminapp.R
 import com.dohyun.baeminapp.ui.utils.ToolbarUtil
 import com.dohyun.baeminapp.ui.base.BaseFragment
 import com.dohyun.baeminapp.databinding.FragmentMyPageBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
 
     private lateinit var adapter: MyPageAdapter

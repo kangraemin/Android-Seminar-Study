@@ -26,8 +26,14 @@ class MainActivity : AppCompatActivity() {
 
         navController.addOnDestinationChangedListener { controller, destination, arguments ->
             when(destination.id) {
-                R.id.splashFragment, R.id.loginFragment -> findViewById<ConstraintLayout>(R.id.layout_bottom).isVisible = false
-                else -> findViewById<ConstraintLayout>(R.id.layout_bottom).isVisible = true
+                R.id.splashFragment, R.id.loginFragment -> {
+                    findViewById<ConstraintLayout>(R.id.layout_bottom).isVisible = false
+                    findViewById<ImageView>(R.id.btn_main).isVisible = false
+                }
+                else -> {
+                    findViewById<ConstraintLayout>(R.id.layout_bottom).isVisible = true
+                    findViewById<ImageView>(R.id.btn_main).isVisible = true
+                }
             }
         }
 

@@ -10,12 +10,12 @@ import io.reactivex.rxjava3.core.Single
 @Dao
 interface TokenDao {
 
-    @Query(value = "SELECT * FROM token")
-    fun getToken(): Single<Token>
+    @Query(value = "SELECT * FROM Token")
+    fun getTokens(): Single<Token>
 
     @Insert
     fun saveToken(token : Token): Completable
 
-    @Query(value = "DELETE FROM token")
-    fun clearCache(): Completable
+    @Query(value = "DELETE FROM Token")
+    fun deleteToken(): Completable
 }

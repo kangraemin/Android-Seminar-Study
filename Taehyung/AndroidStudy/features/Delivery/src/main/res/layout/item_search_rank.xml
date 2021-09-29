@@ -9,11 +9,14 @@
         android:id="@+id/tv_rank_num"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="12dp"
+        android:gravity="end"
+        android:paddingVertical="12dp"
+        android:paddingStart="0dp"
+        android:paddingEnd="12dp"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/iv_rank"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@id/iv_rank"
         tools:text="1" />
 
     <TextView
@@ -21,19 +24,19 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="@id/tv_rank_num"
+        app:layout_constraintBottom_toBottomOf="@id/iv_rank"
         app:layout_constraintEnd_toStartOf="@id/iv_rank"
         app:layout_constraintStart_toEndOf="@id/tv_rank_num"
-        app:layout_constraintTop_toTopOf="@id/tv_rank_num"
+        app:layout_constraintTop_toTopOf="@id/iv_rank"
         tools:text="배스킨라빈스" />
 
     <ImageView
         android:id="@+id/iv_rank"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="@id/tv_rank_num"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_rank_num"
+        app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/ic_baseline_arrow_drop_up_24" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

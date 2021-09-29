@@ -1,4 +1,4 @@
-package android.anjahyun.study.view
+package android.anjahyun.study.view.login
 
 import android.anjahyun.study.base.BaseFragment
 import android.anjahyun.study.databinding.FragmentLoginBinding

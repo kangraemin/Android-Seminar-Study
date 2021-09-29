@@ -1,5 +1,6 @@
 package com.terry.delivery.ui.search
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.activityViewModels
@@ -8,6 +9,8 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.terry.delivery.base.BaseFragment
 import com.terry.delivery.databinding.FragmentSearchBinding
+import java.text.SimpleDateFormat
+import java.util.*
 
 /*
  * Created by Taehyung Kim on 2021-08-29
@@ -25,6 +28,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
 
         observeLiveData()
         initToolbar(binding)
+        initRankTime(binding)
         initRankList(binding)
     }
 
@@ -39,6 +43,14 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
             searchRankHighAdapter.submitList(rankList.slice(0 until 5))
             searchRankLowAdapter.submitList(rankList.slice(5 until 10))
         }
+    }
+
+    @SuppressLint("SetTextI18n")
+    private fun initRankTime(binding: FragmentSearchBinding) {
+        val date = Calendar.getInstance().time
+        val dateFormat = SimpleDateFormat("MM.dd HH:00", Locale.ROOT)
+
+        binding.tvSearchRankTime.text = "${dateFormat.format(date)} 기준"
     }
 
     private fun initRankList(binding: FragmentSearchBinding) {

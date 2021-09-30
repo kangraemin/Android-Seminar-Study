@@ -1,5 +1,6 @@
 package com.lcw.study.clonebaemin.di
 
+import com.lcw.study.clonebaemin.BuildConfig
 import com.lcw.study.clonebaemin.data.ApiService
 import dagger.Module
 import dagger.Provides

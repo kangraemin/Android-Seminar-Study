@@ -43,7 +43,15 @@
         android:id="@+id/searchFragment"
         android:name="com.dohyun.baeminapp.ui.view.search.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_search_to_searchResult"
+            app:destination="@id/searchResultFragment" />
+        <argument
+            android:name="argsValue"
+            app:argType="string"
+            android:defaultValue=""/>
+    </fragment>
     <fragment
         android:id="@+id/dibsFragment"
         android:name="com.dohyun.baeminapp.ui.view.dibs.DibsFragment"
@@ -67,5 +75,9 @@
         android:id="@+id/loginFragment"
         android:name="com.dohyun.baeminapp.ui.view.login.LoginFragment"
         android:label="LoginFragment" />
+    <fragment
+        android:id="@+id/searchResultFragment"
+        android:name="com.dohyun.baeminapp.ui.view.search.result.SearchResultFragment"
+        android:label="SearchResultFragment" />
 
 </navigation>

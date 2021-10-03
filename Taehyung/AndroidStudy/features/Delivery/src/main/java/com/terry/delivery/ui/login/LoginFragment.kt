@@ -41,7 +41,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
             val isVerifyPassword = verifyPassword(binding)
 
             if (isVerifyUserName && isVerifyPassword) {
-                loginViewModel.getAccessToken(
+                loginViewModel.login(
                     binding.etLoginId.text.toString(),
                     binding.etLoginPassword.text.toString()
                 )
@@ -54,14 +54,12 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
     private fun bindObserver() {
-        with(loginViewModel) {
-            token.observe(viewLifecycleOwner) {
+        loginViewModel.loginResult.observe(viewLifecycleOwner) { isLoginSuccess ->
+            if (isLoginSuccess) {
                 binding?.let { binding ->
                     SnackbarUtil.showMessage(binding.root, "로그인 성공 !")
                 }
-            }
-
-            loginError.observe(viewLifecycleOwner) {
+            } else {
                 binding?.let { binding ->
                     SnackbarUtil.showErrorMessage(binding.root, "로그인 실패 !!")
                 }

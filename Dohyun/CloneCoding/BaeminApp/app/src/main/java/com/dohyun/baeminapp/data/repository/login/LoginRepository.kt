@@ -1,4 +1,4 @@
-package com.dohyun.baeminapp.data.repository
+package com.dohyun.baeminapp.data.repository.login
 
 import com.dohyun.baeminapp.data.entity.Token
 import com.dohyun.baeminapp.data.entity.UserInfo

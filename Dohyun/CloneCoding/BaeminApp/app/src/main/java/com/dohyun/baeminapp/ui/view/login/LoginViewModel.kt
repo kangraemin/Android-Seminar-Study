@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.dohyun.baeminapp.ui.base.BaseViewModel
 import com.dohyun.baeminapp.data.entity.UserInfo
-import com.dohyun.baeminapp.data.repository.LoginRepository
+import com.dohyun.baeminapp.data.repository.login.LoginRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable

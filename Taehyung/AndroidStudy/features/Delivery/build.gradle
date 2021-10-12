@@ -61,12 +61,21 @@ dependencies {
 
     implementation "androidx.lifecycle:lifecycle-livedata-core-ktx:$rootProject.lifecycleVersion"
 
+    implementation "androidx.test:core:$rootProject.testCoreVersion"
     testImplementation "junit:junit:$rootProject.junitVersion"
+    testImplementation "org.hamcrest:hamcrest-all:$rootProject.hamcrestAllVersion"
+    testImplementation "androidx.arch.core:core-testing:$rootProject.archCoreTestingVersion"
+    testImplementation "org.robolectric:robolectric:$rootProject.robolectricVersion"
+    testImplementation "org.mockito:mockito-core:$rootProject.mockitoCoreVersion"
+    testImplementation "com.google.truth:truth:$rootProject.testTruthVersion"
+
+    // Instrumented Unit Tests
+    androidTestImplementation "junit:junit:$rootProject.junitVersion"
+    androidTestImplementation "androidx.arch.core:core-testing:$rootProject.archCoreTestingVersion"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.androidJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.androidExpressoCoreVersion"
-    androidTestImplementation "androidx.annotation:annotation:$rootProject.androidAnnotationVersion"
-
-    testImplementation "org.hamcrest:hamcrest-all:$rootProject.hamcrestAllVersion"
-    testImplementation "org.mockito:mockito-core:$rootProject.mockitoCoreVersion"
-    testImplementation "androidx.arch.core:core-testing:$rootProject.archCoreTestingVersion"
+    androidTestImplementation "org.mockito:mockito-core:$rootProject.mockitoCoreVersion"
+    androidTestImplementation "com.google.truth:truth:$rootProject.testTruthVersion"
+    androidTestImplementation "com.google.dagger:hilt-android-testing:$rootProject.hiltVersion"
+    kaptAndroidTest "com.google.dagger:hilt-compiler:$rootProject.hiltVersion"
 }

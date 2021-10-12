@@ -12,11 +12,34 @@
     <string name="search1">최근 검색어</string>
     <string name="search2">전체삭제</string>
     <string name="search3">가장 많이\n검색하고 있어요</string>
+    <string name="search4">기준</string>
+    <string name="search5">검색어를 입력해주세요</string>
 
     <!-- 찜 -->
     <!-- 메인 -->
     <!-- 주문내역 -->
     <!-- my배민 -->
+    <string name="my1">등급별 혜택</string>
+    <string name="my2">포인트</string>
+    <string name="my3">쿠폰함</string>
+    <string name="my4">선물함</string>
+    <string name="my5">찜</string>
+    <string name="my6">주문내역</string>
+    <string name="my7">리뷰관리</string>
+    <string name="my8">함께해요!</string>
+    <string name="my9">배민페이 관리</string>
+    <string name="my10">배민페이로 결제하면 최대 5.5% 배민포인트가 적립됩니다!</string>
+    <string name="my11">가족계정 관리</string>
+    <string name="my12">결제수단을 공유해 우리 가족의 끼니를 챙겨주세요.</string>
+    <string name="my13">공지사항</string>
+    <string name="my14">배민커넥트 지원</string>
+    <string name="my15">이벤트</string>
+    <string name="my16">고객센터</string>
+    <string name="my17">환경설정</string>
+    <string name="my18">약관 및 정책</string>
+    <string name="my19">현재 버전</string>
+    <string name="my20">로그인해주세요</string>
+    <string name="my21">Copyright JaeHyun Brothers in Seoul, All Rights Reserved.</string>
     <!-- 로그인 -->
     <string name="login">로그인</string>
     <string name="login1">아이디 또는 이메일</string>

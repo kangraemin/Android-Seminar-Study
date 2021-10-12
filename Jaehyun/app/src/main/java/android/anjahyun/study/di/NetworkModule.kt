@@ -18,7 +18,7 @@ import javax.inject.Singleton
 @Module
 class NetworkModule {
 
-    val BASE_URL = "https://r5670326j8.execute-api.ap-northeast-2.amazonaws.com/"
+    val BASE_URL = "https://r5670326j8.execute-api.ap-northeast-2.amazonaws.com/delivery_server/"
 
     @Singleton
     @Provides

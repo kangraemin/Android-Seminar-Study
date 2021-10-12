@@ -9,7 +9,7 @@ import retrofit2.http.POST
 
 interface ApiService {
 
-    @POST("/delivery_server/api/token/")
+    @POST("api/token/")
     fun login(@Body body: LoginVO): Single<Response<JsonObject>>
 
 }

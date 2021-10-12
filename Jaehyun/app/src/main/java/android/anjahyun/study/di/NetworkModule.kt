@@ -30,6 +30,7 @@ class NetworkModule {
             val url = originalHttpUrl.newBuilder().build()
             val requestBuilder = original.newBuilder()
                 .url(url)
+                .addHeader("X-Api-Key", "iGR3hRvQ.K3wPNmJgqSMeY6CehCZmuq7Kg5Hnw3o7")
             val request = requestBuilder.build()
             chain.proceed(request)
         })

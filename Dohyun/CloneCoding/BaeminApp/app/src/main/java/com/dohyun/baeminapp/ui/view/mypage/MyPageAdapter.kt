@@ -92,7 +92,7 @@ class MyPageAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val profileName = itemView.findViewById<TextView>(R.id.item_user_id)
 
         fun bind(item: MyBaemin.MyUser) {
-            profileImg.setImageDrawable(item.userImg)
+            profileImg.setImageResource(item.userImg)
             profileName.text = item.userName
             itemView.setOnClickListener {
                 it.findNavController().navigate(R.id.action_myPage_to_login)
@@ -161,7 +161,7 @@ class MyPageAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         fun bind(item: MyBaemin.BaeminSetImg) {
             title.text = item.settingTitle
-            img.setImageDrawable(item.settingImg)
+            img.setImageResource(item.settingImg)
             itemView.setOnClickListener {
                 Log.d("MyPageAdapter", "click setting img")
             }
@@ -181,7 +181,7 @@ class MyPageAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val img = itemView.findViewById<ImageView>(R.id.item_only_img)
 
         fun bind(item: MyBaemin.OnlyImg) {
-            img.setImageDrawable(item.img)
+            img.setImageResource(item.img)
 
             itemView.setOnClickListener {
                 Log.d("MyPageAdapter", "click img")
@@ -207,9 +207,9 @@ class MyPageAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         private val title3 = itemView.findViewById<TextView>(R.id.item_third_title)
 
         fun bind(item: MyBaemin.GridSetting) {
-            logo1.setImageDrawable(item.logo1)
-            logo2.setImageDrawable(item.logo2)
-            logo3.setImageDrawable(item.logo3)
+            logo1.setImageResource(item.logo1)
+            logo2.setImageResource(item.logo2)
+            logo3.setImageResource(item.logo3)
 
             title1.text = item.title1
             title2.text = item.title2

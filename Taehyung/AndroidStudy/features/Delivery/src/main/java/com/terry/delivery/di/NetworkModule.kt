@@ -1,7 +1,8 @@
 package com.terry.delivery.di
 
 import com.terry.delivery.BuildConfig
-import com.terry.delivery.data.remote.LoginService
+import com.terry.delivery.data.remote.LoginApi
+import com.terry.delivery.util.Const
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,9 +21,6 @@ import javax.inject.Singleton
 @Module
 object NetworkModule {
 
-    private const val baseUrl =
-        "https://r5670326j8.execute-api.ap-northeast-2.amazonaws.com/delivery_server/"
-
     @Singleton
     @Provides
     fun provideOkHttpClient(): OkHttpClient = OkHttpClient.Builder()
@@ -37,7 +35,7 @@ object NetworkModule {
     @Provides
     fun provideRetrofit(httpClient: OkHttpClient): Retrofit =
         Retrofit.Builder()
-            .baseUrl(baseUrl)
+            .baseUrl(Const.BASE_URL)
             .client(httpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -45,7 +43,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideLoginService(retrofit: Retrofit): LoginService =
-        retrofit.create(LoginService::class.java)
+    fun provideLoginService(retrofit: Retrofit): LoginApi =
+        retrofit.create(LoginApi::class.java)
 
 }

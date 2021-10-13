@@ -1,5 +1,6 @@
 package com.terry.delivery.data.remote
 
+import com.terry.delivery.data.remote.model.LoginInfo
 import com.terry.delivery.entity.RefreshToken
 import com.terry.delivery.entity.Token
 import com.terry.delivery.entity.VerifyToken
@@ -9,13 +10,11 @@ import retrofit2.http.*
 /*
  * Created by Taehyung Kim on 2021-09-08
  */
-interface LoginService {
+interface LoginApi {
 
-    @FormUrlEncoded
     @POST("api/token/")
     fun getAccessToken(
-        @Field("username") userName: String,
-        @Field("password") password: String
+        @Body loginInfo: LoginInfo
     ): Single<Token>
 
     @FormUrlEncoded

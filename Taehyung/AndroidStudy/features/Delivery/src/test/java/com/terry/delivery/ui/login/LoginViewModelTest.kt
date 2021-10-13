@@ -2,7 +2,7 @@ package com.terry.delivery.ui.login
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth
-import com.terry.delivery.ImmediateSchedulerRule
+import com.terry.delivery.ImmediateSchedulerRuleTest
 import com.terry.delivery.data.repository.FakeDeliveryRepositoryImplTest
 import com.terry.delivery.getOrAwaitValueAndroidTest
 import org.junit.After
@@ -19,7 +19,7 @@ class LoginViewModelTest {
     var instantTaskExecutorRule = InstantTaskExecutorRule()
 
     @get:Rule
-    var schedulerRule = ImmediateSchedulerRule()
+    var schedulerRule = ImmediateSchedulerRuleTest()
 
     lateinit var viewModel: LoginViewModel
 

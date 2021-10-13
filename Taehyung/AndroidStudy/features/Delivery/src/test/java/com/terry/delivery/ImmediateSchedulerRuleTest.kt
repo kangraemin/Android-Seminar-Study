@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit
 /*
  * Created by Taehyung Kim on 2021-10-06
  */
-class ImmediateSchedulerRule : TestRule {
+class ImmediateSchedulerRuleTest : TestRule {
     private val immediateScheduler = object : Scheduler() {
         @NonNull
         override fun scheduleDirect(

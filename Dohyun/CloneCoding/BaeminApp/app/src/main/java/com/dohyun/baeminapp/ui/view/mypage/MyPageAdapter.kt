@@ -95,8 +95,11 @@ class MyPageAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             profileImg.setImageResource(item.userImg)
             profileName.text = item.userName
             itemView.setOnClickListener {
-                it.findNavController().navigate(R.id.action_myPage_to_login)
-                Log.d("MyPageAdapter", "click user")
+                if (profileName.text == "로그인해주세요") {
+                    it.findNavController().navigate(R.id.action_myPage_to_login)
+                } else {
+                    it.findNavController().navigate(R.id.action_myPage_to_logout)
+                }
             }
         }
 
@@ -231,8 +234,11 @@ class MyPageAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     }
 
-    fun addItems(item: MyBaemin) {
-        this.items.add(item)
+    fun addItems(item: List<MyBaemin>) {
+        items.clear()
+        for (i in item) {
+            this.items.add(i)
+        }
         this.notifyDataSetChanged()
     }
 

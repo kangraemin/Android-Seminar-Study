@@ -70,6 +70,9 @@
         <action
             android:id="@+id/action_myPage_to_login"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_myPage_to_logout"
+            app:destination="@id/logoutFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -78,6 +81,11 @@
     <fragment
         android:id="@+id/searchResultFragment"
         android:name="com.dohyun.baeminapp.ui.view.search.result.SearchResultFragment"
-        android:label="SearchResultFragment" />
+        android:label="SearchResultFragment" >
+    </fragment>
+    <fragment
+        android:id="@+id/logoutFragment"
+        android:name="com.dohyun.baeminapp.ui.view.logout.LogoutFragment"
+        android:label="LogoutFragment" />
 
 </navigation>

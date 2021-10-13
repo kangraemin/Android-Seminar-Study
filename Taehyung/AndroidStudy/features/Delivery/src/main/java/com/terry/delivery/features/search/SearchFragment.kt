@@ -1,4 +1,4 @@
-package com.terry.delivery.ui.search
+package com.terry.delivery.features.search
 
 import android.annotation.SuppressLint
 import android.os.Bundle

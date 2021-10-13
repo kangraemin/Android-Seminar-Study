@@ -57,7 +57,7 @@
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.terry.delivery.ui.search.SearchFragment"
+        android:name="com.terry.delivery.features.search.SearchFragment"
         android:label="SearchFragment"
         tools:layout="@layout/fragment_search" />
 
@@ -90,7 +90,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.terry.delivery.ui.login.LoginFragment"
+        android:name="com.terry.delivery.features.login.LoginFragment"
         android:label="LoginFragment"
         tools:layout="@layout/fragment_login" />
 

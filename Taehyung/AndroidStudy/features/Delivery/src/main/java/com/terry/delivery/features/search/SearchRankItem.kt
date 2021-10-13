@@ -1,4 +1,4 @@
-package com.terry.delivery.ui.search
+package com.terry.delivery.features.search
 
 /*
  * Created by Taehyung Kim on 2021-09-29

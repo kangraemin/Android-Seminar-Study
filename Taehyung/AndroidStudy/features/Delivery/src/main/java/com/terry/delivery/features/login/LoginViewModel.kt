@@ -1,4 +1,4 @@
-package com.terry.delivery.ui.login
+package com.terry.delivery.features.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

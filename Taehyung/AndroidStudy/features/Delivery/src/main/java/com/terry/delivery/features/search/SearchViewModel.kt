@@ -1,4 +1,4 @@
-package com.terry.delivery.ui.search
+package com.terry.delivery.features.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

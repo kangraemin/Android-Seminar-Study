@@ -1,4 +1,4 @@
-package com.terry.delivery.ui.login
+package com.terry.delivery.features.login
 
 import android.os.Bundle
 import android.view.View

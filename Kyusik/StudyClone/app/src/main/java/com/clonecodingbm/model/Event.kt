@@ -1,4 +1,4 @@
-package com.clonecodingbm.data
+package com.clonecodingbm.model
 
 open class Event<out T>(private val content: T) {
 

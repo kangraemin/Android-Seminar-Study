@@ -1,7 +1,8 @@
 package com.clonecodingbm.network
 
-import com.clonecodingbm.data.login.Token
-import com.clonecodingbm.data.login.LoginInfo
+import com.clonecodingbm.db.TokenEntity
+import com.clonecodingbm.model.LoginInfo
+import com.clonecodingbm.model.Token
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.Body
 import retrofit2.http.POST

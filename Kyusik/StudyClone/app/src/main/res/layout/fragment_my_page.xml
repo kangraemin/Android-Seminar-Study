@@ -7,7 +7,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/teal_700"
-        tools:context=".view.bottom.MyPageFragment">
+        tools:context=".ui.bottom.MyPageFragment">
 
         <Button
             android:id="@+id/bt_myPage_login"

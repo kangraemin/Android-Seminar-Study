@@ -6,7 +6,7 @@
     app:startDestination="@id/splashFragment">
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.clonecodingbm.SplashFragment"
+        android:name="com.clonecodingbm.ui.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash">
         <action
@@ -17,7 +17,7 @@
     </fragment>
     <fragment
         android:id="@+id/navFragment"
-        android:name="com.clonecodingbm.NavFragment"
+        android:name="com.clonecodingbm.ui.NavFragment"
         android:label="fragment_nav"
         tools:layout="@layout/fragment_nav">
         <action
@@ -51,17 +51,17 @@
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.clonecodingbm.view.bottom.SearchFragment"
+        android:name="com.clonecodingbm.ui.bottom.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
     <fragment
         android:id="@+id/orderListFragment"
-        android:name="com.clonecodingbm.view.bottom.OrderListFragment"
+        android:name="com.clonecodingbm.ui.bottom.OrderListFragment"
         android:label="fragment_order_list"
         tools:layout="@layout/fragment_order_list" />
     <fragment
         android:id="@+id/myPageFragment"
-        android:name="com.clonecodingbm.view.bottom.MyPageFragment"
+        android:name="com.clonecodingbm.ui.bottom.MyPageFragment"
         android:label="fragment_my_page"
         tools:layout="@layout/fragment_my_page" >
         <action
@@ -74,11 +74,11 @@
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
-        android:name="com.clonecodingbm.view.bottom.FavoriteFragment"
+        android:name="com.clonecodingbm.ui.bottom.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.clonecodingbm.view.mypage.LoginFragment"
+        android:name="com.clonecodingbm.ui.login.LoginFragment"
         android:label="LoginFragment" />
 </navigation>

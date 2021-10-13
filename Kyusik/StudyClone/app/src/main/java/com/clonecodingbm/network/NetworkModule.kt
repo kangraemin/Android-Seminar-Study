@@ -33,12 +33,10 @@ object NetworkModule {
     @Singleton
     @Provides
     fun provideCallFactory(
-        httpLoggingInterceptor: HttpLoggingInterceptor,
-        tmdbApiKeyInterceptor: Interceptor
+        httpLoggingInterceptor: HttpLoggingInterceptor
     ): Call.Factory {
         return OkHttpClient.Builder()
             .addInterceptor(httpLoggingInterceptor)
-            .addInterceptor(tmdbApiKeyInterceptor)
             .build()
     }
 
@@ -62,7 +60,7 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    @Named("base_url")
+    @Named("rams_base_url")
     fun provideBaseUrl(): String {
         return BuildConfig.RAMS_BASE_URL
     }

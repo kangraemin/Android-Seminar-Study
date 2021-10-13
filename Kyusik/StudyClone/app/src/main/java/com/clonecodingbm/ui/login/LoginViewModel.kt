@@ -1,26 +1,25 @@
-package com.clonecodingbm.viewmodel
+package com.clonecodingbm.ui.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.clonecodingbm.base.BaseViewModel
-import com.clonecodingbm.data.Event
-import com.clonecodingbm.data.login.LoginDataItem
-import com.clonecodingbm.data.login.LoginInfo
-import com.clonecodingbm.network.ApiService
-import com.clonecodingbm.network.RetrofitClient
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.schedulers.Schedulers
+import com.clonecodingbm.model.Event
+import com.clonecodingbm.model.Token
+import com.clonecodingbm.repository.LoginRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.schedulers.Schedulers
+import javax.inject.Inject
 
-class LoginViewModel : BaseViewModel() {
-    private val apiService: ApiService = RetrofitClient.getApiService
-
+@HiltViewModel
+class LoginViewModel @Inject constructor(
+    private val loginRepository: LoginRepository
+) : BaseViewModel() {
     private val _message = MutableLiveData<Event<String>>()
-    private val _loginData = MutableLiveData<LoginDataItem>()
-
     val message: LiveData<Event<String>> get() = _message
-    val loginData: LiveData<LoginDataItem> get() = _loginData
+
+    private val _token = MutableLiveData<Token>()
+    val token: LiveData<Token> get() = _token
 
     fun doLoginRequest(id: String, password: String) {
         when {
@@ -37,17 +36,17 @@ class LoginViewModel : BaseViewModel() {
 //            }
             else -> {
                 compositeDisposable.add(
-                    apiService
-                        .login(LoginInfo(id, password))
+                    loginRepository
+                        .login(id, password)
                         .subscribeOn(Schedulers.io())
                         .doOnSubscribe { showProgress() }
                         .observeOn(AndroidSchedulers.mainThread())
                         .doOnSuccess { hideProgress() }
                         .subscribe({
-                            _loginData.postValue(it)
+                            _token.value = it
                         }, {
                             it.printStackTrace()
-                            _message.postValue(Event("$it"))
+                            _message.value = Event("$it")
                         })
                 )
             }

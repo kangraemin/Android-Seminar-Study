@@ -1,7 +1,8 @@
 package com.clonecodingbm.repository
 
-import com.clonecodingbm.data.login.LoginInfo
-import com.clonecodingbm.data.login.Token
+import com.clonecodingbm.model.LoginInfo
+import com.clonecodingbm.db.TokenEntity
+import com.clonecodingbm.model.Token
 import com.clonecodingbm.network.LoginApi
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers

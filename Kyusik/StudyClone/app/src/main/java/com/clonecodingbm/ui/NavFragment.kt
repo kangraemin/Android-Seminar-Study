@@ -1,16 +1,13 @@
-package com.clonecodingbm
+package com.clonecodingbm.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.Toast
-import androidx.core.widget.ImageViewCompat
+import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.clonecodingbm.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import kotlinx.android.synthetic.main.fragment_nav.view.*
 
 class NavFragment : Fragment() {
     override fun onCreateView(

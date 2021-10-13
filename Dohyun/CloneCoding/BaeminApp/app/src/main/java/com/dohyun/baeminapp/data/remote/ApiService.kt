@@ -15,5 +15,5 @@ interface ApiService {
     fun getAccessToken(@Body refresh: String): Single<String>
 
     @GET("test/")
-    fun testAccessToken(@Header("authorization") access: String): Single<VerifyToken>
+    fun verifyAccessToken(@Header("authorization") access: String): Single<VerifyToken>
 }

@@ -18,4 +18,7 @@ interface TokenDao {
 
     @Query(value = "DELETE FROM Token")
     fun deleteToken(): Completable
+
+    @Query(value = "SELECT access FROM Token")
+    fun getAccessToken(): Single<String>
 }

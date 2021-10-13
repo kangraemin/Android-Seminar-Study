@@ -1,0 +1,7 @@
+<resources>
+
+    <style name="Theme.AndroidStudy.Delivery" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:statusBarColor">#FFFFFF</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+</resources>

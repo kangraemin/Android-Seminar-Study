@@ -6,16 +6,6 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
 
-    <dist:module
-        dist:instant="false"
-        dist:title="@string/title_delivery">
-        <dist:delivery>
-            <dist:on-demand />
-        </dist:delivery>
-
-        <dist:fusing dist:include="true" />
-    </dist:module>
-
     <application
         android:name=".DeliveryApp"
         tools:ignore="AllowBackup,MissingApplicationIcon">

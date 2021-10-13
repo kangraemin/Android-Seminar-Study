@@ -1,5 +1,5 @@
 plugins {
-    id 'com.android.dynamic-feature'
+    id 'com.android.library'
     id 'kotlin-android'
     id 'androidx.navigation.safeargs.kotlin'
     id 'kotlin-kapt'
@@ -9,7 +9,6 @@ android {
     compileSdk 30
 
     defaultConfig {
-        applicationId "com.terry.delivery"
         minSdk 23
         targetSdk 30
         versionCode 1
@@ -31,7 +30,6 @@ android {
 }
 
 dependencies {
-    implementation project(":app")
     implementation "androidx.core:core-ktx:$rootProject.androidCoreKtxVersion"
     implementation "androidx.appcompat:appcompat:$rootProject.appCompatVersion"
     implementation "com.google.android.material:material:$rootProject.materialVersion"

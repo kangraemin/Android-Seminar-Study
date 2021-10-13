@@ -9,6 +9,7 @@ import com.dohyun.baeminapp.data.repository.login.LoginRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
 @HiltViewModel
@@ -26,7 +27,7 @@ class LoginViewModel @Inject constructor(
             repository.login(UserInfo(id, pw))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    repository.saveTokens(it)
+//                    repository.saveTokens(it)
                     _loginState.value = true
                 }, {
                     _loginState.value = false

@@ -1,8 +1,6 @@
 package com.dohyun.baeminapp.data.remote
 
-import com.dohyun.baeminapp.data.entity.Token
-import com.dohyun.baeminapp.data.entity.UserInfo
-import com.dohyun.baeminapp.data.entity.VerifyToken
+import com.dohyun.baeminapp.data.entity.*
 import io.reactivex.rxjava3.core.Single
 import retrofit2.http.*
 
@@ -16,4 +14,12 @@ interface ApiService {
 
     @GET("test/")
     fun verifyAccessToken(@Header("authorization") access: String): Single<VerifyToken>
+
+    @GET("api/restaurants/query_search")
+    fun searchRestaurants(
+            @Header("X-Api-Key") apiKey: String,
+            @Header("authorization") access: String,
+            @Query("query") query: String,
+            @Query("page") page: Int?
+    ): Single<Results>
 }

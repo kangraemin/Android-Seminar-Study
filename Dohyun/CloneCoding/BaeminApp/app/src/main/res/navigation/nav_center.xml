@@ -47,10 +47,6 @@
         <action
             android:id="@+id/action_search_to_searchResult"
             app:destination="@id/searchResultFragment" />
-        <argument
-            android:name="argsValue"
-            app:argType="string"
-            android:defaultValue=""/>
     </fragment>
     <fragment
         android:id="@+id/dibsFragment"
@@ -82,6 +78,10 @@
         android:id="@+id/searchResultFragment"
         android:name="com.dohyun.baeminapp.ui.view.search.result.SearchResultFragment"
         android:label="SearchResultFragment" >
+        <argument
+            android:name="inputValue"
+            app:argType="string"
+            android:defaultValue='""' />
     </fragment>
     <fragment
         android:id="@+id/logoutFragment"

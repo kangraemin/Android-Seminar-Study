@@ -39,5 +39,28 @@ class DeliveryRepositoryImpl @Inject constructor(
         // TODO: 2021-10-17 키워드 서치 로직 추가
         return Completable.complete()
     }
+
+    override fun checkLocalAccessToken(): Completable {
+//        localTokenDao
+//            .getLocalToken()
+//            .subscribeOn(Schedulers.io())
+//            .subscribe({ token ->
+//                verifyAccessToken(token.accessToken)
+//            }, {
+//                it.printStackTrace()
+//            })
+        return Completable.complete()
+    }
+
+//    private fun verifyAccessToken(token: String): Boolean {
+//        loginApi
+//            .verifyAccessToken(token)
+//            .subscribeOn(Schedulers.io())
+//            .subscribe({ verifyToken ->
+//                verifyToken
+//            }, {
+//                it.printStackTrace()
+//            })
+//    }
 }
 

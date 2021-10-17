@@ -1,6 +1,6 @@
 package com.terry.delivery.data.remote
 
-import com.google.common.truth.Truth.assertThat
+import com.google.common.truth.Truth
 import com.terry.delivery.ImmediateSchedulerRuleTest
 import com.terry.delivery.data.remote.model.LoginInfo
 import com.terry.delivery.util.Const
@@ -51,8 +51,8 @@ class LoginApiTest {
 
         val token = loginApi.getAccessToken(loginInfo).blockingGet()
 
-        assertThat(token.access).isNotEmpty()
-        assertThat(token.refresh).isNotEmpty()
+        Truth.assertThat(token.access).isNotEmpty()
+        Truth.assertThat(token.refresh).isNotEmpty()
     }
 
     @Test
@@ -61,9 +61,39 @@ class LoginApiTest {
 
         loginApi.getAccessToken(loginInfo)
             .subscribe({ token ->
-                assertThat(token.detail).isNotEmpty()
+                Truth.assertThat(token.detail).isNotEmpty()
             }, {
                 it.printStackTrace()
             })
+    }
+
+    @Test
+    fun `verify access token with valid access token, returns success`() {
+        val loginInfo = LoginInfo("delivery", "dev_baemin")
+
+        val token = loginApi.getAccessToken(loginInfo).blockingGet()
+
+        val response = loginApi.verifyAccessToken("Bearer ${token.access!!}").blockingGet()
+
+        if (response.isSuccessful) {
+            val data = response.body()!!
+
+            Truth.assertThat(data.message).isNotEmpty()
+        }
+
+        Truth.assertThat(response.isSuccessful).isTrue()
+    }
+
+    @Test
+    fun `verify access token with invalid access token, returns error`() {
+        val response = loginApi.verifyAccessToken("invalid access token").blockingGet()
+
+        if (response.isSuccessful) {
+            val data = response.body()!!
+
+            Truth.assertThat(data.message).isNotEmpty()
+        }
+
+        Truth.assertThat(response.isSuccessful).isFalse()
     }
 }

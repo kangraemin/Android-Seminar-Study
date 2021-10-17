@@ -10,4 +10,6 @@ interface DeliveryRepository {
     fun login(id: String, password: String): Completable
 
     fun searchWithKeyword(headers: Map<String, String>, query: String, page: Int): Completable
+
+    fun checkLocalAccessToken(): Completable
 }

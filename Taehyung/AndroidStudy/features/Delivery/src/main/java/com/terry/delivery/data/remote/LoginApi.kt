@@ -5,6 +5,7 @@ import com.terry.delivery.entity.login.RefreshToken
 import com.terry.delivery.entity.login.Token
 import com.terry.delivery.entity.login.VerifyToken
 import io.reactivex.Single
+import retrofit2.Response
 import retrofit2.http.*
 
 /*
@@ -25,6 +26,6 @@ interface LoginApi {
 
     @GET("test/")
     fun verifyAccessToken(
-        @Header("authorization") accessToken: String
-    ): Single<VerifyToken>
+        @Header("Authorization") accessToken: String
+    ): Single<Response<VerifyToken>>
 }

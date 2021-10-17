@@ -56,7 +56,7 @@ class LoginApiTest {
     }
 
     @Test
-    fun `get access token with invalid userName, returns success`() {
+    fun `get access token with invalid userName, returns error`() {
         val loginInfo = LoginInfo("invalidName", "dev_baemin")
 
         loginApi.getAccessToken(loginInfo)

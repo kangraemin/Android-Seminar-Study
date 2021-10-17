@@ -10,7 +10,7 @@
         android:name=".DeliveryApp"
         tools:ignore="AllowBackup,MissingApplicationIcon">
         <activity
-            android:name=".ui.DeliveryMainActivity"
+            android:name=".features.main.DeliveryMainActivity"
             android:exported="true"
             android:theme="@style/Theme.AndroidStudy.Delivery" />
     </application>

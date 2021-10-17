@@ -1,4 +1,4 @@
-package com.terry.delivery.ui
+package com.terry.delivery.features.main
 
 import android.os.Bundle
 import android.view.View

@@ -1,4 +1,4 @@
-package com.terry.delivery.ui
+package com.terry.delivery.features.main
 
 import com.terry.delivery.base.BaseFragment
 import com.terry.delivery.databinding.FragmentOrderListBinding

@@ -1,4 +1,4 @@
-package com.terry.delivery.ui
+package com.terry.delivery.features.splash
 
 import android.os.Bundle
 import android.view.View

@@ -3,6 +3,7 @@ package com.terry.androidstudy
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.terry.androidstudy.databinding.ActivityMainBinding
+import com.terry.delivery.features.main.DeliveryMainActivity
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.deliveryModuleButton.setOnClickListener {
-            startModuleActivity("com.terry.delivery.ui.DeliveryMainActivity")
+            startModuleActivity(DeliveryMainActivity::class.java.name)
         }
     }
 }

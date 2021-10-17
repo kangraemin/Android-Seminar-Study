@@ -4,6 +4,7 @@ import com.terry.delivery.data.DeliveryRepository
 import com.terry.delivery.data.local.dao.LocalTokenDao
 import com.terry.delivery.data.mapper.mapToLocalToken
 import com.terry.delivery.data.remote.LoginApi
+import com.terry.delivery.data.remote.SearchApi
 import com.terry.delivery.data.remote.model.LoginInfo
 import io.reactivex.Completable
 import io.reactivex.schedulers.Schedulers
@@ -14,6 +15,7 @@ import javax.inject.Inject
  */
 class DeliveryRepositoryImpl @Inject constructor(
     private val loginApi: LoginApi,
+    private val searchApi: SearchApi,
     private val localTokenDao: LocalTokenDao
 ) : DeliveryRepository {
 
@@ -27,6 +29,15 @@ class DeliveryRepositoryImpl @Inject constructor(
                     .andThen(localTokenDao.saveTokens(token.mapToLocalToken()))
                     .doOnError { it.printStackTrace() }
             }
+    }
+
+    override fun searchWithKeyword(
+        headers: Map<String, String>,
+        query: String,
+        page: Int
+    ): Completable {
+        // TODO: 2021-10-17 키워드 서치 로직 추가
+        return Completable.complete()
     }
 }
 

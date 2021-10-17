@@ -2,6 +2,7 @@ package com.terry.delivery.di
 
 import com.terry.delivery.BuildConfig
 import com.terry.delivery.data.remote.LoginApi
+import com.terry.delivery.data.remote.SearchApi
 import com.terry.delivery.util.Const
 import dagger.Module
 import dagger.Provides
@@ -43,7 +44,12 @@ object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideLoginService(retrofit: Retrofit): LoginApi =
+    fun provideLoginApi(retrofit: Retrofit): LoginApi =
         retrofit.create(LoginApi::class.java)
+
+    @Singleton
+    @Provides
+    fun provideSearchApi(retrofit: Retrofit): SearchApi =
+        retrofit.create(SearchApi::class.java)
 
 }

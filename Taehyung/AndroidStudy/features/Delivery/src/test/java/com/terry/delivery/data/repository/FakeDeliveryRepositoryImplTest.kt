@@ -21,4 +21,16 @@ class FakeDeliveryRepositoryImplTest : DeliveryRepository {
             Completable.complete()
         }
     }
+
+    override fun searchWithKeyword(
+        headers: Map<String, String>,
+        query: String,
+        page: Int
+    ): Completable {
+        return if (shouldReturnNetworkError) {
+            Completable.error(Throwable("Error"))
+        } else {
+            Completable.complete()
+        }
+    }
 }

@@ -1,4 +1,4 @@
-package com.terry.delivery.entity
+package com.terry.delivery.entity.login
 
 data class RefreshToken(
     val access: String?,

@@ -1,4 +1,4 @@
-package com.terry.delivery.entity
+package com.terry.delivery.entity.login
 
 data class Token(
     val access: String?,

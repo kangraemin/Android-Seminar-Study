@@ -6,8 +6,11 @@ import com.terry.delivery.data.mapper.mapToLocalToken
 import com.terry.delivery.data.remote.LoginApi
 import com.terry.delivery.data.remote.SearchApi
 import com.terry.delivery.data.remote.model.LoginInfo
+import com.terry.delivery.entity.login.VerifyToken
 import io.reactivex.Completable
+import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
+import retrofit2.Response
 import javax.inject.Inject
 
 /*
@@ -40,27 +43,14 @@ class DeliveryRepositoryImpl @Inject constructor(
         return Completable.complete()
     }
 
-    override fun checkLocalAccessToken(): Completable {
-//        localTokenDao
-//            .getLocalToken()
-//            .subscribeOn(Schedulers.io())
-//            .subscribe({ token ->
-//                verifyAccessToken(token.accessToken)
-//            }, {
-//                it.printStackTrace()
-//            })
-        return Completable.complete()
+    override fun checkLocalAccessToken(): Single<Response<VerifyToken>> {
+        return localTokenDao
+            .getLocalToken()
+            .subscribeOn(Schedulers.io())
+            .flatMap { token ->
+                loginApi.verifyAccessToken(token.accessToken)
+            }
     }
 
-//    private fun verifyAccessToken(token: String): Boolean {
-//        loginApi
-//            .verifyAccessToken(token)
-//            .subscribeOn(Schedulers.io())
-//            .subscribe({ verifyToken ->
-//                verifyToken
-//            }, {
-//                it.printStackTrace()
-//            })
-//    }
 }
 

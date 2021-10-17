@@ -1,7 +1,10 @@
 package com.terry.delivery.data.repository
 
 import com.terry.delivery.data.DeliveryRepository
+import com.terry.delivery.entity.login.VerifyToken
 import io.reactivex.Completable
+import io.reactivex.Single
+import retrofit2.Response
 
 /*
  * Created by Taehyung Kim on 2021-10-13
@@ -39,11 +42,19 @@ class FakeDeliveryRepositoryImplTest : DeliveryRepository {
         }
     }
 
-    override fun checkLocalAccessToken(): Completable {
+    override fun checkLocalAccessToken(): Single<Response<VerifyToken>> {
         return if (shouldReturnAccessTokenInvalid) {
-            Completable.error(Throwable("Error"))
+            Single.error(Throwable("Error"))
         } else {
-            Completable.complete()
+            Single.just(
+                Response.success(
+                    VerifyToken(
+                        "test success detail",
+                        "test success message"
+                    )
+                )
+            )
         }
+
     }
 }

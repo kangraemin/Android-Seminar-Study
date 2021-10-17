@@ -22,7 +22,7 @@ interface LoginApi {
     @POST("api/token/refresh/")
     fun refreshAccessToken(
         @Field("refresh") accessToken: String
-    ): Single<RefreshToken>
+    ): Single<Response<RefreshToken>>
 
     @GET("test/")
     fun verifyAccessToken(

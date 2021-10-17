@@ -96,4 +96,34 @@ class LoginApiTest {
 
         Truth.assertThat(response.isSuccessful).isFalse()
     }
+
+    @Test
+    fun `refresh access token with valid refresh token, returns success`() {
+        val loginInfo = LoginInfo("delivery", "dev_baemin")
+
+        val refreshToken = loginApi.getAccessToken(loginInfo).blockingGet().refresh
+
+        val response = loginApi.refreshAccessToken(refreshToken!!).blockingGet()
+
+        if (response.isSuccessful) {
+            val data = response.body()!!
+
+            Truth.assertThat(data.access).isNotEmpty()
+        }
+
+        Truth.assertThat(response.isSuccessful).isTrue()
+    }
+
+    @Test
+    fun `refresh access token with invalid refresh token, returns error`() {
+        val response = loginApi.refreshAccessToken("invalid refresh token test").blockingGet()
+
+        if (response.isSuccessful) {
+            val data = response.body()!!
+
+            Truth.assertThat(data.access).isNotEmpty()
+        }
+
+        Truth.assertThat(response.isSuccessful).isFalse()
+    }
 }

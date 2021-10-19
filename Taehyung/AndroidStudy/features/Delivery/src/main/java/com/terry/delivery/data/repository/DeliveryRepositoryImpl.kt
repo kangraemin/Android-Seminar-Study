@@ -10,6 +10,7 @@ import com.terry.delivery.data.remote.model.LoginInfo
 import com.terry.delivery.entity.login.RefreshToken
 import com.terry.delivery.model.EmptyBodyException
 import io.reactivex.Completable
+import io.reactivex.Maybe
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -45,7 +46,7 @@ class DeliveryRepositoryImpl @Inject constructor(
         return Completable.complete()
     }
 
-    override fun checkLocalAccessToken(): Single<LocalToken> {
+    override fun checkLocalAccessToken(): Maybe<LocalToken> {
         var t: LocalToken? = null
 
         return localTokenDao
@@ -56,9 +57,9 @@ class DeliveryRepositoryImpl @Inject constructor(
                 t = token
                 loginApi.verifyAccessToken(accessToken = "Bearer ${token.accessToken}")
             }
-            .flatMap { response ->
-                if (response.isSuccessful) Single.just(t)
-                else Single.just(null)
+            .flatMapMaybe { response ->
+                if (response.isSuccessful) Maybe.fromCompletable(Completable.complete())
+                else Maybe.just(t)
             }
     }
 

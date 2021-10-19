@@ -2,10 +2,9 @@ package com.terry.delivery.data
 
 import com.terry.delivery.data.local.model.LocalToken
 import com.terry.delivery.entity.login.RefreshToken
-import com.terry.delivery.entity.login.VerifyToken
 import io.reactivex.Completable
+import io.reactivex.Maybe
 import io.reactivex.Single
-import retrofit2.Response
 
 /*
  * Created by Taehyung Kim on 2021-09-23
@@ -16,7 +15,7 @@ interface DeliveryRepository {
 
     fun searchWithKeyword(headers: Map<String, String>, query: String, page: Int): Completable
 
-    fun checkLocalAccessToken(): Single<LocalToken>
+    fun checkLocalAccessToken(): Maybe<LocalToken>
 
     fun refreshAccessToken(): Single<RefreshToken>
 }

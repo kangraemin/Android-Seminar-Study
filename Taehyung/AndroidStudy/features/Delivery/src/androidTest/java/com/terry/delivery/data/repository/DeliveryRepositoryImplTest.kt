@@ -83,21 +83,31 @@ class DeliveryRepositoryImplTest {
 
         val localToken = deliveryRepositoryImpl.checkLocalAccessToken().blockingGet()
 
-        Truth.assertThat(localToken).isNotNull()
+        Truth.assertThat(localToken).isNull()
     }
 
     @Test
     fun checkLocalAccessTokenWithEmptyLocalAccessToken_returnsFalse() {
-
         runCatching {
             val localToken = deliveryRepositoryImpl.checkLocalAccessToken().blockingGet()
 
-            Truth.assertThat(localToken.accessToken).isNull()
+            Truth.assertThat(localToken.accessToken).isNotNull()
         }.onSuccess {
             assert(false)
         }.onFailure {
             Truth.assertThat(it).isInstanceOf(EmptyResultSetException::class.java)
         }
+    }
+
+    @Test
+    fun checkLocalAccessTokenWithInvalidAccessToken_returnsFalse() {
+        localTokenDao.saveTokens(
+            LocalToken(0, "invalid_access_token", "invalid_refresh_token")
+        ).blockingGet()
+
+        val localToken = deliveryRepositoryImpl.checkLocalAccessToken().blockingGet()
+
+        Truth.assertThat(localToken.accessToken).isNotNull()
     }
 
     @Test

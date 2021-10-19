@@ -86,7 +86,7 @@ class LoginApiTest {
 
     @Test
     fun `verify access token with invalid access token, returns error`() {
-        val response = loginApi.verifyAccessToken("invalid access token").blockingGet()
+        val response = loginApi.verifyAccessToken("Bearer invalid_access_token").blockingGet()
 
         if (response.isSuccessful) {
             val data = response.body()!!

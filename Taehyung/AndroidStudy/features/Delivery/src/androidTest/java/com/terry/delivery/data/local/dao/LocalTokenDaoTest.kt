@@ -1,7 +1,6 @@
 package com.terry.delivery.data.local.dao
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.room.EmptyResultSetException
 import androidx.test.filters.SmallTest
 import com.terry.delivery.data.local.AppDatabase
 import com.terry.delivery.data.local.model.LocalToken
@@ -70,5 +69,25 @@ class LocalTokenDaoTest {
         }, { it.printStackTrace() })
 
         localTokenDao.getLocalToken().test().assertNoValues()
+    }
+
+    @Test
+    fun updateToken() {
+        val testToken =
+            LocalToken(id = 0, accessToken = "test_token", refreshToken = "test_refresh_token")
+
+        localTokenDao.saveTokens(testToken).blockingAwait()
+
+        localTokenDao.updateAccessToken(
+            LocalToken(
+                id = 0,
+                accessToken = "test_updated_token",
+                refreshToken = "test_updated_refresh_token"
+            )
+        ).blockingAwait()
+
+        localTokenDao.getLocalToken().test().assertValue { token ->
+            (token.accessToken == "test_updated_token") && (token.refreshToken == "test_updated_refresh_token")
+        }
     }
 }

@@ -116,27 +116,26 @@ class DeliveryRepositoryImplTest {
         val loginInfo = LoginInfo("delivery", "dev_baemin")
         val token = loginApi.getAccessToken(loginInfo).blockingGet()
 
-        val refreshToken = deliveryRepositoryImpl.refreshAccessToken(token.refresh!!).blockingGet()
+        val result = deliveryRepositoryImpl.refreshAccessToken(token.refresh!!).blockingGet()
 
-        Truth.assertThat(refreshToken).isNotNull()
-        Truth.assertThat(refreshToken.access).isNotNull()
+        Truth.assertThat(result).isNull()
+
+        deliveryRepositoryImpl.refreshAccessToken(token.refresh!!)
+            .test()
+            .assertComplete()
     }
 
     @Test
     fun refreshAccessTokenWithInvalidInfo_returnsFalse() {
-        runCatching {
-            val refreshToken = deliveryRepositoryImpl
-                .refreshAccessToken("invalid_refresh_token")
-                .blockingGet()
+        val result = deliveryRepositoryImpl
+            .refreshAccessToken("invalid_refresh_token")
+            .blockingGet()
 
-            Truth.assertThat(refreshToken.access).isNull()
-            Truth.assertThat(refreshToken.code).isEqualTo("token_not_valid")
-            Truth.assertThat(refreshToken.detail).isEqualTo("Token is invalid or expired")
-        }.onSuccess {
-            assert(false)
-        }.onFailure {
-            Truth.assertThat(it).isInstanceOf(RuntimeException::class.java)
-        }
+        Truth.assertThat(result).isInstanceOf(ResponseFailException::class.java)
 
+        deliveryRepositoryImpl
+            .refreshAccessToken("invalid_refresh_token")
+            .test()
+            .assertNotComplete()
     }
 }

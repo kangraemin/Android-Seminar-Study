@@ -17,5 +17,5 @@ interface DeliveryRepository {
 
     fun checkLocalAccessToken(): Maybe<LocalToken>
 
-    fun refreshAccessToken(refreshToken: String? = null): Single<RefreshToken>
+    fun refreshAccessToken(refreshToken: String? = null): Completable
 }

@@ -10,9 +10,7 @@ import com.terry.delivery.data.remote.model.LoginInfo
 import com.terry.delivery.entity.login.RefreshToken
 import com.terry.delivery.model.EmptyBodyException
 import com.terry.delivery.model.ResponseFailException
-import io.reactivex.Completable
-import io.reactivex.Maybe
-import io.reactivex.Single
+import io.reactivex.*
 import io.reactivex.schedulers.Schedulers
 import retrofit2.Response
 import javax.inject.Inject
@@ -65,18 +63,32 @@ class DeliveryRepositoryImpl @Inject constructor(
             }
     }
 
-    override fun refreshAccessToken(refreshToken: String?): Single<RefreshToken> {
-        val singleSource =
-            if (refreshToken == null) getRefreshToken { loginApi.refreshAccessToken(it.refreshToken) }
-            else loginApi.refreshAccessToken(refreshToken)
+    override fun refreshAccessToken(refreshToken: String?): Completable {
+        var tempRefreshToken = refreshToken
 
-        return singleSource.flatMap { response ->
+        val singleSource = if (refreshToken == null) {
+            getRefreshToken { localToken ->
+                tempRefreshToken = localToken.refreshToken
+                loginApi.refreshAccessToken(localToken.refreshToken)
+            }
+        } else {
+            loginApi.refreshAccessToken(refreshToken)
+        }
+
+        return singleSource.flatMapCompletable { response ->
             if (response.isSuccessful) {
                 val refreshTokenData = response.body()
-                    ?: return@flatMap Single.error(EmptyBodyException("Response Body is empty !!"))
-                Single.just(refreshTokenData)
+                    ?: return@flatMapCompletable Completable.error(EmptyBodyException("Response Body is empty !!"))
+                val accessToken = refreshTokenData.access
+                    ?: return@flatMapCompletable Completable.error(EmptyBodyException("accessToken is empty !!"))
+                val localRefreshToken = tempRefreshToken
+                    ?: return@flatMapCompletable Completable.error(EmptyBodyException("refreshToken is empty !!"))
+
+                updateRefreshedToken(accessToken, localRefreshToken) {
+                    Completable.complete()
+                }.doOnError { it.printStackTrace() }
             } else {
-                Single.error(ResponseFailException(response.errorBody()?.string()))
+                Completable.error(ResponseFailException(response.errorBody()?.string()))
             }
         }
     }
@@ -87,5 +99,14 @@ class DeliveryRepositoryImpl @Inject constructor(
             .subscribeOn(Schedulers.io())
             .doOnError { it.printStackTrace() }
             .flatMap { invoke(it) }
+
+    private fun updateRefreshedToken(
+        accessToken: String,
+        refreshToken: String,
+        invoke: () -> CompletableSource
+    ) = localTokenDao
+        .updateAccessToken(LocalToken(id = 0, accessToken, refreshToken))
+        .andThen(invoke())
+
 }
 

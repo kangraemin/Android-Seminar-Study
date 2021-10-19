@@ -1,5 +1,7 @@
 package com.terry.delivery.data
 
+import com.terry.delivery.data.local.model.LocalToken
+import com.terry.delivery.entity.login.RefreshToken
 import com.terry.delivery.entity.login.VerifyToken
 import io.reactivex.Completable
 import io.reactivex.Single
@@ -14,5 +16,7 @@ interface DeliveryRepository {
 
     fun searchWithKeyword(headers: Map<String, String>, query: String, page: Int): Completable
 
-    fun checkLocalAccessToken(): Single<Response<VerifyToken>>
+    fun checkLocalAccessToken(): Single<LocalToken>
+
+    fun refreshAccessToken(): Single<RefreshToken>
 }

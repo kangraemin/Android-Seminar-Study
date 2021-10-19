@@ -2,12 +2,14 @@ package com.terry.delivery.data.repository
 
 import androidx.room.EmptyResultSetException
 import androidx.test.filters.SmallTest
+import com.google.common.truth.Truth
 import com.terry.delivery.ImmediateSchedulerRuleAndroidTest
 import com.terry.delivery.data.local.AppDatabase
 import com.terry.delivery.data.local.dao.LocalTokenDao
 import com.terry.delivery.data.local.model.LocalToken
 import com.terry.delivery.data.remote.LoginApi
 import com.terry.delivery.data.remote.SearchApi
+import com.terry.delivery.data.remote.model.LoginInfo
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.After
@@ -74,22 +76,64 @@ class DeliveryRepositoryImplTest {
 
     @Test
     fun checkLocalAccessTokenWithValidInfo_returnsTrue() {
-        val localToken = LocalToken(0, "access_token_test", "refresh_token_test")
+        val loginInfo = LoginInfo("delivery", "dev_baemin")
+        val token = loginApi.getAccessToken(loginInfo).blockingGet()
 
-        localTokenDao.saveTokens(localToken).blockingGet()
+        localTokenDao.saveTokens(LocalToken(0, token.access!!, token.refresh!!)).blockingGet()
 
-        deliveryRepositoryImpl
-            .checkLocalAccessToken()
-            .test()
-            .assertComplete()
-            .assertNoErrors()
+        val localToken = deliveryRepositoryImpl.checkLocalAccessToken().blockingGet()
+
+        Truth.assertThat(localToken).isNotNull()
     }
 
     @Test
     fun checkLocalAccessTokenWithEmptyLocalAccessToken_returnsFalse() {
-        deliveryRepositoryImpl
-            .checkLocalAccessToken()
-            .test()
-            .assertNotComplete()
+
+        runCatching {
+            val localToken = deliveryRepositoryImpl.checkLocalAccessToken().blockingGet()
+
+            Truth.assertThat(localToken.accessToken).isNull()
+        }.onSuccess {
+            assert(false)
+        }.onFailure {
+            Truth.assertThat(it).isInstanceOf(EmptyResultSetException::class.java)
+        }
+    }
+
+    @Test
+    fun refreshAccessTokenWithValidAccessToken_returnsTrue() {
+        val loginInfo = LoginInfo("delivery", "dev_baemin")
+        val token = loginApi.getAccessToken(loginInfo).blockingGet()
+
+        localTokenDao.saveTokens(LocalToken(0, token.access!!, token.refresh!!)).blockingGet()
+
+        val refreshToken = deliveryRepositoryImpl.refreshAccessToken().blockingGet()
+
+        Truth.assertThat(refreshToken).isNotNull()
+        Truth.assertThat(refreshToken.access).isNotNull()
+    }
+
+    @Test
+    fun refreshAccessTokenWithInvalidInfo_returnsFalse() {
+        val localToken = LocalToken(
+            0,
+            "invalid access token",
+            "invalid refresh token"
+        )
+
+        localTokenDao.saveTokens(localToken).blockingGet()
+
+        runCatching {
+            val refreshToken = deliveryRepositoryImpl.refreshAccessToken().blockingGet()
+
+            Truth.assertThat(refreshToken.access).isNull()
+            Truth.assertThat(refreshToken.code).isEqualTo("token_not_valid")
+            Truth.assertThat(refreshToken.detail).isEqualTo("Token is invalid or expired")
+        }.onSuccess {
+            assert(false)
+        }.onFailure {
+            Truth.assertThat(it).isInstanceOf(NullPointerException::class.java)
+        }
+
     }
 }

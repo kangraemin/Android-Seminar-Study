@@ -1,10 +1,10 @@
 package com.terry.delivery.data.repository
 
 import com.terry.delivery.data.DeliveryRepository
-import com.terry.delivery.entity.login.VerifyToken
+import com.terry.delivery.data.local.model.LocalToken
+import com.terry.delivery.entity.login.RefreshToken
 import io.reactivex.Completable
 import io.reactivex.Single
-import retrofit2.Response
 
 /*
  * Created by Taehyung Kim on 2021-10-13
@@ -42,19 +42,37 @@ class FakeDeliveryRepositoryImplTest : DeliveryRepository {
         }
     }
 
-    override fun checkLocalAccessToken(): Single<Response<VerifyToken>> {
+    override fun checkLocalAccessToken(): Single<LocalToken> {
         return if (shouldReturnAccessTokenInvalid) {
             Single.error(Throwable("Error"))
         } else {
             Single.just(
-                Response.success(
-                    VerifyToken(
-                        "test success detail",
-                        "test success message"
-                    )
+                LocalToken(
+                    id = 0,
+                    "test success accessToken",
+                    "test success refreshToken"
                 )
             )
         }
+    }
 
+    override fun refreshAccessToken(): Single<RefreshToken> {
+        return if (shouldReturnNetworkError) {
+            Single.just(
+                RefreshToken(
+                    null,
+                    "token_not_valid",
+                    "Token is invalid or expired"
+                )
+            )
+        } else {
+            Single.just(
+                RefreshToken(
+                    "test success accessToken",
+                    null,
+                    null
+                )
+            )
+        }
     }
 }

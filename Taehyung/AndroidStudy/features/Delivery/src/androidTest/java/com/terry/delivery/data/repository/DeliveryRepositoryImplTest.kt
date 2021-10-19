@@ -10,6 +10,7 @@ import com.terry.delivery.data.local.model.LocalToken
 import com.terry.delivery.data.remote.LoginApi
 import com.terry.delivery.data.remote.SearchApi
 import com.terry.delivery.data.remote.model.LoginInfo
+import com.terry.delivery.model.ResponseFailException
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import org.junit.After
@@ -115,9 +116,7 @@ class DeliveryRepositoryImplTest {
         val loginInfo = LoginInfo("delivery", "dev_baemin")
         val token = loginApi.getAccessToken(loginInfo).blockingGet()
 
-        localTokenDao.saveTokens(LocalToken(0, token.access!!, token.refresh!!)).blockingGet()
-
-        val refreshToken = deliveryRepositoryImpl.refreshAccessToken().blockingGet()
+        val refreshToken = deliveryRepositoryImpl.refreshAccessToken(token.refresh!!).blockingGet()
 
         Truth.assertThat(refreshToken).isNotNull()
         Truth.assertThat(refreshToken.access).isNotNull()
@@ -125,16 +124,10 @@ class DeliveryRepositoryImplTest {
 
     @Test
     fun refreshAccessTokenWithInvalidInfo_returnsFalse() {
-        val localToken = LocalToken(
-            0,
-            "invalid access token",
-            "invalid refresh token"
-        )
-
-        localTokenDao.saveTokens(localToken).blockingGet()
-
         runCatching {
-            val refreshToken = deliveryRepositoryImpl.refreshAccessToken().blockingGet()
+            val refreshToken = deliveryRepositoryImpl
+                .refreshAccessToken("invalid_refresh_token")
+                .blockingGet()
 
             Truth.assertThat(refreshToken.access).isNull()
             Truth.assertThat(refreshToken.code).isEqualTo("token_not_valid")
@@ -142,7 +135,7 @@ class DeliveryRepositoryImplTest {
         }.onSuccess {
             assert(false)
         }.onFailure {
-            Truth.assertThat(it).isInstanceOf(NullPointerException::class.java)
+            Truth.assertThat(it).isInstanceOf(RuntimeException::class.java)
         }
 
     }

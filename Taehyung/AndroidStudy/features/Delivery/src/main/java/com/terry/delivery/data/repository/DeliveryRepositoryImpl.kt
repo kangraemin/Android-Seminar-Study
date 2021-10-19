@@ -9,10 +9,12 @@ import com.terry.delivery.data.remote.SearchApi
 import com.terry.delivery.data.remote.model.LoginInfo
 import com.terry.delivery.entity.login.RefreshToken
 import com.terry.delivery.model.EmptyBodyException
+import com.terry.delivery.model.ResponseFailException
 import io.reactivex.Completable
 import io.reactivex.Maybe
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
+import retrofit2.Response
 import javax.inject.Inject
 
 /*
@@ -63,24 +65,27 @@ class DeliveryRepositoryImpl @Inject constructor(
             }
     }
 
-    override fun refreshAccessToken(): Single<RefreshToken> {
-        return localTokenDao
+    override fun refreshAccessToken(refreshToken: String?): Single<RefreshToken> {
+        val singleSource =
+            if (refreshToken == null) getRefreshToken { loginApi.refreshAccessToken(it.refreshToken) }
+            else loginApi.refreshAccessToken(refreshToken)
+
+        return singleSource.flatMap { response ->
+            if (response.isSuccessful) {
+                val refreshTokenData = response.body()
+                    ?: return@flatMap Single.error(EmptyBodyException("Response Body is empty !!"))
+                Single.just(refreshTokenData)
+            } else {
+                Single.error(ResponseFailException(response.errorBody()?.string()))
+            }
+        }
+    }
+
+    private fun getRefreshToken(invoke: (LocalToken) -> Single<Response<RefreshToken>>) =
+        localTokenDao
             .getLocalToken()
             .subscribeOn(Schedulers.io())
             .doOnError { it.printStackTrace() }
-            .flatMap { token ->
-                loginApi.refreshAccessToken(token.refreshToken)
-            }
-            .flatMap { response ->
-                if (response.isSuccessful) {
-                    Single.just(
-                        response.body()
-                            ?: return@flatMap Single.error(EmptyBodyException("Response Body is empty !!"))
-                    )
-                } else {
-                    Single.just(null)
-                }
-            }
-    }
+            .flatMap { invoke(it) }
 }
 

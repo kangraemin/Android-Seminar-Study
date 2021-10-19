@@ -1,10 +1,9 @@
 package com.clonecodingbm.ui.login
 
-import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.clonecodingbm.R
-import com.clonecodingbm.base.BaseFragment
+import com.clonecodingbm.ui.base.BaseFragment
 import com.clonecodingbm.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -14,21 +13,20 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
 
     override fun init() {
         viewModel = ViewModelProvider(this)[LoginViewModel::class.java]
+
         viewModel.message.observe(viewLifecycleOwner, {
-            it.getContentIfNotHandled()?.let {
-                Toast.makeText(context, it, Toast.LENGTH_LONG).show()
-            }
+            showToast(it)
         })
-        viewModel.token.observe(viewLifecycleOwner, {
-            binding.tvLoginRefresh.text = it.refresh
-            binding.tvLoginAccess.text = it.access
-            findNavController().popBackStack()
+        viewModel.loginResult.observe(viewLifecycleOwner, {
+            if (it == true) {
+                findNavController().popBackStack()
+            }
         })
         viewModel.isLoading.observe(viewLifecycleOwner, { isLoading ->
             if (isLoading) {
-                showToast("isLoading: true")
+                showLoading(true, binding.pbLoading)
             } else {
-                showToast("isLoading: false")
+                showLoading(false, binding.pbLoading)
             }
         })
 
@@ -36,7 +34,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
             findNavController().popBackStack()
         }
         binding.btLoginLogin.setOnClickListener {
-            viewModel.doLoginRequest(binding.etLoginIdInput.text.toString(), binding.etLoginPwInput.text.toString())
+            viewModel.doLoginRequest(
+                binding.etLoginIdInput.text.toString(),
+                binding.etLoginPwInput.text.toString()
+            )
         }
     }
 

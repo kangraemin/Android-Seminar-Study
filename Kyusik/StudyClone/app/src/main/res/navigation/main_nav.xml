@@ -61,7 +61,7 @@
         tools:layout="@layout/fragment_order_list" />
     <fragment
         android:id="@+id/myPageFragment"
-        android:name="com.clonecodingbm.ui.bottom.MyPageFragment"
+        android:name="com.clonecodingbm.ui.mypage.MyPageFragment"
         android:label="fragment_my_page"
         tools:layout="@layout/fragment_my_page" >
         <action

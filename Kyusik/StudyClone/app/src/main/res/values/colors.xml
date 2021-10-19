@@ -9,4 +9,21 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="main">#2AC1BC</color>
+    <color name="main_gradation_light">#5f4eee</color>
+    <color name="main_gradation_dark">#202746</color>
+    <color name="text_black">#333333</color>
+    <color name="text_hint">#999999</color>
+    <color name="pale_red">#d94c35</color>
+    <color name="yellow_orange">#ffb900</color>
+    <color name="gross_green">#a1bb1a</color>
+    <color name="tealish">#33bbd2</color>
+    <color name="peacock_blue">#005495</color>
+    <color name="darkish_pink">#de5a71</color>
+    <color name="slate_grey">#63687d</color>
+    <color name="white_two">#fafafa</color>
+    <color name="white_three">#f1f1f1</color>
+    <color name="grapefruit">#ff4d4d</color>
+    <color name="purpleish_blue">#5c57ea</color>
+    <color name="cool_grey">#b9bac2</color>
+    <color name="disable_color">#e1e1e1</color>
 </resources>

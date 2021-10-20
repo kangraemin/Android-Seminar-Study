@@ -1,6 +1,5 @@
 package com.clonecodingbm.ui.search
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,11 +37,6 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
         notifyDataSetChanged()
     }
 
-    fun deleteRecentSearch(position: Int) {
-        recentSearches.toMutableList().removeAt(position)
-        notifyDataSetChanged()
-    }
-
     inner class SearchViewHolder(
         private val binding: ItemSearchBinding
     ) : RecyclerView.ViewHolder(binding.root) {
@@ -53,8 +47,6 @@ class SearchAdapter : RecyclerView.Adapter<SearchAdapter.SearchViewHolder>() {
             }
             binding.ivDelete.setOnClickListener {
                 listener?.deleteItem(recentSearch.searchWord)
-                Log.e("","delete word : ${recentSearch.searchWord}")
-                Log.e("","position : $adapterPosition")
             }
             binding.tvWord.text = recentSearch.searchWord
         }

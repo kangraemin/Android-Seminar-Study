@@ -65,7 +65,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                 findNavController().popBackStack()
             }
             ivSearchCancel.setOnClickListener {
-                binding.etSearchInput.text = null
+                etSearchInput.text = null
+                showKeyboard(etSearchInput)
             }
             etSearchInput.setOnEditorActionListener { _, actionId, _ ->
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
@@ -85,6 +86,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         val action = SearchFragmentDirections.actionSearchFragmentToSearchListFragment(searchWord)
         findNavController().navigate(action)
         binding.etSearchInput.text = null
+        hideKeyboard(binding.etSearchInput)
     }
 
     companion object {

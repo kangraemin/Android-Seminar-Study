@@ -1,9 +1,12 @@
 package com.clonecodingbm.ui.base
 
+import android.content.Context.INPUT_METHOD_SERVICE
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
+import android.widget.EditText
 import android.widget.Toast
 import androidx.annotation.LayoutRes
 import androidx.databinding.DataBindingUtil
@@ -48,4 +51,15 @@ abstract class BaseFragment<B : ViewDataBinding>(
             loadingView.visibility = View.GONE
         }
     }
+
+    protected fun showKeyboard(editText: EditText) {
+        editText.requestFocus()
+        (context?.getSystemService(INPUT_METHOD_SERVICE) as? InputMethodManager)!!
+            .showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)
+    }
+
+
+    protected fun hideKeyboard(editText: EditText) =
+        (context?.getSystemService(INPUT_METHOD_SERVICE) as? InputMethodManager)!!
+            .hideSoftInputFromWindow(editText.windowToken, 0)
 }

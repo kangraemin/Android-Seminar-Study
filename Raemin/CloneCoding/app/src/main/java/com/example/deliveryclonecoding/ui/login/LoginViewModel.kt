@@ -2,7 +2,7 @@ package com.example.deliveryclonecoding.ui.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.deliveryclonecoding.data.Repository
+import com.example.deliveryclonecoding.data.remote.login.LoginRepository
 import com.example.deliveryclonecoding.data.remote.base.NetworkCallResult
 import com.example.deliveryclonecoding.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    val repository: Repository
+    val loginRepository: LoginRepository
 ) : BaseViewModel() {
 
     private val _loginResult: MutableLiveData<Boolean> = MutableLiveData()
@@ -26,7 +26,7 @@ class LoginViewModel @Inject constructor(
     init {
         loginSubject
             .flatMapSingle {
-                repository
+                loginRepository
                     .login(it.first, it.second)
                     .andThen(Single.just(NetworkCallResult<Unit>()))
                     .onErrorReturn { NetworkCallResult(throwable = it) }

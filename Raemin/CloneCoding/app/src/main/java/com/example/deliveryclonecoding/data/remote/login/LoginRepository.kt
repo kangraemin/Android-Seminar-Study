@@ -1,7 +1,7 @@
-package com.example.deliveryclonecoding.data
+package com.example.deliveryclonecoding.data.remote.login
 
 import io.reactivex.Completable
 
-interface Repository {
+interface LoginRepository {
     fun login(id: String, password: String): Completable
 }

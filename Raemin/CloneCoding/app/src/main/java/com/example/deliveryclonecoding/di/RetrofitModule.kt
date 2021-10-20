@@ -1,6 +1,6 @@
 package com.example.deliveryclonecoding.di
 
-import com.example.deliveryclonecoding.data.remote.login.LoginApi
+import com.example.deliveryclonecoding.data.remote.login.datasource.LoginApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

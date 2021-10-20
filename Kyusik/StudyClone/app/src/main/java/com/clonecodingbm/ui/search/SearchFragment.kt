@@ -1,6 +1,5 @@
 package com.clonecodingbm.ui.search
 
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import androidx.lifecycle.ViewModelProvider
@@ -21,8 +20,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         viewModel.apply {
             getRecentSearches()
             recentSearches.observe(viewLifecycleOwner, {
-                Log.e(TAG, "restaurants: ${it}")
-                binding.tvLog.text = it.toString()
+                val list = it.reversed()
+                binding.tvLog.text = list.toString()
             })
             compositeDisposable.add(
                 binding.etSearchInput

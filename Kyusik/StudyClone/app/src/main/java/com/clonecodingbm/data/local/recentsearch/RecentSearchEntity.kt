@@ -5,8 +5,6 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "RecentSearches")
 data class RecentSearchEntity(
-    val searchWord: String
-) {
     @PrimaryKey
-    var id: Int = 0
-}
+    val searchWord: String
+)

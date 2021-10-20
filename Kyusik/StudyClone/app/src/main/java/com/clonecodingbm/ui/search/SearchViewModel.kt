@@ -3,7 +3,6 @@ package com.clonecodingbm.ui.search
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.clonecodingbm.data.local.recentsearch.RecentSearchEntity
-import com.clonecodingbm.data.remote.search.SearchResponse
 import com.clonecodingbm.data.repository.search.SearchRepository
 import com.clonecodingbm.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -23,10 +22,11 @@ class SearchViewModel @Inject constructor(
                 .getRecentSearches()
                 .doOnSubscribe { showProgress() }
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSuccess { hideProgress() }
                 .subscribe({
+                    hideProgress()
                     _recentSearches.value = it
                 }, {
+                    hideProgress()
                     it.printStackTrace()
                 })
         )

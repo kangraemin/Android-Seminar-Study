@@ -2,6 +2,7 @@ package com.clonecodingbm.data.di
 
 import com.clonecodingbm.BuildConfig
 import com.clonecodingbm.data.remote.login.LoginApi
+import com.clonecodingbm.data.remote.search.SearchApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -78,5 +79,11 @@ object NetworkModule {
     @Provides
     fun provideLoginApi(retrofit: Retrofit): LoginApi {
         return retrofit.create(LoginApi::class.java)
+    }
+
+    @Singleton
+    @Provides
+    fun provideSearchApi(retrofit: Retrofit): SearchApi {
+        return retrofit.create(SearchApi::class.java)
     }
 }

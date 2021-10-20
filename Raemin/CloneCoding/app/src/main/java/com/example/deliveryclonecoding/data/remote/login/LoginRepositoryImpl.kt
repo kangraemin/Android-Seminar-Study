@@ -19,4 +19,15 @@ class LoginRepositoryImpl @Inject constructor(
                     .andThen(localTokenDataSource.saveToken(mappingRemoteDataToLocal(loginDataItem)))
             }
     }
+
+    override fun refreshToken(): Completable {
+        return localTokenDataSource
+            .getToken()
+            .flatMap { tokenDataSource.refreshAccessToken(it.refreshToken) }
+            .flatMapCompletable { loginDataItem ->
+                localTokenDataSource
+                    .deleteAllCachedToken()
+                    .andThen(localTokenDataSource.saveToken(mappingRemoteDataToLocal(loginDataItem)))
+            }
+    }
 }

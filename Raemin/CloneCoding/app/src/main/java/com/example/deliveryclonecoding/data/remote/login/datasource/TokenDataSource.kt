@@ -4,4 +4,5 @@ import io.reactivex.Single
 
 interface TokenDataSource {
     fun getUserTokenFromServer(id: String, password: String): Single<TokenDataItem>
+    fun refreshAccessToken(refresh: String): Single<TokenDataItem>
 }

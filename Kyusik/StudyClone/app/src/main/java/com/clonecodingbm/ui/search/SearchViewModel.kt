@@ -31,4 +31,33 @@ class SearchViewModel @Inject constructor(
                 })
         )
     }
+
+    fun deleteRecentSearch(query: String) {
+        compositeDisposable.add(
+            searchRepository
+                .deleteRecentSearch(query)
+                .doOnSubscribe { showProgress() }
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    hideProgress()
+                    _recentSearches.value = it
+                },{
+                    hideProgress()
+                })
+        )
+    }
+
+    fun deleteRecentSearchAll() {
+        compositeDisposable.add(
+            searchRepository
+                .deleteRecentSearchAll().doOnSubscribe { showProgress() }
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    hideProgress()
+                    _recentSearches.value = emptyList()
+                },{
+                    hideProgress()
+                })
+        )
+    }
 }

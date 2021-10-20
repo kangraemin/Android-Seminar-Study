@@ -6,6 +6,7 @@ import com.clonecodingbm.data.local.recentsearch.RecentSearchEntity
 import com.clonecodingbm.data.local.token.TokenDataSource
 import com.clonecodingbm.data.remote.search.SearchDataSource
 import com.clonecodingbm.data.remote.search.SearchResponse
+import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
@@ -30,5 +31,16 @@ class SearchRepositoryImpl @Inject constructor(
                             .searchRestaurants(BuildConfig.RAMS_API_KEY, access, query, page)
                     )
             }
+    }
+
+    override fun deleteRecentSearch(query: String): Single<List<RecentSearchEntity>> {
+        return recentSearchDataSource
+            .deleteRecentSearch(RecentSearchEntity(query))
+            .andThen(recentSearchDataSource.getRecentSearches())
+    }
+
+    override fun deleteRecentSearchAll(): Completable {
+        return recentSearchDataSource
+            .deleteAll()
     }
 }

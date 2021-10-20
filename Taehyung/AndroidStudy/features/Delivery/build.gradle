@@ -11,8 +11,6 @@ android {
     defaultConfig {
         minSdk 23
         targetSdk 30
-        versionCode 1
-        versionName "1.0"
 
         testInstrumentationRunner "com.terry.delivery.HiltTestRunner"
     }
@@ -58,6 +56,8 @@ dependencies {
     implementation "androidx.fragment:fragment-ktx:$rootProject.fragmentVersion"
 
     implementation "androidx.lifecycle:lifecycle-livedata-core-ktx:$rootProject.lifecycleVersion"
+
+    implementation "com.jakewharton.timber:timber:$rootProject.timberVersion"
 
     implementation "androidx.test:core:$rootProject.testCoreVersion"
     testImplementation "junit:junit:$rootProject.junitVersion"

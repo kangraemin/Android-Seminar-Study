@@ -3,6 +3,7 @@ package com.example.deliveryclonecoding.ui.login
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.fragment.app.viewModels
 import com.example.deliveryclonecoding.R
 import com.example.deliveryclonecoding.databinding.FragmentLoginBinding
 import com.example.deliveryclonecoding.ui.base.BaseFragment
@@ -13,10 +14,12 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login) {
+class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
-    @Inject
-    lateinit var loginViewModel: LoginViewModel
+    override val layoutRes: Int
+        get() = R.layout.fragment_login
+
+    private val loginViewModel: LoginViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

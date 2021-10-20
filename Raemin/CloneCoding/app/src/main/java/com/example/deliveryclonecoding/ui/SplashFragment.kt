@@ -14,7 +14,10 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
 import java.util.concurrent.TimeUnit
 
-class SplashFragment : BaseFragment<FragmentSplashBinding>(R.layout.fragment_splash) {
+class SplashFragment : BaseFragment<FragmentSplashBinding>() {
+
+    override val layoutRes: Int
+        get() = R.layout.fragment_splash
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

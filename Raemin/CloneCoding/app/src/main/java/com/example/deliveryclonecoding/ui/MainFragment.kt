@@ -8,7 +8,10 @@ import com.example.deliveryclonecoding.databinding.FragmentMainBinding
 import com.example.deliveryclonecoding.ui.base.BaseFragment
 
 
-class MainFragment : BaseFragment<FragmentMainBinding>(R.layout.fragment_main) {
+class MainFragment : BaseFragment<FragmentMainBinding>() {
+
+    override val layoutRes: Int
+        get() = R.layout.fragment_main
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

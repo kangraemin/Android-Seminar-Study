@@ -10,9 +10,9 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import io.reactivex.disposables.CompositeDisposable
 
-abstract class BaseFragment<VDB : ViewDataBinding>(
-    @LayoutRes private val layoutRes: Int
-) : Fragment() {
+abstract class BaseFragment<VDB : ViewDataBinding>: Fragment() {
+
+    abstract val layoutRes: Int
 
     protected val compositeDisposable = CompositeDisposable()
 

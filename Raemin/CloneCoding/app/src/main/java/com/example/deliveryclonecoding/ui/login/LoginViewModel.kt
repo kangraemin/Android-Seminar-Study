@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.deliveryclonecoding.data.Repository
 import com.example.deliveryclonecoding.data.remote.base.NetworkCallResult
 import com.example.deliveryclonecoding.ui.base.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
@@ -12,8 +13,9 @@ import io.reactivex.subjects.PublishSubject
 import retrofit2.HttpException
 import javax.inject.Inject
 
+@HiltViewModel
 class LoginViewModel @Inject constructor(
-    private val repository: Repository
+    val repository: Repository
 ) : BaseViewModel() {
 
     private val _loginResult: MutableLiveData<Boolean> = MutableLiveData()

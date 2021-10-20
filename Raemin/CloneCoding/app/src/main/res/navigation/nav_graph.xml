@@ -44,7 +44,7 @@
 
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.example.deliveryclonecoding.ui.SearchFragment"
+        android:name="com.example.deliveryclonecoding.ui.search.SearchFragment"
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" />
 

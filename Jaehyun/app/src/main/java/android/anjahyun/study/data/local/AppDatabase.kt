@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 
-@Database(entities = [Token::class], version = 1)
+@Database(entities = [Token::class, Search::class], version = 1)
 abstract class AppDatabase: RoomDatabase() {
 
     abstract fun tokenDao(): TokenDao

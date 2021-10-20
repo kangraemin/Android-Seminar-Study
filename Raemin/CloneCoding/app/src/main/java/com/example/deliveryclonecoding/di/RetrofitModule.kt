@@ -1,6 +1,6 @@
 package com.example.deliveryclonecoding.di
 
-import com.example.deliveryclonecoding.data.remote.login.datasource.LoginApi
+import com.example.deliveryclonecoding.data.remote.login.datasource.TokenApi
 import com.example.deliveryclonecoding.data.remote.search.datasource.SearchApi
 import dagger.Module
 import dagger.Provides
@@ -44,8 +44,8 @@ object RetrofitModule {
 
     @Provides
     @Singleton
-    fun loginAPI(retrofit: Retrofit): LoginApi {
-        return retrofit.create(LoginApi::class.java)
+    fun loginAPI(retrofit: Retrofit): TokenApi {
+        return retrofit.create(TokenApi::class.java)
     }
 
     @Provides

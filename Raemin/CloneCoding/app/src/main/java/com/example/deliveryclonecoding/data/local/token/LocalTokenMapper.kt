@@ -1,12 +1,12 @@
 package com.example.deliveryclonecoding.data.local.token
 
-import com.example.deliveryclonecoding.data.remote.login.datasource.LoginDataItem
+import com.example.deliveryclonecoding.data.remote.login.datasource.TokenDataItem
 
 object LocalTokenMapper {
-    fun mappingRemoteDataToLocal(loginDataItem: LoginDataItem): LocalTokenItem {
+    fun mappingRemoteDataToLocal(tokenDataItem: TokenDataItem): LocalTokenItem {
         return LocalTokenItem(
-            accessToken = loginDataItem.access,
-            refreshToken = loginDataItem.refresh
+            accessToken = tokenDataItem.access,
+            refreshToken = tokenDataItem.refresh
         )
     }
 }

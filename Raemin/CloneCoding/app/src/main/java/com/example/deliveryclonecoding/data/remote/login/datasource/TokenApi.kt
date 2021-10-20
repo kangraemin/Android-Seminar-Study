@@ -4,7 +4,7 @@ import io.reactivex.Single
 import retrofit2.http.Body
 import retrofit2.http.POST
 
-interface LoginApi {
+interface TokenApi {
     @POST("api/token/")
-    fun login(@Body loginInfo: LoginInfo): Single<LoginDataItem>
+    fun getUserTokenFromServer(@Body tokenParameter: TokenParameter): Single<TokenDataItem>
 }

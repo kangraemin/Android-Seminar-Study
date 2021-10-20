@@ -6,6 +6,8 @@ import com.clonecodingbm.data.repository.login.LoginRepository
 import com.clonecodingbm.data.repository.login.LoginRepositoryImpl
 import com.clonecodingbm.data.repository.mypage.MyPageRepository
 import com.clonecodingbm.data.repository.mypage.MyPageRepositoryImpl
+import com.clonecodingbm.data.repository.search.SearchRepository
+import com.clonecodingbm.data.repository.search.SearchRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -29,4 +31,9 @@ abstract class RepositoryModule {
     abstract fun bindsHomeRepository(
         repositoryImpl: HomeRepositoryImpl
     ): HomeRepository
+
+    @Binds
+    abstract fun bindsSearchRepository(
+        repositoryImpl: SearchRepositoryImpl
+    ): SearchRepository
 }

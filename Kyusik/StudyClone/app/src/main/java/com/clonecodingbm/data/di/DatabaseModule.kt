@@ -3,6 +3,7 @@ package com.clonecodingbm.data.di
 import android.content.Context
 import androidx.room.Room
 import com.clonecodingbm.data.local.AppDatabase
+import com.clonecodingbm.data.local.recentsearch.RecentSearchDao
 import com.clonecodingbm.data.local.token.TokenDao
 import dagger.Module
 import dagger.Provides
@@ -27,4 +28,9 @@ object DatabaseModule {
     @Singleton
     fun provideTokenDao(appDatabase: AppDatabase): TokenDao =
         appDatabase.tokenDao()
+
+    @Provides
+    @Singleton
+    fun provideRecentSearchDao(appDatabase: AppDatabase): RecentSearchDao =
+        appDatabase.recentSearchDao()
 }

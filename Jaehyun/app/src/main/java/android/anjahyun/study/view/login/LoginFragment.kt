@@ -1,4 +1,4 @@
-package android.anjahyun.study.view
+package android.anjahyun.study.view.login
 
 import android.anjahyun.study.base.BaseFragment
 import android.anjahyun.study.databinding.FragmentLoginBinding
@@ -6,15 +6,14 @@ import android.anjahyun.study.viewmodel.LoginViewModel
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class LoginFragment: BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate), View.OnClickListener {
 
-    private lateinit var viewModel: LoginViewModel
+    private val viewModel: LoginViewModel by viewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -26,7 +25,6 @@ class LoginFragment: BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::in
 
         binding.btnLogin.setOnClickListener(this)
 
-        viewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
 
         viewModel.loginResult.observe(viewLifecycleOwner, {
             if (it) {

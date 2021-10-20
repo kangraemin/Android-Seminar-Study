@@ -1,6 +1,7 @@
 package com.example.deliveryclonecoding.di
 
 import com.example.deliveryclonecoding.data.remote.login.datasource.LoginApi
+import com.example.deliveryclonecoding.data.remote.search.datasource.SearchApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -45,5 +46,11 @@ object RetrofitModule {
     @Singleton
     fun loginAPI(retrofit: Retrofit): LoginApi {
         return retrofit.create(LoginApi::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun searchAPI(retrofit: Retrofit): SearchApi {
+        return retrofit.create(SearchApi::class.java)
     }
 }

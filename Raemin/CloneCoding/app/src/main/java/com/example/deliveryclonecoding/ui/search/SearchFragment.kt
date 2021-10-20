@@ -16,7 +16,6 @@ class SearchFragment : BaseViewModelFragment<FragmentSearchBinding, SearchViewMo
     private val searchViewModel: SearchViewModel by viewModels()
 
     override fun createViewModel(): SearchViewModel {
-        Log.d("asdf", "?")
         return searchViewModel.apply {
             binding.vm = searchViewModel
             binding.lifecycleOwner = this@SearchFragment

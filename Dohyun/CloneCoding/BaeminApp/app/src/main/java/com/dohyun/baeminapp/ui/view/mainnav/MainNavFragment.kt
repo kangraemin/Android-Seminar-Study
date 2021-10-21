@@ -1,7 +1,10 @@
-package com.dohyun.baeminapp.ui
+package com.dohyun.baeminapp.ui.view.mainnav
 
+import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.dohyun.baeminapp.R
 import com.dohyun.baeminapp.ui.base.BaseFragment
@@ -11,6 +14,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainNavFragment : BaseFragment<FragmentMainNavBinding>(R.layout.fragment_main_nav) {
+
+    private val viewModel by activityViewModels<MainNavViewModel>()
 
     override fun onCreateBinding(
         inflater: LayoutInflater,
@@ -45,6 +50,24 @@ class MainNavFragment : BaseFragment<FragmentMainNavBinding>(R.layout.fragment_m
             true
         }
 
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.checkUserState()
+        observeData()
+    }
+
+    private fun observeData() {
+        with(viewModel) {
+            logoutState.observe(viewLifecycleOwner) {
+                if (it) {
+                    showToast("다시 로그인이 필요합니다")
+                }
+            }
+
+        }
     }
 
 }

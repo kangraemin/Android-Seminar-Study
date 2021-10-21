@@ -21,7 +21,6 @@ class LogoutViewModel @Inject constructor(
     private var disposable: CompositeDisposable? = CompositeDisposable()
 
     fun doLogout() {
-        println("logout btn click!")
         repository.logout()
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())

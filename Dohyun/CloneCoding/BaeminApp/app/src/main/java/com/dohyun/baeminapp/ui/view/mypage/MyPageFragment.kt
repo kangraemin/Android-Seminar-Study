@@ -49,7 +49,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
             mypageData.observe(viewLifecycleOwner) { data ->
                 myPageAdapter.addItems(data)
             }
-            checkTokens.observe(viewLifecycleOwner) { data ->
+            loginState.observe(viewLifecycleOwner) { data ->
                 initMyBaeminData(data)
             }
         }

@@ -27,13 +27,30 @@ class LoginViewModel @Inject constructor(
             repository.login(UserInfo(id, pw))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-//                    repository.saveTokens(it)
-                    _loginState.value = true
+                    println("LoginViewModel login success")
+                    _loginState.postValue(true)
                 }, {
-                    _loginState.value = false
+                    _loginState.postValue(false)
                     println("error : ${it.message}")
                 })
         )
+    }
+
+    fun checkLoginState() {
+        disposable?.add(
+            repository.isLogin()
+                .observeOn(Schedulers.io())
+                .subscribe({
+                    _loginState.postValue(it)
+                }, {
+                    println("LoginViewModel checkLoginState error : ${it.message}")
+                })
+        )
+    }
+
+    override fun onCleared() {
+        super.onCleared()
+        disposable?.dispose()
     }
 
 }

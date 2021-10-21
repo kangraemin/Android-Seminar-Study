@@ -1,7 +1,15 @@
 package com.dohyun.baeminapp.di
 
-import com.dohyun.baeminapp.data.repository.LoginRepository
-import com.dohyun.baeminapp.data.repository.LoginRepositoryImpl
+import com.dohyun.baeminapp.data.repository.search.SearchRepository
+import com.dohyun.baeminapp.data.repository.search.SearchRepositoryImpl
+import com.dohyun.baeminapp.data.repository.login.LoginRepository
+import com.dohyun.baeminapp.data.repository.login.LoginRepositoryImpl
+import com.dohyun.baeminapp.data.repository.logout.LogoutRepository
+import com.dohyun.baeminapp.data.repository.logout.LogoutRepositoryImpl
+import com.dohyun.baeminapp.data.repository.mainnav.MainNavRepository
+import com.dohyun.baeminapp.data.repository.mainnav.MainNavRepositoryImpl
+import com.dohyun.baeminapp.data.repository.mypage.MyPageRepository
+import com.dohyun.baeminapp.data.repository.mypage.MyPageRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -15,4 +23,25 @@ abstract class RepositoryModule {
     abstract fun bindsLoginRepository(
         repositoryImpl: LoginRepositoryImpl
     ): LoginRepository
+
+    @Binds
+    abstract fun bindsSearchRepository(
+        repositoryImpl: SearchRepositoryImpl
+    ): SearchRepository
+
+    @Binds
+    abstract fun bindsMyPageRepository(
+        repositoryImpl: MyPageRepositoryImpl
+    ): MyPageRepository
+
+    @Binds
+    abstract fun bindsLogoutRepository(
+        repositoryImpl: LogoutRepositoryImpl
+    ): LogoutRepository
+
+    @Binds
+    abstract fun bindsMainNavRepository(
+        repositoryImpl: MainNavRepositoryImpl
+    ): MainNavRepository
+
 }

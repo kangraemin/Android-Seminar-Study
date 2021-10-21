@@ -15,27 +15,25 @@ class MyPageViewModel @Inject constructor(
     private val repository: MyPageRepository
 ) : BaseViewModel() {
 
-    private val _checkTokens = MutableLiveData<Boolean>(false)
-    val checkTokens: LiveData<Boolean>
-        get() = _checkTokens
-
     private val _mypageData = MutableLiveData<ArrayList<MyBaemin>>()
+    private val _loginState = MutableLiveData<Boolean>()
 
     val mypageData: LiveData<ArrayList<MyBaemin>>
         get() = _mypageData
 
+    val loginState : LiveData<Boolean>
+        get() = _loginState
+
     fun checkUserState() {
-        repository.verifyToken()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+        repository.isLogin()
+            .observeOn(Schedulers.io())
             .subscribe({
-                _checkTokens.value = true
-                println("checkUserState OK")
+                _loginState.postValue(it)
             }, {
-                _checkTokens.value = false
-                println("error :  $it")
+                println("MyPageViewModel checkUserState error $it")
             })
     }
+
 
     fun initMyBaeminData(checkToken : Boolean) {
 

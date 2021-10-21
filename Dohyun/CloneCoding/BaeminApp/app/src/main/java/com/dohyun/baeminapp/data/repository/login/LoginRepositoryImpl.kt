@@ -1,15 +1,18 @@
 package com.dohyun.baeminapp.data.repository.login
 
 import com.dohyun.baeminapp.data.entity.UserInfo
+import com.dohyun.baeminapp.data.local.PreferenceManager
 import com.dohyun.baeminapp.data.local.TokenDao
 import com.dohyun.baeminapp.data.remote.ApiService
 import io.reactivex.rxjava3.core.Completable
+import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
 class LoginRepositoryImpl @Inject constructor(
         private val tokenDao: TokenDao,
-        private val apiService: ApiService
+        private val apiService: ApiService,
+        private val preferenceManager: PreferenceManager
 ) : LoginRepository {
     override fun login(user: UserInfo): Completable {
         return Completable.create { emitter ->
@@ -29,5 +32,9 @@ class LoginRepositoryImpl @Inject constructor(
                     emitter.onError(throwable)
                 })
         }
+    }
+
+    override fun isLogin(): Single<Boolean> {
+        return Single.just(preferenceManager.checkLogin)
     }
 }

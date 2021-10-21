@@ -1,7 +1,7 @@
 package com.terry.delivery.di
 
-import com.terry.delivery.data.DeliveryRepository
-import com.terry.delivery.data.repository.DeliveryRepositoryImpl
+import com.terry.delivery.data.LoginRepository
+import com.terry.delivery.data.repository.LoginRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -16,7 +16,7 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun bindsDeliveryRepository(
-        repository: DeliveryRepositoryImpl
-    ): DeliveryRepository
+        repository: LoginRepositoryImpl
+    ): LoginRepository
 
 }

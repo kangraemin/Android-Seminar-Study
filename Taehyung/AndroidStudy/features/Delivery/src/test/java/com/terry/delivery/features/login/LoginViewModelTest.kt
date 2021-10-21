@@ -3,8 +3,7 @@ package com.terry.delivery.features.login
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.google.common.truth.Truth
 import com.terry.delivery.ImmediateSchedulerRuleTest
-import com.terry.delivery.data.repository.FakeDeliveryRepositoryImplTest
-import com.terry.delivery.features.login.LoginViewModel
+import com.terry.delivery.data.repository.FakeLoginRepositoryImplTest
 import com.terry.delivery.getOrAwaitValueAndroidTest
 import org.junit.After
 import org.junit.Before
@@ -26,7 +25,7 @@ class LoginViewModelTest {
 
     @Before
     fun setup() {
-        viewModel = LoginViewModel(FakeDeliveryRepositoryImplTest())
+        viewModel = LoginViewModel(FakeLoginRepositoryImplTest())
     }
 
     @After

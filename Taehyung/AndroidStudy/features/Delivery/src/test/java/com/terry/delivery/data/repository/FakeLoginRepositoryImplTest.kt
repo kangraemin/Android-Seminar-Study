@@ -1,15 +1,14 @@
 package com.terry.delivery.data.repository
 
-import com.terry.delivery.data.DeliveryRepository
+import com.terry.delivery.data.LoginRepository
 import com.terry.delivery.data.local.model.LocalToken
-import com.terry.delivery.entity.login.RefreshToken
 import io.reactivex.Completable
-import io.reactivex.Single
+import io.reactivex.Maybe
 
 /*
  * Created by Taehyung Kim on 2021-10-13
  */
-class FakeDeliveryRepositoryImplTest : DeliveryRepository {
+class FakeLoginRepositoryImplTest : LoginRepository {
 
     private var shouldReturnNetworkError = false
     private var shouldReturnAccessTokenInvalid = false
@@ -42,11 +41,11 @@ class FakeDeliveryRepositoryImplTest : DeliveryRepository {
         }
     }
 
-    override fun checkLocalAccessToken(): Single<LocalToken> {
+    override fun checkLocalAccessToken(): Maybe<LocalToken> {
         return if (shouldReturnAccessTokenInvalid) {
-            Single.error(Throwable("Error"))
+            Maybe.error(Throwable("Error"))
         } else {
-            Single.just(
+            Maybe.just(
                 LocalToken(
                     id = 0,
                     "test success accessToken",
@@ -56,23 +55,11 @@ class FakeDeliveryRepositoryImplTest : DeliveryRepository {
         }
     }
 
-    override fun refreshAccessToken(): Single<RefreshToken> {
+    override fun refreshAccessToken(refreshToken: String?): Completable {
         return if (shouldReturnNetworkError) {
-            Single.just(
-                RefreshToken(
-                    null,
-                    "token_not_valid",
-                    "Token is invalid or expired"
-                )
-            )
+            Completable.error(Throwable("Error"))
         } else {
-            Single.just(
-                RefreshToken(
-                    "test success accessToken",
-                    null,
-                    null
-                )
-            )
+            Completable.complete()
         }
     }
 }

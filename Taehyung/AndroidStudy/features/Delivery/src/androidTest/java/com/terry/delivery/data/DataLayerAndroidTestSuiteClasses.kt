@@ -3,7 +3,7 @@ package com.terry.delivery.data
 import com.terry.delivery.data.local.dao.LocalTokenDaoTest
 import com.terry.delivery.data.remote.LoginApiAndroidTest
 import com.terry.delivery.data.remote.SearchApiAndroidTest
-import com.terry.delivery.data.repository.DeliveryRepositoryImplTest
+import com.terry.delivery.data.repository.LoginRepositoryImplTest
 import org.junit.runner.RunWith
 import org.junit.runners.Suite
 
@@ -15,6 +15,6 @@ import org.junit.runners.Suite
     LocalTokenDaoTest::class,
     LoginApiAndroidTest::class,
     SearchApiAndroidTest::class,
-    DeliveryRepositoryImplTest::class
+    LoginRepositoryImplTest::class
 )
 class DataLayerAndroidTestSuiteClasses

@@ -1,6 +1,6 @@
 package com.terry.delivery.data.repository
 
-import com.terry.delivery.data.DeliveryRepository
+import com.terry.delivery.data.LoginRepository
 import com.terry.delivery.data.local.dao.LocalTokenDao
 import com.terry.delivery.data.local.model.LocalToken
 import com.terry.delivery.data.mapper.mapToLocalToken
@@ -18,11 +18,10 @@ import javax.inject.Inject
 /*
  * Created by Taehyung Kim on 2021-09-23
  */
-class DeliveryRepositoryImpl @Inject constructor(
+class LoginRepositoryImpl @Inject constructor(
     private val loginApi: LoginApi,
-    private val searchApi: SearchApi,
     private val localTokenDao: LocalTokenDao
-) : DeliveryRepository {
+) : LoginRepository {
 
     override fun login(id: String, password: String): Completable {
         return loginApi
@@ -37,29 +36,25 @@ class DeliveryRepositoryImpl @Inject constructor(
 
     }
 
-    override fun searchWithKeyword(
-        headers: Map<String, String>,
-        query: String,
-        page: Int
-    ): Completable {
-        // TODO: 2021-10-17 키워드 서치 로직 추가
-        return Completable.complete()
-    }
-
     override fun checkLocalAccessToken(): Maybe<LocalToken> {
-        var t: LocalToken? = null
+        var t = LocalToken(-1, "", "")
 
         return localTokenDao
             .getLocalToken()
             .subscribeOn(Schedulers.io())
+            .onErrorReturnItem(t)
             .doOnError { it.printStackTrace() }
             .flatMap { token ->
                 t = token
-                loginApi.verifyAccessToken(accessToken = "Bearer ${token.accessToken}")
+                if (t.accessToken.isEmpty()) Single.just(t)
+                else loginApi.verifyAccessToken(accessToken = "Bearer ${token.accessToken}")
             }
             .flatMapMaybe { response ->
-                if (response.isSuccessful) Maybe.fromCompletable(Completable.complete())
-                else Maybe.just(t)
+                if (response is Response<*>) {
+                    if (response.isSuccessful) return@flatMapMaybe Maybe.fromCompletable(Completable.complete())
+                }
+
+                return@flatMapMaybe Maybe.just(t)
             }
     }
 

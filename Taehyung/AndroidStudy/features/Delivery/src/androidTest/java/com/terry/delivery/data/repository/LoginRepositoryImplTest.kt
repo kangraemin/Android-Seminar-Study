@@ -1,6 +1,5 @@
 package com.terry.delivery.data.repository
 
-import androidx.room.EmptyResultSetException
 import androidx.test.filters.SmallTest
 import com.google.common.truth.Truth
 import com.terry.delivery.ImmediateSchedulerRuleAndroidTest
@@ -25,7 +24,7 @@ import javax.inject.Named
  */
 @SmallTest
 @HiltAndroidTest
-class DeliveryRepositoryImplTest {
+class LoginRepositoryImplTest {
 
     @get:Rule
     var hiltRule = HiltAndroidRule(this)
@@ -45,13 +44,13 @@ class DeliveryRepositoryImplTest {
 
     lateinit var localTokenDao: LocalTokenDao
 
-    lateinit var deliveryRepositoryImpl: DeliveryRepositoryImpl
+    lateinit var deliveryRepositoryImpl: LoginRepositoryImpl
 
     @Before
     fun setup() {
         hiltRule.inject()
         localTokenDao = deliveryDatabase.getTokenDao()
-        deliveryRepositoryImpl = DeliveryRepositoryImpl(loginApi, searchApi, localTokenDao)
+        deliveryRepositoryImpl = LoginRepositoryImpl(loginApi, localTokenDao)
     }
 
     @After
@@ -89,15 +88,9 @@ class DeliveryRepositoryImplTest {
 
     @Test
     fun checkLocalAccessTokenWithEmptyLocalAccessToken_returnsFalse() {
-        runCatching {
-            val localToken = deliveryRepositoryImpl.checkLocalAccessToken().blockingGet()
+        val localToken = deliveryRepositoryImpl.checkLocalAccessToken().blockingGet()
 
-            Truth.assertThat(localToken.accessToken).isNotNull()
-        }.onSuccess {
-            assert(false)
-        }.onFailure {
-            Truth.assertThat(it).isInstanceOf(EmptyResultSetException::class.java)
-        }
+        Truth.assertThat(localToken.accessToken).isEmpty()
     }
 
     @Test
@@ -108,7 +101,7 @@ class DeliveryRepositoryImplTest {
 
         val localToken = deliveryRepositoryImpl.checkLocalAccessToken().blockingGet()
 
-        Truth.assertThat(localToken.accessToken).isNotNull()
+        Truth.assertThat(localToken.accessToken).matches("invalid_access_token")
     }
 
     @Test

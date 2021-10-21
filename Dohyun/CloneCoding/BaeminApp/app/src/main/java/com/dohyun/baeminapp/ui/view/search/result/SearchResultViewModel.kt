@@ -17,6 +17,10 @@ class SearchResultViewModel @Inject constructor(
     private val repository: SearchRepository
 ) : BaseViewModel() {
 
+    private val _progressVisible = MutableLiveData<Boolean>()
+    val progressVisible : LiveData<Boolean>
+        get() = _progressVisible
+
     private val _result = MutableLiveData<Results>()
     val result : LiveData<Results>
         get() = _result
@@ -24,6 +28,7 @@ class SearchResultViewModel @Inject constructor(
     private var disposable : CompositeDisposable? = CompositeDisposable()
 
     fun doSearch(query: String, page: Int?) {
+        _progressVisible.postValue(true)
         disposable?.add(
             repository.search(query, page)
                 .subscribeOn(Schedulers.io())
@@ -31,8 +36,9 @@ class SearchResultViewModel @Inject constructor(
                 .subscribe({
                     println("SearchResultViewModel result :: $it")
                     _result.postValue(it)
+                    _progressVisible.postValue(false)
                 }, {
-                    println("SearchResultViewModel search error $it")
+                    println("SearchResultViewModel search error ${it.message}")
                 })
         )
     }

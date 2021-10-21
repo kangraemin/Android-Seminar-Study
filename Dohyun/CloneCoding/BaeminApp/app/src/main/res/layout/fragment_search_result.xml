@@ -99,5 +99,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/menu_listView" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            tools:visibility="visible"/>
+
     </FrameLayout>
 </layout>

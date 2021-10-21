@@ -13,6 +13,9 @@ class SearchRepositoryImpl @Inject constructor(
 ): SearchRepository {
 
     override fun search(query: String, page: Int?): Single<Results> {
-        return apiService.searchRestaurants("","Bearer ${tokenDao.getAccessToken().subscribeOn(Schedulers.io()).blockingGet()}", query, page)
+        val access = tokenDao.getAccessToken().observeOn(Schedulers.io()).blockingGet()
+        println("SearchRepositoryImpl :: $access")
+        return apiService.searchRestaurants("",
+                "Bearer $access", query, page)
     }
 }

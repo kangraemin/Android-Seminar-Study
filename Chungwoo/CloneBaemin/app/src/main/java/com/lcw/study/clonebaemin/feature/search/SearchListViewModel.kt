@@ -16,7 +16,7 @@ class SearchListViewModel @Inject constructor(private val api: ApiService) : Bas
     private val _success: MutableLiveData<Boolean> = MutableLiveData()
     val success: LiveData<Boolean> get() = _success
 
-    private val _searchData: MutableLiveData<SearchData> = MutableLiveData()
+     val _searchData: MutableLiveData<SearchData> = MutableLiveData()
     val searchData: LiveData<SearchData> get() = _searchData
 
 
@@ -24,7 +24,7 @@ class SearchListViewModel @Inject constructor(private val api: ApiService) : Bas
         api.getSearch(apiKey, query, page)
             .subscribeOn(Schedulers.io())  //상위스트림
             .subscribe({
-                Log.d("SearchListViewModel", "response success: $it ")
+                Log.d("SearchListViewModel", "response success: ${it.restaurants} ")
                 _searchData.postValue(it)
             }, {
                 Log.d("SearchListViewModel", "response fail: $it ")

@@ -15,7 +15,7 @@ class TokenDataSourceImpl @Inject constructor(
 
     override fun refreshAccessToken(refresh: String): Single<TokenDataItem> {
         return tokenApi
-            .refreshAccessToken(refresh)
+            .refreshAccessToken(RefreshTokenParameter(refresh))
             .subscribeOn(Schedulers.io())
     }
 }

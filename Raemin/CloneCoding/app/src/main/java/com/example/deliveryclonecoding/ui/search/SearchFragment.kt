@@ -1,12 +1,10 @@
 package com.example.deliveryclonecoding.ui.search
 
-import android.util.Log
 import androidx.fragment.app.viewModels
 import com.example.deliveryclonecoding.R
 import com.example.deliveryclonecoding.databinding.FragmentSearchBinding
 import com.example.deliveryclonecoding.ui.base.BaseViewModelFragment
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class SearchFragment : BaseViewModelFragment<FragmentSearchBinding, SearchViewModel>() {

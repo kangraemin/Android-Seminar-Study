@@ -7,9 +7,9 @@ import javax.inject.Inject
 class RestaurantDataSourceImpl @Inject constructor(
     private val searchApi: SearchApi
 ) : RestaurantDataSource {
-    override fun search(query: String): Single<RestaurantsSearchResult> {
+    override fun search(query: String, accessToken: String?): Single<RestaurantsSearchResult> {
         return searchApi
-            .search(query)
+            .search(query, accessToken)
             .subscribeOn(Schedulers.io())
     }
 }

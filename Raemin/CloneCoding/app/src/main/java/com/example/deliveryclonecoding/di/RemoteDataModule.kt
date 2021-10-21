@@ -1,5 +1,7 @@
 package com.example.deliveryclonecoding.di
 
+import com.example.deliveryclonecoding.data.remote.base.BaseNetworkErrorHandler
+import com.example.deliveryclonecoding.data.remote.base.BaseNetworkErrorHandlerImpl
 import com.example.deliveryclonecoding.data.remote.login.datasource.TokenDataSource
 import com.example.deliveryclonecoding.data.remote.login.datasource.TokenDataSourceImpl
 import com.example.deliveryclonecoding.data.remote.search.datasource.RestaurantDataSource
@@ -16,4 +18,6 @@ abstract class RemoteDataModule {
     abstract fun bindLoginDataSource(impl: TokenDataSourceImpl): TokenDataSource
     @Binds
     abstract fun bindRestaurantsDataSource(impl: RestaurantDataSourceImpl): RestaurantDataSource
+    @Binds
+    abstract fun bindBaseNetworkErrorHandler(impl: BaseNetworkErrorHandlerImpl): BaseNetworkErrorHandler
 }

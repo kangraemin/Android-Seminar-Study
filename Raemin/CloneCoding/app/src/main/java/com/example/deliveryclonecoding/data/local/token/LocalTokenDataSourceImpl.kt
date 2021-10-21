@@ -25,4 +25,10 @@ class LocalTokenDataSourceImpl @Inject constructor(
             .deleteAllCachedToken()
             .subscribeOn(Schedulers.io())
     }
+
+    override fun updateAccessToken(accessToken: String): Completable {
+        return localTokenDao
+            .updateAccessToken(accessToken)
+            .subscribeOn(Schedulers.io())
+    }
 }

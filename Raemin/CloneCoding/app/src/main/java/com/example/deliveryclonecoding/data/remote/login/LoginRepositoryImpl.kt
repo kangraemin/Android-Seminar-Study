@@ -24,10 +24,6 @@ class LoginRepositoryImpl @Inject constructor(
         return localTokenDataSource
             .getToken()
             .flatMap { tokenDataSource.refreshAccessToken(it.refreshToken) }
-            .flatMapCompletable { loginDataItem ->
-                localTokenDataSource
-                    .deleteAllCachedToken()
-                    .andThen(localTokenDataSource.saveToken(mappingRemoteDataToLocal(loginDataItem)))
-            }
+            .flatMapCompletable { localTokenDataSource.updateAccessToken(it.access) }
     }
 }

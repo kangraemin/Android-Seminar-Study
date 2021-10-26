@@ -19,13 +19,13 @@ class MyPageRepositoryImpl @Inject constructor(
             }
     }
 
-    fun refreshToken(): Completable {
-        return tokenDataSource
-            .getTokens()
-            .flatMapCompletable { token ->
-                loginDataSource
-                    .refreshToken(token.refresh)
-                    .ignoreElement()
-            }
-    }
+//    fun refreshToken(): Completable {
+//        return tokenDataSource
+//            .getTokens()
+//            .flatMapCompletable { token ->
+//                loginDataSource
+//                    .refreshToken(token.refresh)
+//                    .ignoreElement()
+//            }
+//    }
 }

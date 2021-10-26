@@ -31,4 +31,10 @@ class TokenDataSourceImpl @Inject constructor(
             .getAccessToken()
             .subscribeOn(Schedulers.io())
     }
+
+    override fun updateAccessToken(access: String): Completable {
+        return tokenDao
+            .updateAccessToken(access)
+            .subscribeOn(Schedulers.io())
+    }
 }

@@ -11,7 +11,7 @@ interface LoginApi {
     fun login(@Body loginRequest: LoginRequest) : Single<LoginResponse>
 
     @POST("api/token/refresh/")
-    fun refreshToken(@Body refresh: String): Single<String>
+    fun refreshToken(@Body refresh: RefreshRequest): Single<RefreshResponse>
 
     @GET("test/")
     fun checkToken(@Header("authorization") access: String): Single<CheckTokenResponse>

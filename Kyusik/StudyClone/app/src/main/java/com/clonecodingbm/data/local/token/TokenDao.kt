@@ -4,6 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
+import androidx.room.Update
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 
@@ -20,4 +21,7 @@ interface TokenDao {
 
     @Query(value = "SELECT access FROM TokenEntity")
     fun getAccessToken(): Single<String>
+
+    @Query(value = "UPDATE TokenEntity SET access = :access WHERE id = 0")
+    fun updateAccessToken(access: String): Completable
 }

@@ -13,7 +13,7 @@ class LoginDataSourceImpl @Inject constructor(
             .subscribeOn(Schedulers.io())
     }
 
-    override fun refreshToken(refresh: String): Single<String> {
+    override fun refreshToken(refresh: RefreshRequest): Single<RefreshResponse> {
         return loginApi
             .refreshToken(refresh)
             .subscribeOn(Schedulers.io())

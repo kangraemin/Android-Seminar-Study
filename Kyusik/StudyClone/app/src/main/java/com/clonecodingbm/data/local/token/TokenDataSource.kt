@@ -8,4 +8,5 @@ interface TokenDataSource {
     fun saveToken(tokenEntity : TokenEntity): Completable
     fun deleteToken(): Completable
     fun getAccessToken(): Single<String>
+    fun updateAccessToken(access: String): Completable
 }

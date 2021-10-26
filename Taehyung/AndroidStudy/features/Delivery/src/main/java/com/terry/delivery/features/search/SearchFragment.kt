@@ -27,15 +27,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         val binding = binding ?: return
 
         observeLiveData()
-        initToolbar(binding)
         initRankTime(binding)
         initRankList(binding)
-    }
-
-    private fun initToolbar(binding: FragmentSearchBinding) {
-        with(binding.tbSearch) {
-            setupWithNavController(findNavController())
-        }
     }
 
     private fun observeLiveData() {

@@ -54,10 +54,8 @@ class SearchApiTest {
         val loginInfo = LoginInfo("delivery", "dev_baemin")
         val token = loginApi.getAccessToken(loginInfo).blockingGet()
 
-        val headers = Const.getSearchApiHeaders(token = token.access ?: "")
-
         val result = searchApi.searchItem(
-            headerMap = headers,
+            accessToken = "Bearer ${token.access}",
             query = "떡볶이",
             page = 1
         ).blockingGet()
@@ -67,10 +65,8 @@ class SearchApiTest {
 
     @Test
     fun `search keyword with invalid headers and keyword(query), returns error`() {
-        val headers = Const.getSearchApiHeaders(token = "invalid_token_test")
-
         searchApi.searchItem(
-            headerMap = headers,
+            accessToken = "Bearer invalid_access_token",
             query = "떡볶이",
             page = 1
         ).subscribe({ searchItem ->
@@ -85,10 +81,8 @@ class SearchApiTest {
         val loginInfo = LoginInfo("delivery", "dev_baemin")
         val token = loginApi.getAccessToken(loginInfo).blockingGet()
 
-        val headers = Const.getSearchApiHeaders(token = token.access ?: "")
-
         val result = searchApi.searchItem(
-            headerMap = headers,
+            accessToken = "Bearer ${token.access}",
             query = "invalid_keyword_test",
             page = 1
         ).blockingGet()

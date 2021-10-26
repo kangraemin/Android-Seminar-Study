@@ -29,18 +29,6 @@ class FakeLoginRepositoryImplTest : LoginRepository {
         }
     }
 
-    override fun searchWithKeyword(
-        headers: Map<String, String>,
-        query: String,
-        page: Int
-    ): Completable {
-        return if (shouldReturnNetworkError) {
-            Completable.error(Throwable("Error"))
-        } else {
-            Completable.complete()
-        }
-    }
-
     override fun checkLocalAccessToken(): Maybe<LocalToken> {
         return if (shouldReturnAccessTokenInvalid) {
             Maybe.error(Throwable("Error"))

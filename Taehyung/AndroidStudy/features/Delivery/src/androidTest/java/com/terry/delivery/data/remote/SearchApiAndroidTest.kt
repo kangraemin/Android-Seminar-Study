@@ -3,8 +3,6 @@ package com.terry.delivery.data.remote
 import androidx.test.filters.SmallTest
 import com.google.common.truth.Truth
 import com.terry.delivery.ImmediateSchedulerRuleAndroidTest
-import com.terry.delivery.data.remote.LoginApi
-import com.terry.delivery.data.remote.SearchApi
 import com.terry.delivery.data.remote.model.LoginInfo
 import com.terry.delivery.util.Const
 import dagger.hilt.android.testing.HiltAndroidRule
@@ -48,15 +46,14 @@ class SearchApiAndroidTest {
         val loginInfo = LoginInfo("delivery", "dev_baemin")
         val token = loginApi.getAccessToken(loginInfo).blockingGet()
 
-        val headers = Const.getSearchApiHeaders(token = token.access ?: "")
-
         val result = searchApi.searchItem(
-            headerMap = headers,
+            accessToken = "Bearer ${token.access}",
             query = "떡볶이",
             page = 1
         ).blockingGet()
 
         Truth.assertThat(result.restaurantDto).isNotNull()
+        Truth.assertThat(result.restaurantDto).isNotEmpty()
     }
 
 }

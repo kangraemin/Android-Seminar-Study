@@ -1,12 +1,16 @@
 package com.terry.delivery.data
 
-import io.reactivex.Completable
+import com.terry.delivery.entity.search.SearchItem
+import io.reactivex.Single
 
 /*
  * Created by Taehyung Kim on 2021-10-21
  */
 interface SearchRepository {
 
-    fun searchWithKeyword(headers: Map<String, String>, query: String, page: Int): Completable
+    fun searchWithKeyword(
+        accessToken: String,
+        query: String,
+        page: Int
+    ): Single<Result<SearchItem>>
 }
-

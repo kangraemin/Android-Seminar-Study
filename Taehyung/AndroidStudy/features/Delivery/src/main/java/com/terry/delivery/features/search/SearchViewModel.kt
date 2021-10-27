@@ -3,11 +3,16 @@ package com.terry.delivery.features.search
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.terry.delivery.base.BaseViewModel
+import com.terry.delivery.data.LoginRepository
 import com.terry.delivery.data.SearchRepository
 import com.terry.delivery.data.remote.model.search.Ranking
+import com.terry.delivery.entity.search.RestaurantDto
+import com.terry.delivery.exceptions.NotLoggedInException
+import com.terry.delivery.util.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
+import timber.log.Timber
 import java.io.InputStream
 import javax.inject.Inject
 
@@ -19,15 +24,42 @@ class SearchViewModel @Inject constructor(
     private val searchRepository: SearchRepository
 ) : BaseViewModel() {
 
-    private val _searchRankData = MutableLiveData<Ranking>()
+    private val _searchRankData = SingleLiveEvent<Ranking>()
     val searchRankData: LiveData<Ranking>
         get() = _searchRankData
+
+    private val _queryResult = SingleLiveEvent<List<RestaurantDto>>()
+    val queryResult: LiveData<List<RestaurantDto>> = _queryResult
+
+    private val _failMessage = SingleLiveEvent<String>()
+    val failMessage: LiveData<String> = _failMessage
 
     fun initDebugRankData(rawData: InputStream) {
         searchRepository.getTop10RankedData(rawData.bufferedReader().use { it.readText() })
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ ranking ->
                 _searchRankData.value = ranking
+            }, {
+                it.printStackTrace()
+            })
+            .addTo(disposable)
+    }
+
+    fun searchItem(query: String) {
+        searchRepository.searchItemQuery(query, 1)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ result ->
+                if (result.isSuccess) {
+                    val data = result.getOrNull() ?: return@subscribe
+
+                    _queryResult.value = data.restaurantDto
+                } else {
+                    val error = result.exceptionOrNull()
+                    Timber.w(error)
+                    if (error != null && error is NotLoggedInException) {
+                        _failMessage.postValue("NotLoggedInException !")
+                    }
+                }
             }, {
                 it.printStackTrace()
             })

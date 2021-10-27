@@ -9,6 +9,11 @@ import io.reactivex.Single
  */
 interface SearchRepository {
 
+    fun searchItemQuery(
+        query: String,
+        page: Int
+    ): Single<Result<SearchItem>>
+
     fun searchWithKeyword(
         accessToken: String,
         query: String,

@@ -49,7 +49,7 @@ class SearchRepositoryImplTest {
     fun setup() {
         hiltRule.inject()
         localTokenDao = deliveryDatabase.getTokenDao()
-        searchRepositoryImpl = SearchRepositoryImpl(searchApi)
+        searchRepositoryImpl = SearchRepositoryImpl(searchApi, localTokenDao)
     }
 
     @After

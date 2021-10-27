@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.terry.delivery.R
 import com.terry.delivery.base.BaseFragment
 import com.terry.delivery.databinding.FragmentSearchBinding
+import com.terry.delivery.util.SnackbarUtil
+import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -48,6 +50,14 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
             searchRankHighAdapter.submitList(rankList.ranking.slice(0 until 5))
             searchRankLowAdapter.submitList(rankList.ranking.slice(5 until 10))
         }
+
+        viewModel.queryResult.observe(viewLifecycleOwner) { queryList ->
+            Timber.d(queryList.toString())
+        }
+
+        viewModel.failMessage.observe(viewLifecycleOwner) { msg ->
+            view?.let { SnackbarUtil.showErrorMessage(it, msg) }
+        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -82,6 +92,10 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
 
             if (text == null || text.isEmpty()) {
                 binding.groupSearch.visibility = View.GONE
+            }
+
+            if (text != null && text.count() >= 2) {
+                viewModel.searchItem(text.toString())
             }
         }
     }

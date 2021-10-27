@@ -16,8 +16,26 @@
     <string name="search5">검색어를 입력해주세요</string>
 
     <!-- 찜 -->
+    <string name="fav1">배달/포장</string>
+    <string name="fav2">B마트</string>
+    <string name="fav3">쇼핑라이브</string>
+    <string name="fav4">자주 찾는 가게를\n찜 해보세요.</string>
+    <string name="fav5">B마트가 아직 갈 수 없는 지역이에요.</string>
+    <string name="fav6">알림받기를 설정한 채널이 없습니다.</string>
+    <string name="fav7">총</string>
+    <string name="fav8">개</string>
     <!-- 메인 -->
+    <string name="main1">배달</string>
+    <string name="main2">배민1</string>
+    <string name="main3">포장</string>
+    <string name="main4">쇼핑라이브</string>
+    <string name="main5">선물하기</string>
+    <string name="main6">전국별미</string>
     <!-- 주문내역 -->
+    <string name="orderList1">배달/포장</string>
+    <string name="orderList2">B마트</string>
+    <string name="orderList3">쇼핑라이브</string>
+    <string name="orderList4">전국별미</string>
     <!-- my배민 -->
     <string name="my1">등급별 혜택</string>
     <string name="my2">포인트</string>

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/splashFragment"
-        android:name="android.anjahyun.study.view.SplashFragment"
+        android:name="android.anjahyun.study.view.splash.SplashFragment"
         tools:layout="@layout/fragment_splash"
         app:popUpToInclusive="true"
         android:label="SplashFragment" >
@@ -32,7 +32,7 @@
     </fragment>
     <fragment
         android:id="@+id/mainFragment"
-        android:name="android.anjahyun.study.view.MainFragment"
+        android:name="android.anjahyun.study.view.main.MainFragment"
         tools:layout="@layout/fragment_main"
         android:label="MainFragment" />
     <fragment

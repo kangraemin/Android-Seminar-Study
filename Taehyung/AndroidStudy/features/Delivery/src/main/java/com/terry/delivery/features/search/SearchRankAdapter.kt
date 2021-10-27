@@ -7,13 +7,14 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.terry.delivery.R
+import com.terry.delivery.data.remote.model.search.RankingData
 import com.terry.delivery.databinding.ItemSearchRankBinding
 
 /*
  * Created by Taehyung Kim on 2021-09-29
  */
 class SearchRankAdapter :
-    ListAdapter<SearchRankItem, SearchRankAdapter.SearchRankViewHolder>(diffUtil) {
+    ListAdapter<RankingData, SearchRankAdapter.SearchRankViewHolder>(diffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchRankViewHolder {
         return SearchRankViewHolder(
@@ -33,7 +34,7 @@ class SearchRankAdapter :
         private val binding: ItemSearchRankBinding
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: SearchRankItem) {
+        fun bind(item: RankingData) {
             binding.tvRankNum.text = item.rank.toString()
             binding.tvRankTitle.text = item.title
 
@@ -46,15 +47,15 @@ class SearchRankAdapter :
             )
         }
 
-        private fun getRankChangedResource(item: SearchRankItem): Int {
+        private fun getRankChangedResource(item: RankingData): Int {
             return when (item.getRankChanged()) {
-                SearchRankItem.RankStatus.RANK_UP -> {
+                RankingData.RankStatus.RANK_UP -> {
                     R.drawable.ic_baseline_arrow_drop_up_24
                 }
-                SearchRankItem.RankStatus.RANK_DOWN -> {
+                RankingData.RankStatus.RANK_DOWN -> {
                     R.drawable.ic_baseline_arrow_drop_down_24
                 }
-                SearchRankItem.RankStatus.RANK_IDLE -> {
+                RankingData.RankStatus.RANK_IDLE -> {
                     R.drawable.ic_baseline_horizontal_rule_24
                 }
             }
@@ -62,17 +63,17 @@ class SearchRankAdapter :
     }
 
     companion object {
-        private val diffUtil = object : DiffUtil.ItemCallback<SearchRankItem>() {
+        private val diffUtil = object : DiffUtil.ItemCallback<RankingData>() {
             override fun areItemsTheSame(
-                oldItem: SearchRankItem,
-                newItem: SearchRankItem
+                oldItem: RankingData,
+                newItem: RankingData
             ): Boolean {
                 return oldItem == newItem
             }
 
             override fun areContentsTheSame(
-                oldItem: SearchRankItem,
-                newItem: SearchRankItem
+                oldItem: RankingData,
+                newItem: RankingData
             ): Boolean {
                 return oldItem == newItem
             }

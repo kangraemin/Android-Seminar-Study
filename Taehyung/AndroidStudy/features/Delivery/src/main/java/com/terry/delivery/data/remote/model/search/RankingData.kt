@@ -1,14 +1,10 @@
-package com.terry.delivery.features.search
+package com.terry.delivery.data.remote.model.search
 
-/*
- * Created by Taehyung Kim on 2021-09-29
- */
-data class SearchRankItem(
+data class RankingData(
     val rank: Int,
-    val title: String,
-    val rankChanged: Int
+    val rankChanged: Int,
+    val title: String
 ) {
-
     fun getRankChanged(): RankStatus {
         return when (rankChanged) {
             0 -> RankStatus.RANK_UP

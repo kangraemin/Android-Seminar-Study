@@ -1,0 +1,54 @@
+{
+  "ranking": [
+    {
+      "rank": 1,
+      "title": "bbq",
+      "rankChanged": 0
+    },
+    {
+      "rank": 2,
+      "title": "bhc",
+      "rankChanged": 0
+    },
+    {
+      "rank": 3,
+      "title": "닭발",
+      "rankChanged": 0
+    },
+    {
+      "rank": 4,
+      "title": "타코야끼",
+      "rankChanged": 0
+    },
+    {
+      "rank": 5,
+      "title": "자담치킨",
+      "rankChanged": 0
+    },
+    {
+      "rank": 6,
+      "title": "꼬치",
+      "rankChanged": 2
+    },
+    {
+      "rank": 7,
+      "title": "역전",
+      "rankChanged": 0
+    },
+    {
+      "rank": 8,
+      "title": "닭꼬치",
+      "rankChanged": 1
+    },
+    {
+      "rank": 9,
+      "title": "햄버거",
+      "rankChanged": 0
+    },
+    {
+      "rank": 10,
+      "title": "순대",
+      "rankChanged": 0
+    }
+  ]
+}

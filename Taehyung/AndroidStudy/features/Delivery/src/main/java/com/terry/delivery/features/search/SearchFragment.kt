@@ -7,6 +7,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.terry.delivery.R
 import com.terry.delivery.base.BaseFragment
 import com.terry.delivery.databinding.FragmentSearchBinding
 import java.text.SimpleDateFormat
@@ -33,8 +34,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
 
     private fun observeLiveData() {
         viewModel.searchRankData.observe(viewLifecycleOwner) { rankList ->
-            searchRankHighAdapter.submitList(rankList.slice(0 until 5))
-            searchRankLowAdapter.submitList(rankList.slice(5 until 10))
+            searchRankHighAdapter.submitList(rankList.ranking.slice(0 until 5))
+            searchRankLowAdapter.submitList(rankList.ranking.slice(5 until 10))
         }
     }
 
@@ -59,6 +60,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
             isNestedScrollingEnabled = false
         }
 
-        viewModel.initDebugRankData()
+        viewModel.initDebugRankData(resources.openRawResource(R.raw.rank_data))
     }
 }

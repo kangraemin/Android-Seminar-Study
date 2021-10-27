@@ -1,7 +1,9 @@
 package com.terry.delivery.di
 
 import com.terry.delivery.data.LoginRepository
+import com.terry.delivery.data.SearchRepository
 import com.terry.delivery.data.repository.LoginRepositoryImpl
+import com.terry.delivery.data.repository.SearchRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -19,4 +21,8 @@ abstract class RepositoryModule {
         repository: LoginRepositoryImpl
     ): LoginRepository
 
+    @Binds
+    abstract fun bindsSearchRepository(
+        repository: SearchRepositoryImpl
+    ): SearchRepository
 }

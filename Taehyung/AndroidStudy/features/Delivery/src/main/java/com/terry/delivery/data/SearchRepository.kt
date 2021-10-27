@@ -1,6 +1,7 @@
 package com.terry.delivery.data
 
 import com.terry.delivery.entity.search.SearchItem
+import com.terry.delivery.data.remote.model.search.Ranking
 import io.reactivex.Single
 
 /*
@@ -13,4 +14,7 @@ interface SearchRepository {
         query: String,
         page: Int
     ): Single<Result<SearchItem>>
+
+    fun getTop10RankedData(jsonString: String): Single<Ranking>
 }
+

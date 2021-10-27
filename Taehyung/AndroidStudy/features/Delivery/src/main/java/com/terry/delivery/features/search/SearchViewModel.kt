@@ -2,8 +2,13 @@ package com.terry.delivery.features.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import com.terry.delivery.base.BaseViewModel
+import com.terry.delivery.data.SearchRepository
+import com.terry.delivery.data.remote.model.search.Ranking
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.addTo
+import java.io.InputStream
 import javax.inject.Inject
 
 /*
@@ -11,28 +16,22 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class SearchViewModel @Inject constructor(
+    private val searchRepository: SearchRepository
+) : BaseViewModel() {
 
-) : ViewModel() {
-
-    private val _searchRankData = MutableLiveData<List<SearchRankItem>>()
-    val searchRankData: LiveData<List<SearchRankItem>>
+    private val _searchRankData = MutableLiveData<Ranking>()
+    val searchRankData: LiveData<Ranking>
         get() = _searchRankData
 
-    fun initDebugRankData() {
-        _searchRankData.postValue(
-            listOf(
-                SearchRankItem(1, "bbq", 0),
-                SearchRankItem(2, "bhc", 0),
-                SearchRankItem(3, "닭발", 0),
-                SearchRankItem(4, "타코야끼", 0),
-                SearchRankItem(5, "자담치킨", 0),
-                SearchRankItem(6, "꼬치", 2),
-                SearchRankItem(7, "역전", 0),
-                SearchRankItem(8, "닭꼬치", 1),
-                SearchRankItem(9, "햄버거", 0),
-                SearchRankItem(10, "순대", 0)
-            )
-        )
+    fun initDebugRankData(rawData: InputStream) {
+        searchRepository.getTop10RankedData(rawData.bufferedReader().use { it.readText() })
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ ranking ->
+                _searchRankData.value = ranking
+            }, {
+                it.printStackTrace()
+            })
+            .addTo(disposable)
     }
 
 }

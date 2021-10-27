@@ -3,9 +3,8 @@ package com.terry.delivery.features.search
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.View
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.terry.delivery.R
 import com.terry.delivery.base.BaseFragment
@@ -28,8 +27,20 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         val binding = binding ?: return
 
         observeLiveData()
+        bindViews(binding)
         initRankTime(binding)
         initRankList(binding)
+        initSearchTextListener(binding)
+    }
+
+    private fun bindViews(binding: FragmentSearchBinding) {
+        with(binding) {
+            ivCancelSearch.setOnClickListener {
+                fun clearSearchText() = binding.etSearch.setText("")
+
+                clearSearchText()
+            }
+        }
     }
 
     private fun observeLiveData() {
@@ -61,5 +72,17 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         }
 
         viewModel.initDebugRankData(resources.openRawResource(R.raw.rank_data))
+    }
+
+    private fun initSearchTextListener(binding: FragmentSearchBinding) {
+        binding.etSearch.addTextChangedListener { text ->
+            if (text != null && text.isNotEmpty()) {
+                binding.groupSearch.visibility = View.VISIBLE
+            }
+
+            if (text == null || text.isEmpty()) {
+                binding.groupSearch.visibility = View.GONE
+            }
+        }
     }
 }

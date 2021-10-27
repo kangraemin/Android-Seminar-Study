@@ -42,9 +42,10 @@
         tools:ignore="ContentDescription" />
 
     <EditText
+        android:id="@+id/et_search"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginHorizontal="10dp"
+        android:layout_marginStart="10dp"
         android:background="@null"
         android:hint="@string/hint_search"
         android:importantForAutofill="no"
@@ -58,8 +59,8 @@
     <ImageView
         android:id="@+id/iv_cancel_search"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
+        android:layout_height="0dp"
+        android:paddingHorizontal="10dp"
         android:src="@drawable/ic_baseline_cancel_24"
         app:layout_constraintBottom_toBottomOf="@id/view_search"
         app:layout_constraintEnd_toEndOf="@id/view_search"
@@ -290,5 +291,39 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="view_bg_search, rv_search_list, iv_cancel_search"
+        tools:visibility="visible" />
+
+    <View
+        android:id="@+id/view_bg_search"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/bg_search_mode"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/rv_search_list" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_search_list"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="14dp"
+        android:background="@color/white"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_back"
+        tools:itemCount="1"
+        tools:listitem="@layout/item_search" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

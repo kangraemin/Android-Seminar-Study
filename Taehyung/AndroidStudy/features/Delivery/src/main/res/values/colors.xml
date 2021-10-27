@@ -10,6 +10,8 @@
 
     <color name="delivery_main_color">#26A69A</color>
 
+    <color name="bg_search_mode">#70424242</color>
+
     <!-- google's material design colours from
      http://www.google.com/design/spec/style/color.html#color-ui-color-palette -->
 

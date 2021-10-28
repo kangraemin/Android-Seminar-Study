@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.clonecodingbm.data.local.AppDatabase
 import com.clonecodingbm.data.local.recentsearch.RecentSearchDao
-import com.clonecodingbm.data.local.token.TokenDao
+import com.clonecodingbm.data.local.login.UserDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,8 +26,8 @@ object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideTokenDao(appDatabase: AppDatabase): TokenDao =
-        appDatabase.tokenDao()
+    fun provideTokenDao(appDatabase: AppDatabase): UserDao =
+        appDatabase.userDao()
 
     @Provides
     @Singleton

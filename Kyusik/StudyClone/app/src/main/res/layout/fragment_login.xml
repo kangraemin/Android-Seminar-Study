@@ -39,22 +39,6 @@
                 android:maxLength="15"
                 android:text="dev_baemin" />
 
-            <TextView
-                android:id="@+id/tv_login_refresh"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:textColor="@color/main"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tv_login_access"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:textColor="@color/main"
-                android:textStyle="bold" />
-
             <Button
                 android:id="@+id/bt_login_login"
                 android:layout_width="match_parent"

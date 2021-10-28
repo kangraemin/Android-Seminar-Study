@@ -1,23 +1,20 @@
 package com.clonecodingbm.data.repository.search
 
-import android.util.Log
 import com.clonecodingbm.BuildConfig
+import com.clonecodingbm.data.local.login.UserDataSource
 import com.clonecodingbm.data.local.recentsearch.RecentSearchDataSource
 import com.clonecodingbm.data.local.recentsearch.RecentSearchEntity
-import com.clonecodingbm.data.local.token.TokenDataSource
-import com.clonecodingbm.data.local.token.TokenEntity
 import com.clonecodingbm.data.remote.login.LoginDataSource
 import com.clonecodingbm.data.remote.login.RefreshRequest
 import com.clonecodingbm.data.remote.search.SearchDataSource
 import com.clonecodingbm.data.remote.search.SearchResponse
 import io.reactivex.rxjava3.core.Completable
-import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Single
 import javax.inject.Inject
 
 class SearchRepositoryImpl @Inject constructor(
     private val loginDataSource: LoginDataSource,
-    private val tokenDataSource: TokenDataSource,
+    private val userDataSource: UserDataSource,
     private val recentSearchDataSource: RecentSearchDataSource,
     private val searchDataSource: SearchDataSource
 ) : SearchRepository {
@@ -27,7 +24,7 @@ class SearchRepositoryImpl @Inject constructor(
     }
 
     override fun searchAndSave(query: String, page: Int): Single<SearchResponse> {
-        return tokenDataSource
+        return userDataSource
             .getAccessToken()
             .flatMap {
                 recentSearchDataSource
@@ -40,14 +37,14 @@ class SearchRepositoryImpl @Inject constructor(
             .retryWhen { error ->
                 return@retryWhen error
                     .flatMapSingle {
-                        return@flatMapSingle tokenDataSource
-                            .getTokens()
-                            .flatMap { token ->
+                        return@flatMapSingle userDataSource
+                            .getUser()
+                            .flatMap { user ->
                                 loginDataSource
-                                    .refreshToken(RefreshRequest(token.refresh))
+                                    .refreshToken(RefreshRequest(user.refresh))
                             }
                             .flatMap { token ->
-                                tokenDataSource
+                                userDataSource
                                     .updateAccessToken(token.access)
                                     .andThen(Single.just(Unit))
                             }

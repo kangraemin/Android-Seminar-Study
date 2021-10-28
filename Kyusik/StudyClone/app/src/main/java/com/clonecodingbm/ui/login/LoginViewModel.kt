@@ -17,30 +17,20 @@ class LoginViewModel @Inject constructor(
     val loginResult: LiveData<Boolean> get() = _loginResult
 
     fun doLoginRequest(id: String, password: String) {
-        when {
-            id.isBlank() -> {
-                showToast("아이디를 확인해주세요.")
-            }
-            password.isBlank() -> {
-                showToast("비밀번호를 확인해주세요.")
-            }
-            else -> {
-                compositeDisposable.add(
-                    repository
-                        .login(LoginRequest(id, password))
-                        .doOnSubscribe { showProgress() }
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe({
-                            hideProgress()
-                            _loginResult.value = true
-                        }, {
-                            it.printStackTrace()
-                            hideProgress()
-                            _loginResult.value = false
-                        })
-                )
-            }
-        }
+        compositeDisposable.add(
+            repository
+                .login(LoginRequest(id, password))
+                .doOnSubscribe { showProgress() }
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe({
+                    hideProgress()
+                    _loginResult.value = true
+                }, {
+                    it.printStackTrace()
+                    hideProgress()
+                    _loginResult.value = false
+                })
+        )
     }
 
     companion object {

@@ -1,8 +1,9 @@
 package com.clonecodingbm.ui.mypage
 
+import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.clonecodingbm.R
 import com.clonecodingbm.databinding.FragmentMyPageBinding
@@ -11,28 +12,28 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_page) {
-    private lateinit var viewModel: MyPageViewModel
+    private val viewModel by viewModels<MyPageViewModel>()
 
     override fun init() {
-        viewModel = ViewModelProvider(this)[MyPageViewModel::class.java]
-        viewModel.checkToken()
-        binding.clMyPageLogin.setOnClickListener{
-            if (binding.clMyPageRank.visibility == View.VISIBLE) {
-                Toast.makeText(context, "마이페이지로 이동", Toast.LENGTH_SHORT).show()
-            } else {
-                findNavController().navigate(R.id.action_myPageFragment_to_loginFragment)
-            }
-        }
-
-        viewModel.isLoading.observe(viewLifecycleOwner, { isLoading ->
-            if (isLoading) {
-                showLoading(true, binding.pbLoading)
-            } else {
-                showLoading(false, binding.pbLoading)
-            }
-        })
-
         viewModel.apply {
+            isAutoLogin()
+
+            isLoading.observe(viewLifecycleOwner, { isLoading ->
+                if (isLoading) {
+                    showLoading(true, binding.pbLoading)
+                } else {
+                    showLoading(false, binding.pbLoading)
+                }
+            })
+
+            isAutoLogin.observe(viewLifecycleOwner, { autoLogin ->
+                if (autoLogin) {
+                    checkToken()
+                } else {
+                    Log.e(TAG, "autoLogin: $autoLogin")
+                }
+            })
+
             checkToken.observe(viewLifecycleOwner, {
                 if (it) {
                     binding.tvNameLogin.text = "rank + userName"
@@ -42,6 +43,14 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
                     binding.clMyPageRank.visibility = View.GONE
                 }
             })
+        }
+
+        binding.clMyPageLogin.setOnClickListener{
+            if (binding.clMyPageRank.visibility == View.VISIBLE) {
+                Toast.makeText(context, "마이페이지로 이동", Toast.LENGTH_SHORT).show()
+            } else {
+                findNavController().navigate(R.id.action_myPageFragment_to_loginFragment)
+            }
         }
     }
 

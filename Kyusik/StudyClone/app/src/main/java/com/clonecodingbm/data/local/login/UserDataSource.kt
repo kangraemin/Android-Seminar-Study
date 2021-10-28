@@ -9,5 +9,5 @@ interface UserDataSource {
     fun deleteUser(): Completable
     fun getAccessToken(): Single<String>
     fun updateAccessToken(access: String): Completable
-    fun isAutoLogin(): Single<Boolean>
+    fun isLogin(): Single<String>
 }

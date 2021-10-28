@@ -79,6 +79,13 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_out" />
+        <action
+            android:id="@+id/action_myPageFragment_to_myInfoFragment"
+            app:destination="@id/myInfoFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
@@ -96,6 +103,16 @@
 
         <argument
             android:name="query"
+            android:defaultValue=""
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/myInfoFragment"
+        android:name="com.clonecodingbm.ui.mypage.myinfo.MyInfoFragment"
+        android:label="MyInfoFragment" >
+
+        <argument
+            android:name="userName"
             android:defaultValue=""
             app:argType="string" />
     </fragment>

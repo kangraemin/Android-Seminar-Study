@@ -38,9 +38,9 @@ class UserDataSourceImpl @Inject constructor(
             .subscribeOn(Schedulers.io())
     }
 
-    override fun isAutoLogin(): Single<Boolean> {
+    override fun isLogin(): Single<String> {
         return userDao
-            .isAutoLogin()
+            .isLogin()
             .subscribeOn(Schedulers.io())
     }
 }

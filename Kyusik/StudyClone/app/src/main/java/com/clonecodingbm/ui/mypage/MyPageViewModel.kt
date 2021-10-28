@@ -1,6 +1,5 @@
 package com.clonecodingbm.ui.mypage
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.clonecodingbm.data.repository.mypage.MyPageRepository
@@ -16,27 +15,24 @@ class MyPageViewModel @Inject constructor(
     private val _checkToken = MutableLiveData<Boolean>()
     val checkToken: LiveData<Boolean> get() = _checkToken
 
-    private val _isAutoLogin = MutableLiveData<Boolean>()
-    val isAutoLogin: LiveData<Boolean> get() = _isAutoLogin
+    private val _loginId = MutableLiveData<String>()
+    val loginId: LiveData<String> get() = _loginId
 
     init {
 
     }
 
-    fun isAutoLogin() {
+    fun isLogin() {
         compositeDisposable.add(
             repository
-                .isAutoLogin()
+                .isLogin()
                 .doOnSubscribe { showProgress() }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     hideProgress()
-                    _isAutoLogin.value = true
-                    Log.e("TAG", "get isAutoLogin: $it")
+                    _loginId.value = it
                 }, {
                     hideProgress()
-                    _isAutoLogin.value = false
-                    Log.e("TAG", "get isAutoLogin: $it")
                     it.printStackTrace()
                 })
         )

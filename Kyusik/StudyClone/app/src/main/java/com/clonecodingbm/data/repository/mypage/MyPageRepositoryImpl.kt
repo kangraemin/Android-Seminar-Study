@@ -37,8 +37,13 @@ class MyPageRepositoryImpl @Inject constructor(
             }
     }
 
-    override fun isAutoLogin(): Single<Boolean> {
+    override fun isLogin(): Single<String> {
         return userDataSource
-            .isAutoLogin()
+            .isLogin()
+    }
+
+    override fun logout(): Completable {
+        return userDataSource
+            .deleteUser()
     }
 }

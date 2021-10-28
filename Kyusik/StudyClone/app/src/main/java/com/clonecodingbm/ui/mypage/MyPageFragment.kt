@@ -1,8 +1,6 @@
 package com.clonecodingbm.ui.mypage
 
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.clonecodingbm.R
@@ -16,7 +14,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
 
     override fun init() {
         viewModel.apply {
-            isAutoLogin()
+            isLogin()
 
             isLoading.observe(viewLifecycleOwner, { isLoading ->
                 if (isLoading) {
@@ -26,17 +24,15 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
                 }
             })
 
-            isAutoLogin.observe(viewLifecycleOwner, { autoLogin ->
-                if (autoLogin) {
+            loginId.observe(viewLifecycleOwner, { loginId ->
+                if (!loginId.isNullOrBlank()) {
                     checkToken()
-                } else {
-                    Log.e(TAG, "autoLogin: $autoLogin")
                 }
             })
 
             checkToken.observe(viewLifecycleOwner, {
                 if (it) {
-                    binding.tvNameLogin.text = "rank + userName"
+                    binding.tvNameLogin.text = "rank + ${viewModel.loginId.value}"
                     binding.clMyPageRank.visibility = View.VISIBLE
                 } else {
                     binding.tvNameLogin.text = "로그인해주세요"
@@ -47,7 +43,8 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
 
         binding.clMyPageLogin.setOnClickListener{
             if (binding.clMyPageRank.visibility == View.VISIBLE) {
-                Toast.makeText(context, "마이페이지로 이동", Toast.LENGTH_SHORT).show()
+                val action = MyPageFragmentDirections.actionMyPageFragmentToMyInfoFragment(viewModel.loginId.value.toString())
+                findNavController().navigate(action)
             } else {
                 findNavController().navigate(R.id.action_myPageFragment_to_loginFragment)
             }

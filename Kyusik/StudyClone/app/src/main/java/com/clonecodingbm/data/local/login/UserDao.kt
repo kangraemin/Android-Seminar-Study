@@ -24,6 +24,6 @@ interface UserDao {
     @Query(value = "UPDATE UserEntity SET access = :access WHERE id = 0")
     fun updateAccessToken(access: String): Completable
 
-    @Query(value = "SELECT autoLogin FROM UserEntity")
-    fun isAutoLogin(): Single<Boolean>
+    @Query(value = "SELECT userId FROM UserEntity")
+    fun isLogin(): Single<String>
 }

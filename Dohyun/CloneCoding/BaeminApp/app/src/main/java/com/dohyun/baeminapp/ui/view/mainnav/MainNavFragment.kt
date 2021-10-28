@@ -27,6 +27,7 @@ class MainNavFragment : BaseFragment<FragmentMainNavBinding>(R.layout.fragment_m
     }
 
     override fun init() {
+        requireDataBinding().toolbar.visibility = View.GONE
         //처음 홈 화면 설정
         val fragmentTransaction = childFragmentManager.beginTransaction()
         val homeFragment = HomeFragment()

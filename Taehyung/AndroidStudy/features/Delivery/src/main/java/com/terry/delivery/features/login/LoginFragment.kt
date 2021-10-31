@@ -22,53 +22,48 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val binding = binding ?: run {
-            SnackbarUtil.showErrorMessage(view, "Error Occur !!")
-            return
-        }
-
-        bindViews(binding)
+        bindViews()
         bindObserver()
-        initToolbar(binding)
+        initToolbar()
     }
 
-    private fun bindViews(binding: FragmentLoginBinding) {
-        binding.btLogin.setOnClickListener {
-            context?.let { context -> KeyboardHelper.hideKeyboard(context, binding.root) }
+    private fun bindViews() {
+        getViewBinding().btLogin.setOnClickListener {
+            context?.let { context -> KeyboardHelper.hideKeyboard(context, getViewBinding().root) }
 
             // Check Null or Empty
-            val isVerifyUserName = verifyUserName(binding)
-            val isVerifyPassword = verifyPassword(binding)
+            val isVerifyUserName = verifyUserName()
+            val isVerifyPassword = verifyPassword()
 
             if (isVerifyUserName && isVerifyPassword) {
                 loginViewModel.login(
-                    binding.etLoginId.text.toString(),
-                    binding.etLoginPassword.text.toString()
+                    getViewBinding().etLoginId.text.toString(),
+                    getViewBinding().etLoginPassword.text.toString()
                 )
 
                 return@setOnClickListener
             }
 
-            SnackbarUtil.showErrorMessage(binding.root, "아이디, 비밀번호 확인 !")
+            SnackbarUtil.showErrorMessage(getViewBinding().root, "아이디, 비밀번호 확인 !")
         }
     }
 
     private fun bindObserver() {
         loginViewModel.loginResult.observe(viewLifecycleOwner) { isLoginSuccess ->
             if (isLoginSuccess) {
-                binding?.let { binding ->
+                getViewBinding().let { binding ->
                     SnackbarUtil.showMessage(binding.root, "로그인 성공 !")
                 }
             } else {
-                binding?.let { binding ->
+                getViewBinding().let { binding ->
                     SnackbarUtil.showErrorMessage(binding.root, "로그인 실패 !!")
                 }
             }
         }
     }
 
-    private fun initToolbar(binding: FragmentLoginBinding) {
-        with(binding.tbLogin) {
+    private fun initToolbar() {
+        with(getViewBinding().tbLogin) {
             setupWithNavController(findNavController())
             context?.let { context ->
                 navigationIcon = ContextCompat.getDrawable(context, R.drawable.ic_close)
@@ -77,10 +72,10 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
         }
     }
 
-    private fun verifyUserName(binding: FragmentLoginBinding) =
-        binding.etLoginId.text.isNullOrEmpty().not()
+    private fun verifyUserName() =
+        getViewBinding().etLoginId.text.isNullOrEmpty().not()
 
-    private fun verifyPassword(binding: FragmentLoginBinding) =
-        binding.etLoginPassword.text.isNullOrEmpty().not()
+    private fun verifyPassword() =
+        getViewBinding().etLoginPassword.text.isNullOrEmpty().not()
 
 }

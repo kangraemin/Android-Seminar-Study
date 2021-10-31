@@ -20,47 +20,43 @@ class MainFragment : BaseFragment<FragmentMainBinding>(FragmentMainBinding::infl
         bindViews()
     }
 
-    private fun initBottomMenu() {
-        binding?.let { binding ->
-            binding.layoutSearchContainer.itemTitleTextView.setTopDrawable(R.drawable.ic_search)
-            binding.layoutSearchContainer.itemTitleTextView.text = getString(R.string.search)
+    private fun initBottomMenu() = with(getViewBinding()) {
+        layoutSearchContainer.itemTitleTextView.setTopDrawable(R.drawable.ic_search)
+        layoutSearchContainer.itemTitleTextView.text = getString(R.string.search)
 
-            binding.layoutFavoriteContainer.itemTitleTextView.setTopDrawable(R.drawable.ic_favorite)
-            binding.layoutFavoriteContainer.itemTitleTextView.text = getString(R.string.favorite)
+        layoutFavoriteContainer.itemTitleTextView.setTopDrawable(R.drawable.ic_favorite)
+        layoutFavoriteContainer.itemTitleTextView.text = getString(R.string.favorite)
 
-            binding.layoutOrderContainer.itemTitleTextView.setTopDrawable(R.drawable.ic_order)
-            binding.layoutOrderContainer.itemTitleTextView.text = getString(R.string.order_list)
+        layoutOrderContainer.itemTitleTextView.setTopDrawable(R.drawable.ic_order)
+        layoutOrderContainer.itemTitleTextView.text = getString(R.string.order_list)
 
-            binding.layoutMyContainer.itemTitleTextView.setTopDrawable(R.drawable.ic_my_page)
-            binding.layoutMyContainer.itemTitleTextView.text = getString(R.string.my_page)
-        }
+        layoutMyContainer.itemTitleTextView.setTopDrawable(R.drawable.ic_my_page)
+        layoutMyContainer.itemTitleTextView.text = getString(R.string.my_page)
     }
 
-    private fun bindViews() {
-        binding?.let { binding ->
-            binding.layoutSearchContainer.parentViewGroup.setOnClickListener {
+    private fun bindViews() = with(getViewBinding()) {
+            layoutSearchContainer.parentViewGroup.setOnClickListener {
                 findNavController().navigate(
                     MainFragmentDirections.actionMainFragmentToSearchFragment()
                 )
             }
 
-            binding.layoutFavoriteContainer.parentViewGroup.setOnClickListener {
+            layoutFavoriteContainer.parentViewGroup.setOnClickListener {
                 findNavController().navigate(
                     MainFragmentDirections.actionMainFragmentToFavoriteFragment()
                 )
             }
 
-            binding.layoutOrderContainer.parentViewGroup.setOnClickListener {
+            layoutOrderContainer.parentViewGroup.setOnClickListener {
                 findNavController().navigate(
                     MainFragmentDirections.actionMainFragmentToOrderListFragment()
                 )
             }
 
-            binding.layoutMyContainer.parentViewGroup.setOnClickListener {
+            layoutMyContainer.parentViewGroup.setOnClickListener {
                 findNavController().navigate(
                     MainFragmentDirections.actionMainFragmentToMyFragment()
                 )
             }
-        }
     }
 }

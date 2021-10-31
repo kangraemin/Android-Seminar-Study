@@ -17,27 +17,21 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(FragmentMyPageBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val binding = binding ?: run {
-            SnackbarUtil.showErrorMessage(view, "Error Occur !")
-            return
-        }
+        bindViews()
+        initToolbar()
 
-        bindViews(binding)
-        initToolbar(binding)
-
-        // TODO: 2021-09-07 REMOVE
-        binding.tvUserName.text = "로그인해주세요"
+        getViewBinding().tvUserName.text = "로그인해주세요"
     }
 
-    private fun bindViews(binding: FragmentMyPageBinding) {
-        binding.constraintLayoutLoginContainer.setOnClickListener {
+    private fun bindViews() {
+        getViewBinding().constraintLayoutLoginContainer.setOnClickListener {
             findNavController().navigate(R.id.action_myPageFragment_to_loginFragment)
         }
     }
 
-    private fun initToolbar(binding: FragmentMyPageBinding) {
-        binding.tbMyPage.setupWithNavController(findNavController())
-        binding.tbMyPage.title = ""
+    private fun initToolbar() {
+        getViewBinding().tbMyPage.setupWithNavController(findNavController())
+        getViewBinding().tbMyPage.title = ""
     }
 
 }

@@ -16,6 +16,9 @@ interface ApiService {
     @POST("api/token/")
     fun login(@Body body: LoginVO): Single<Response<JsonObject>>
 
+    @POST("api/token/refresh/")
+    fun refresh(@Body body: String): Single<Response<JsonObject>>
+
     @GET("api/restaurants/query_search/")
     fun search(@Query("query")query: String, @Query("page")page: Int): Single<Response<SearchItem>>
 

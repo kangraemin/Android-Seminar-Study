@@ -27,6 +27,10 @@ class SearchResultViewModel @Inject constructor(
 
     private var disposable : CompositeDisposable? = CompositeDisposable()
 
+    private val _userState = MutableLiveData<Int>(-1)
+    val userState : LiveData<Int>
+        get() = _userState
+
     fun doSearch(query: String, page: Int?) {
         _progressVisible.postValue(true)
         disposable?.add(
@@ -41,5 +45,26 @@ class SearchResultViewModel @Inject constructor(
                     println("SearchResultViewModel search error ${it.message}")
                 })
         )
+    }
+
+    fun checkUserState() {
+        repository.checkToken()
+                .observeOn(Schedulers.io())
+                .subscribe({
+                    _userState.postValue(1)
+                }, {
+                    _userState.postValue(0)
+                    println("SearchResultViewModel checkUserState error ${it.message}")
+                })
+    }
+
+    fun updateUserState() {
+        repository.updateToken()
+                .observeOn(Schedulers.io())
+                .subscribe({
+                    _userState.postValue(1)
+                }, {
+                    println("SearchResultViewModel updateUserState error ${it.message}")
+                })
     }
 }

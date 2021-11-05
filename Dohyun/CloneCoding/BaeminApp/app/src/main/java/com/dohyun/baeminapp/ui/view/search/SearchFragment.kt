@@ -33,7 +33,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
     }
 
     override fun init() {
-
+        viewModel.checkUserState()
         observeData()
         ToolbarUtil.initToolbar(activity, R.id.search_toolbar, this.requireView())
 
@@ -49,6 +49,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         super.onViewCreated(view, savedInstanceState)
 
         with(viewModel) {
+            userState.observe(viewLifecycleOwner){
+                if (it == 0) {
+                    updateUserState()
+                }
+            }
+
             requireDataBinding().searchBar.editSearch.setOnKeyListener { v, keyCode, event ->
                 if ((event.action == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
 

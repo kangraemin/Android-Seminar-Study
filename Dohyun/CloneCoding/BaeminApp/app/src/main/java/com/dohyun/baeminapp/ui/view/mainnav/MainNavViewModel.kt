@@ -6,6 +6,7 @@ import com.dohyun.baeminapp.data.entity.Token
 import com.dohyun.baeminapp.data.repository.mainnav.MainNavRepository
 import com.dohyun.baeminapp.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
@@ -15,101 +16,35 @@ class MainNavViewModel @Inject constructor(
     private val repository: MainNavRepository
 ): BaseViewModel() {
 
-    private val _tokens = MutableLiveData<Token>()
+    private val _userState = MutableLiveData<Int>(-1)
+    val userState: LiveData<Int>
+        get() = _userState
 
-    private val _logoutState = MutableLiveData<Boolean>(false)
-    val logoutState: LiveData<Boolean>
-        get() = _logoutState
-
-    private var disposable: CompositeDisposable? = CompositeDisposable()
-
-
-    fun checkUserState() {
-        disposable?.add(
-            repository.existToken()
-                ?.observeOn(Schedulers.io())
-                ?.subscribe({
-                    if (it != null) {
-                        println("MainNavViewModel checkUserState :: $it")
-                        _tokens.postValue(it)
-                        checkNetWork(it)
+    fun checkTokens() {
+        repository.verifyToken()
+                .observeOn(Schedulers.io())
+                .subscribe({
+                    _userState.postValue(1)
+                }, {
+                    if (it.message == "Query returned empty result set: SELECT access FROM Token") {
+                        println("MainNavViewModel checkTokens login is not yet")
+                    } else {
+                        _userState.postValue(0)
+                        println("MainNavViewModel checkTokens ${it.message}")
                     }
-                }, {
-                    println("MainNavViewModel checkUserState error :: $it")
                 })
-        )
     }
 
-    private fun checkNetWork(token: Token) {
-        disposable?.add(
-            repository.checkNetwork()
-                .observeOn(Schedulers.io())
-                .subscribe ({
-                    verifyToken(token)
-                }, {
-                    println("MainNavViewModel checkNetWork error $it")
-                    logout()
-                })
-        )
+    fun refreshAccessTokens() {
+        if (_userState.value == 0) {
+            repository.updateToken()
+                    .observeOn(Schedulers.io())
+                    .subscribe({
+                        _userState.postValue(1)
+                    }, {
+                        println("MainNavViewModel refreshTokens fail ${it.message}")
+                    })
+        }
     }
 
-    private fun verifyToken(token: Token) {
-        println("MainNavViewModel :: ${_tokens.value}")
-        disposable?.add(
-            repository.verifyToken(token.access)
-                .observeOn(Schedulers.io())
-                .subscribe({
-                    println("MainNavViewModel verifyToken OK")
-                }, {
-                    updateToken(token)
-                })
-        )
-    }
-
-    private fun updateToken(tokens: Token) {
-        println("MainNavViewModel :: updateToken token : $tokens")
-        disposable?.add(
-            repository.updateToken(tokens.refresh)
-                .observeOn(Schedulers.io())
-                .subscribe({
-                    println("MainNavViewModel :: UpdateToken $it")
-                    val token = Token(tokens.refresh, it)
-                    saveAccessToken(token)
-                }, {
-                    println("MainViewModel updateToken error ${it.message}")
-                    logout()
-                })
-        )
-    }
-
-    private fun saveAccessToken(token: Token) {
-        disposable?.add(
-            repository.saveUpdates(token)
-                .observeOn(Schedulers.io())
-                .subscribe({
-                    println("MainNavViewModel save access Token success")
-                }, {
-                    println("MainNavViewModel save Access Token error : $it")
-                })
-        )
-    }
-
-    private fun logout() {
-        disposable?.add(
-            repository.logout()
-                .observeOn(Schedulers.io())
-                .subscribe({
-                    _logoutState.postValue(true)
-                    println("MainNavViewModel :: logout!")
-                }, {
-                    _logoutState.postValue(false)
-                    println("Logout error :$it")
-                })
-        )
-    }
-
-    override fun onCleared() {
-        super.onCleared()
-        disposable?.dispose()
-    }
 }

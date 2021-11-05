@@ -35,6 +35,7 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(R.layout.
     }
 
     override fun init() {
+        viewModel.checkUserState()
         requireDataBinding().resultSearchBar.editSearch.setText(msg.inputValue)
 
         requireDataBinding().resultSearchBar.searchBackBtn.setOnClickListener {
@@ -66,14 +67,16 @@ class SearchResultFragment : BaseFragment<FragmentSearchResultBinding>(R.layout.
 
     private fun observeData() {
         with(viewModel) {
+            userState.observe(viewLifecycleOwner) {
+                if (it == 0) updateUserState()
+            }
+
             progressVisible.observe(viewLifecycleOwner) {
                 requireDataBinding().progressBar.visibility = it.toVisibility()
             }
 
             result.observe(viewLifecycleOwner) {
-                println("$it")
                 for (data in it.data) {
-                    println("SearchResult ::: $data")
                     resultAdapter.addItems(data)
                 }
 

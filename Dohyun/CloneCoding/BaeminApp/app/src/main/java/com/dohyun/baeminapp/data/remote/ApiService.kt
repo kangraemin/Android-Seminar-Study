@@ -10,7 +10,7 @@ interface ApiService {
     fun login(@Body user: UserInfo) : Single<Token>
 
     @POST("api/token/refresh/")
-    fun getAccessToken(@Body refresh: String): Single<String>
+    fun getAccessToken(@Body refresh: Refresh): Single<Access>
 
     @GET("test/")
     fun verifyAccessToken(@Header("authorization") access: String): Single<VerifyToken>

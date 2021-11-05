@@ -1,14 +1,19 @@
 package com.dohyun.baeminapp.data.repository.mypage
 
-import com.dohyun.baeminapp.data.local.PreferenceManager
-import io.reactivex.rxjava3.core.Single
+import com.dohyun.baeminapp.data.repository.token.TokenService
+import io.reactivex.rxjava3.core.Completable
 import javax.inject.Inject
 
 class MyPageRepositoryImpl @Inject constructor(
-    private val preferenceManager: PreferenceManager
+    private val tokenService: TokenService
 ) : MyPageRepository {
-    override fun isLogin(): Single<Boolean> {
-        return Single.just(preferenceManager.checkLogin)
+    override fun checkTokens(): Completable {
+        return tokenService.checkAccessToken()
     }
+
+    override fun updateTokens(): Completable {
+        return tokenService.updateAccessToken()
+    }
+
 
 }

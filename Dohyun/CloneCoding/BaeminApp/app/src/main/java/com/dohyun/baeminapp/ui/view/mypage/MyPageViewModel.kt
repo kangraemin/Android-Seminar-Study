@@ -16,22 +16,40 @@ class MyPageViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     private val _mypageData = MutableLiveData<ArrayList<MyBaemin>>()
-    private val _loginState = MutableLiveData<Boolean>()
+    private val _loginState = MutableLiveData<Int>(-1)
 
     val mypageData: LiveData<ArrayList<MyBaemin>>
         get() = _mypageData
 
-    val loginState : LiveData<Boolean>
+    val loginState : LiveData<Int>
         get() = _loginState
 
     fun checkUserState() {
-        repository.isLogin()
-            .observeOn(Schedulers.io())
-            .subscribe({
-                _loginState.postValue(it)
-            }, {
-                println("MyPageViewModel checkUserState error $it")
-            })
+        repository.checkTokens()
+                .observeOn(Schedulers.io())
+                .subscribe({
+                    _loginState.postValue(1)
+                }, {
+                    if (it.message == "Query returned empty result set: SELECT access FROM Token") {
+                        println("MyPageViewModel checkUserState login is not yet")
+                    } else {
+                        _loginState.postValue(0)
+                        println("MyPageViewModel checkUserState error ${it.message}")
+                    }
+                })
+    }
+
+    fun updateToken() {
+        if (_loginState.value == 0) {
+            repository.updateTokens()
+                    .observeOn(Schedulers.io())
+                    .subscribe({
+                        _loginState.postValue(1)
+                    }, {
+                        println("MyPageViewModel updateToken fail ${it.message}")
+                    })
+        }
+
     }
 
 

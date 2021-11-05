@@ -50,7 +50,12 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
                 myPageAdapter.addItems(data)
             }
             loginState.observe(viewLifecycleOwner) { data ->
-                initMyBaeminData(data)
+                if (data == 1) {
+                    initMyBaeminData(true)
+                } else if (data == 0) {
+                    initMyBaeminData(false)
+                    updateToken()
+                } else initMyBaeminData(false)
             }
         }
     }

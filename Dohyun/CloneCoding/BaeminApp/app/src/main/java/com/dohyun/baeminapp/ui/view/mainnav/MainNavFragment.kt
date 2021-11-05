@@ -56,16 +56,14 @@ class MainNavFragment : BaseFragment<FragmentMainNavBinding>(R.layout.fragment_m
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.checkUserState()
+        viewModel.checkTokens()
         observeData()
     }
 
     private fun observeData() {
         with(viewModel) {
-            logoutState.observe(viewLifecycleOwner) {
-                if (it) {
-                    showToast("다시 로그인이 필요합니다")
-                }
+            userState.observe(viewLifecycleOwner) {
+                if(it == 0) refreshAccessTokens()
             }
 
         }

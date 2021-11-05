@@ -9,7 +9,6 @@ import com.dohyun.baeminapp.data.repository.login.LoginRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
-import io.reactivex.rxjava3.schedulers.Schedulers
 import javax.inject.Inject
 
 @HiltViewModel
@@ -27,23 +26,10 @@ class LoginViewModel @Inject constructor(
             repository.login(UserInfo(id, pw))
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
-                    println("LoginViewModel login success")
                     _loginState.postValue(true)
                 }, {
                     _loginState.postValue(false)
-                    println("error : ${it.message}")
-                })
-        )
-    }
-
-    fun checkLoginState() {
-        disposable?.add(
-            repository.isLogin()
-                .observeOn(Schedulers.io())
-                .subscribe({
-                    _loginState.postValue(it)
-                }, {
-                    println("LoginViewModel checkLoginState error : ${it.message}")
+                    println("LoginViewModel login error : ${it.message}")
                 })
         )
     }

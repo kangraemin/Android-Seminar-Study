@@ -31,7 +31,6 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
         requireDataBinding().loginCloseBtn.setOnClickListener {
             findNavController().popBackStack()
         }
-        viewModel.checkLoginState()
         observeData()
     }
 

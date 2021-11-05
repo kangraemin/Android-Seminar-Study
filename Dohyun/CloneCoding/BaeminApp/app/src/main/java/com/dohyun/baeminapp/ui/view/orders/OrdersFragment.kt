@@ -8,7 +8,9 @@ import com.dohyun.baeminapp.R
 import com.dohyun.baeminapp.ui.utils.ToolbarUtil
 import com.dohyun.baeminapp.ui.base.BaseFragment
 import com.dohyun.baeminapp.databinding.FragmentOrdersBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class OrdersFragment : BaseFragment<FragmentOrdersBinding>(R.layout.fragment_orders) {
 
     override fun onCreateView(

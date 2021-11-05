@@ -1,11 +1,10 @@
 package com.dohyun.baeminapp.ui.view.mypage
 
-import android.graphics.drawable.Drawable
 
 interface MyBaemin {
 
     data class MyUser(
-        val userImg: Drawable,
+        val userImg: Int,
         val userName: String
     ): MyBaemin
 
@@ -19,20 +18,20 @@ interface MyBaemin {
     ): MyBaemin
 
     data class BaeminSetImg(
-            val settingImg: Drawable,
+            val settingImg: Int,
             val settingTitle: String
     ): MyBaemin
 
     data class OnlyImg(
-            val img: Drawable
+            val img: Int
     ): MyBaemin
 
     data class GridSetting(
-        val logo1: Drawable,
+        val logo1: Int,
         val title1: String,
-        val logo2: Drawable,
+        val logo2: Int,
         val title2: String,
-        val logo3: Drawable,
+        val logo3: Int,
         val title3: String
     ): MyBaemin
 }

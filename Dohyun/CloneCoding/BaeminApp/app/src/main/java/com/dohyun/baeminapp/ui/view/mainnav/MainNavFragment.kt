@@ -1,14 +1,21 @@
-package com.dohyun.baeminapp.ui
+package com.dohyun.baeminapp.ui.view.mainnav
 
+import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.dohyun.baeminapp.R
 import com.dohyun.baeminapp.ui.base.BaseFragment
 import com.dohyun.baeminapp.databinding.FragmentMainNavBinding
 import com.dohyun.baeminapp.ui.view.home.HomeFragment
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainNavFragment : BaseFragment<FragmentMainNavBinding>(R.layout.fragment_main_nav) {
+
+    private val viewModel by activityViewModels<MainNavViewModel>()
 
     override fun onCreateBinding(
         inflater: LayoutInflater,
@@ -20,6 +27,7 @@ class MainNavFragment : BaseFragment<FragmentMainNavBinding>(R.layout.fragment_m
     }
 
     override fun init() {
+        requireDataBinding().toolbar.visibility = View.GONE
         //처음 홈 화면 설정
         val fragmentTransaction = childFragmentManager.beginTransaction()
         val homeFragment = HomeFragment()
@@ -43,6 +51,22 @@ class MainNavFragment : BaseFragment<FragmentMainNavBinding>(R.layout.fragment_m
             true
         }
 
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        viewModel.checkTokens()
+        observeData()
+    }
+
+    private fun observeData() {
+        with(viewModel) {
+            userState.observe(viewLifecycleOwner) {
+                if(it == 0) refreshAccessTokens()
+            }
+
+        }
     }
 
 }

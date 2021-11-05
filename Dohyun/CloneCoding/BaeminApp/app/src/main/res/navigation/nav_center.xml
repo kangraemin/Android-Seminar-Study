@@ -18,7 +18,7 @@
 
     <fragment
         android:id="@+id/mainNavFragment"
-        android:name="com.dohyun.baeminapp.ui.MainNavFragment"
+        android:name="com.dohyun.baeminapp.ui.view.mainnav.MainNavFragment"
         android:label="MainNavFragment">
 
         <action
@@ -43,7 +43,11 @@
         android:id="@+id/searchFragment"
         android:name="com.dohyun.baeminapp.ui.view.search.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search" >
+        <action
+            android:id="@+id/action_search_to_searchResult"
+            app:destination="@id/searchResultFragment" />
+    </fragment>
     <fragment
         android:id="@+id/dibsFragment"
         android:name="com.dohyun.baeminapp.ui.view.dibs.DibsFragment"
@@ -62,10 +66,26 @@
         <action
             android:id="@+id/action_myPage_to_login"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_myPage_to_logout"
+            app:destination="@id/logoutFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.dohyun.baeminapp.ui.view.login.LoginFragment"
         android:label="LoginFragment" />
+    <fragment
+        android:id="@+id/searchResultFragment"
+        android:name="com.dohyun.baeminapp.ui.view.search.result.SearchResultFragment"
+        android:label="SearchResultFragment" >
+        <argument
+            android:name="inputValue"
+            app:argType="string"
+            android:defaultValue='""' />
+    </fragment>
+    <fragment
+        android:id="@+id/logoutFragment"
+        android:name="com.dohyun.baeminapp.ui.view.logout.LogoutFragment"
+        android:label="LogoutFragment" />
 
 </navigation>

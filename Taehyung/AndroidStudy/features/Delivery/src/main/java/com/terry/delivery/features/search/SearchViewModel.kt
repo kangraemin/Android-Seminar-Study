@@ -1,13 +1,11 @@
 package com.terry.delivery.features.search
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import androidx.room.EmptyResultSetException
 import com.terry.delivery.base.BaseViewModel
-import com.terry.delivery.data.LoginRepository
 import com.terry.delivery.data.SearchRepository
 import com.terry.delivery.data.remote.model.search.Ranking
 import com.terry.delivery.entity.search.RestaurantDto
-import com.terry.delivery.exceptions.NotLoggedInException
 import com.terry.delivery.util.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -21,7 +19,7 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class SearchViewModel @Inject constructor(
-    private val searchRepository: SearchRepository
+    private val searchRepository: SearchRepository,
 ) : BaseViewModel() {
 
     private val _searchRankData = SingleLiveEvent<Ranking>()
@@ -48,7 +46,7 @@ class SearchViewModel @Inject constructor(
     fun searchItem(query: String) {
         searchRepository.searchItemQuery(query, 1)
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({ result ->
+            .subscribe { result ->
                 if (result.isSuccess) {
                     val data = result.getOrNull() ?: return@subscribe
 
@@ -56,13 +54,11 @@ class SearchViewModel @Inject constructor(
                 } else {
                     val error = result.exceptionOrNull()
                     Timber.w(error)
-                    if (error != null && error is NotLoggedInException) {
-                        _failMessage.postValue("NotLoggedInException !")
+                    if (error != null && error is EmptyResultSetException) {
+                        _failMessage.postValue("EmptyResultSetException !")
                     }
                 }
-            }, {
-                it.printStackTrace()
-            })
+            }
             .addTo(disposable)
     }
 

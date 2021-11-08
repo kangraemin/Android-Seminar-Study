@@ -21,7 +21,7 @@ interface LoginApi {
     @FormUrlEncoded
     @POST("api/token/refresh/")
     fun refreshAccessToken(
-        @Field("refresh") accessToken: String
+        @Field("refresh") refreshToken: String
     ): Single<Response<RefreshToken>>
 
     @GET("test/")

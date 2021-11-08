@@ -1,16 +1,16 @@
 package com.terry.delivery.data.repository
 
-import androidx.room.EmptyResultSetException
 import com.google.gson.Gson
 import com.terry.delivery.data.SearchRepository
 import com.terry.delivery.data.local.dao.LocalTokenDao
+import com.terry.delivery.data.local.model.LocalToken
+import com.terry.delivery.data.remote.LoginApi
 import com.terry.delivery.data.remote.SearchApi
 import com.terry.delivery.data.remote.model.search.Ranking
 import com.terry.delivery.entity.search.SearchItem
-import com.terry.delivery.exceptions.NotLoggedInException
+import com.terry.delivery.extensions.view.retryRefreshToken
 import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
-import timber.log.Timber
 import javax.inject.Inject
 
 /*
@@ -18,32 +18,28 @@ import javax.inject.Inject
  */
 class SearchRepositoryImpl @Inject constructor(
     private val searchApi: SearchApi,
-    private val localTokenDao: LocalTokenDao
+    private val localTokenDao: LocalTokenDao,
+    private val loginApi: LoginApi
 ) : SearchRepository {
 
     override fun searchItemQuery(query: String, page: Int): Single<Result<SearchItem>> {
         return localTokenDao.getLocalToken()
             .subscribeOn(Schedulers.io())
-            .flatMap {
-                searchWithKeyword(it.accessToken, query, page)
-            }
-            .retryWhen { attempts ->
-                attempts.map { error ->
-                    if (error is EmptyResultSetException) throw NotLoggedInException()
-                    else error
-                }
+            .flatMap { localToken ->
+                searchWithKeyword(localToken, query, page)
             }
             .onErrorResumeNext { Single.just(Result.failure(it)) }
     }
 
     override fun searchWithKeyword(
-        accessToken: String,
+        token: LocalToken,
         query: String,
         page: Int
     ): Single<Result<SearchItem>> {
         return searchApi
-            .searchItem("Bearer $accessToken", query, page)
+            .searchItem("Bearer ${token.accessToken}", query, page)
             .map { Result.success(it) }
+            .retryRefreshToken(localTokenDao, loginApi, token.refreshToken)
             .onErrorResumeNext { Single.just(Result.failure(it)) }
 
     }

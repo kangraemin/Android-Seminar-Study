@@ -2,6 +2,8 @@ package com.terry.delivery.features.search
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
@@ -21,8 +23,16 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
 
     private val viewModel by activityViewModels<SearchViewModel>()
 
+    private val delayHandler by lazy { Handler(Looper.getMainLooper()) }
+    private val searchQueryRunnable: (String) -> Runnable = { searchQuery ->
+        Runnable { viewModel.searchItem(searchQuery) }
+    }
+
     private val searchRankHighAdapter = SearchRankAdapter()
     private val searchRankLowAdapter = SearchRankAdapter()
+    private val searchListAdapter = SearchListAdapter onItemClick@{
+
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,6 +41,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         bindViews()
         initRankTime()
         initRankList()
+        initSearchList()
         initSearchTextListener()
     }
 
@@ -52,6 +63,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
 
         viewModel.queryResult.observe(viewLifecycleOwner) { queryList ->
             Timber.d(queryList.toString())
+            val lastSize = if (queryList.size >= 20) 20 else queryList.size
+            searchListAdapter.submitList(queryList.slice(0 until lastSize))
         }
 
         viewModel.failMessage.observe(viewLifecycleOwner) { msg ->
@@ -83,8 +96,19 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         viewModel.initDebugRankData(resources.openRawResource(R.raw.rank_data))
     }
 
+    private fun initSearchList() {
+        with(getViewBinding().rvSearchList) {
+            adapter = searchListAdapter
+            layoutManager = LinearLayoutManager(requireContext())
+        }
+    }
+
     private fun initSearchTextListener() {
         getViewBinding().etSearch.addTextChangedListener { text ->
+            if (text == null || text.isEmpty()) {
+                searchListAdapter.submitList(emptyList())
+            }
+
             if (text != null && text.isNotEmpty()) {
                 getViewBinding().groupSearch.visibility = View.VISIBLE
             }
@@ -94,7 +118,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
             }
 
             if (text != null && text.count() >= 2) {
-                viewModel.searchItem(text.toString())
+                delayHandler.removeCallbacksAndMessages(null)
+
+                delayHandler.postDelayed(
+                    searchQueryRunnable(text.toString()),
+                    300L
+                )
+
             }
         }
     }

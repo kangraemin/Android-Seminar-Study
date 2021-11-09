@@ -314,16 +314,16 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_search_list"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginTop="14dp"
-        android:background="@color/white"
-        android:paddingStart="14dp"
-        android:paddingEnd="14dp"
+        android:background="@color/transparent"
         android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_back"
-        tools:itemCount="1"
+        app:layout_constraintVertical_bias="0"
+        tools:itemCount="3"
         tools:listitem="@layout/item_search" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

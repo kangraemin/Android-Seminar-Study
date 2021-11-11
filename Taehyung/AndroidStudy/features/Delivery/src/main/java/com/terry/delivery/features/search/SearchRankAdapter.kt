@@ -13,8 +13,9 @@ import com.terry.delivery.databinding.ItemSearchRankBinding
 /*
  * Created by Taehyung Kim on 2021-09-29
  */
-class SearchRankAdapter :
-    ListAdapter<RankingData, SearchRankAdapter.SearchRankViewHolder>(diffUtil) {
+class SearchRankAdapter(
+    private val onItemClick: (String) -> Unit
+) : ListAdapter<RankingData, SearchRankAdapter.SearchRankViewHolder>(diffUtil) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchRankViewHolder {
         return SearchRankViewHolder(
@@ -22,7 +23,8 @@ class SearchRankAdapter :
                 LayoutInflater.from(parent.context),
                 parent,
                 false
-            )
+            ),
+            onItemClick
         )
     }
 
@@ -31,13 +33,13 @@ class SearchRankAdapter :
     }
 
     class SearchRankViewHolder(
-        private val binding: ItemSearchRankBinding
+        private val binding: ItemSearchRankBinding,
+        private val onItemClick: (String) -> Unit
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: RankingData) {
             binding.tvRankNum.text = item.rank.toString()
             binding.tvRankTitle.text = item.title
-
 
             binding.ivRank.setImageDrawable(
                 ContextCompat.getDrawable(
@@ -45,6 +47,8 @@ class SearchRankAdapter :
                     getRankChangedResource(item)
                 )
             )
+
+            binding.root.setOnClickListener { onItemClick(item.title) }
         }
 
         private fun getRankChangedResource(item: RankingData): Int {

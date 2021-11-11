@@ -1,6 +1,8 @@
 package com.terry.delivery.features.search
 
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import androidx.room.EmptyResultSetException
 import com.terry.delivery.base.BaseViewModel
 import com.terry.delivery.data.SearchRepository
@@ -10,6 +12,7 @@ import com.terry.delivery.util.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.io.InputStream
 import javax.inject.Inject
@@ -31,6 +34,8 @@ class SearchViewModel @Inject constructor(
 
     private val _failMessage = SingleLiveEvent<String>()
     val failMessage: LiveData<String> = _failMessage
+
+    val searchHistories = searchRepository.getSearchHistory(count = 10)
 
     fun initDebugRankData(rawData: InputStream) {
         searchRepository.getTop10RankedData(rawData.bufferedReader().use { it.readText() })
@@ -62,4 +67,15 @@ class SearchViewModel @Inject constructor(
             .addTo(disposable)
     }
 
+    fun saveSearchHistory(searchQuery: String) = viewModelScope.launch {
+        searchRepository.saveSearchHistory(searchQuery)
+    }
+
+    fun deleteSearchHistoryAll() = viewModelScope.launch {
+        searchRepository.deleteSearchHistoryAll()
+    }
+
+    fun deleteSearchHistory(title: String) = viewModelScope.launch {
+        searchRepository.deleteSearchHistory(title)
+    }
 }

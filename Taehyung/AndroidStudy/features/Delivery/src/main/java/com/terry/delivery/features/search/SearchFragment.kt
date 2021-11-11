@@ -5,16 +5,28 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.view.inputmethod.EditorInfo
+import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.chip.Chip
 import com.terry.delivery.R
 import com.terry.delivery.base.BaseFragment
+import com.terry.delivery.data.local.model.SearchHistory
 import com.terry.delivery.databinding.FragmentSearchBinding
 import com.terry.delivery.util.SnackbarUtil
+import io.reactivex.Flowable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.rxkotlin.addTo
+import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import timber.log.Timber
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 /*
  * Created by Taehyung Kim on 2021-08-29
@@ -28,11 +40,17 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
         Runnable { viewModel.searchItem(searchQuery) }
     }
 
-    private val searchRankHighAdapter = SearchRankAdapter()
-    private val searchRankLowAdapter = SearchRankAdapter()
-    private val searchListAdapter = SearchListAdapter onItemClick@{
-
+    private val searchRankHighAdapter = SearchRankAdapter onItemClick@{
+        performSearch(it)
     }
+    private val searchRankLowAdapter = SearchRankAdapter onItemClick@{
+        performSearch(it)
+    }
+    private val searchListAdapter = SearchListAdapter onItemClick@{
+        performSearch(it)
+    }
+
+    private val historyTagList = ArrayDeque<String>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -52,6 +70,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
 
                 clearSearchText()
             }
+
+            cpSearchDeleteAll.setOnClickListener {
+                viewModel.deleteSearchHistoryAll()
+                cgSearchHistory.removeAllViews()
+                historyTagList.clear()
+            }
         }
     }
 
@@ -69,6 +93,13 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
 
         viewModel.failMessage.observe(viewLifecycleOwner) { msg ->
             view?.let { SnackbarUtil.showErrorMessage(it, msg) }
+        }
+
+        lifecycleScope.launch {
+            viewModel.searchHistories.collect { searchHistoryList ->
+                addSearchHistoryList(searchHistoryList)
+                this.cancel()
+            }
         }
     }
 
@@ -127,5 +158,79 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(FragmentSearchBinding
 
             }
         }
+
+        getViewBinding().etSearch.setOnEditorActionListener { v, actionId, _ ->
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                performSearch(v.text.toString())
+                return@setOnEditorActionListener true
+            }
+
+            return@setOnEditorActionListener false
+        }
+    }
+
+    private fun performSearch(searchQuery: String) {
+        Flowable.just(saveSearchHistory(searchQuery))
+            .throttleFirst(800L, TimeUnit.MILLISECONDS)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe()
+            .addTo(disposable)
+    }
+
+    private fun saveSearchHistory(searchQuery: String) {
+        viewModel.saveSearchHistory(searchQuery)
+        addSearchHistoryTag(searchQuery, true)
+    }
+
+    private fun addSearchHistoryList(list: List<SearchHistory>) {
+        list.forEach { addSearchHistoryTag(it.title) }
+    }
+
+    private fun addSearchHistoryTag(searchTitle: String, shouldAddReverse: Boolean = false) {
+        val chip = Chip(requireContext()).apply {
+            text = searchTitle
+            closeIcon =
+                ContextCompat.getDrawable(requireContext(), R.drawable.ic_baseline_cancel_24)
+            isCloseIconVisible = true
+        }
+
+        bindsChipClickListener(chip, searchTitle)
+
+        addChipToGroup(shouldAddReverse, chip, searchTitle)
+
+        historyTagList.addLast(searchTitle)
+    }
+
+    private fun bindsChipClickListener(chip: Chip, searchTitle: String) {
+        chip.setOnCloseIconClickListener {
+            viewModel.deleteSearchHistory(searchTitle)
+            getViewBinding().cgSearchHistory.removeView(it)
+            historyTagList.remove(searchTitle)
+        }
+
+        chip.setOnClickListener {
+            getViewBinding().etSearch.setText(searchTitle)
+        }
+    }
+
+    private fun addChipToGroup(shouldAddReverse: Boolean, chip: Chip, searchTitle: String) {
+        if (shouldAddReverse.not()) {
+            getViewBinding().cgSearchHistory.addView(chip)
+        } else {
+            if (checkTagList(searchTitle)) historyTagList.remove(searchTitle)
+
+            getViewBinding().cgSearchHistory.addView(chip)
+        }
+    }
+
+    private fun checkTagList(searchTitle: String): Boolean {
+        historyTagList.forEachIndexed { index, s ->
+            if (s == searchTitle) {
+                getViewBinding().cgSearchHistory.removeViewAt(index)
+                return true
+            }
+        }
+
+        return false
     }
 }

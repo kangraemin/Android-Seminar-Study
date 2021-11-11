@@ -17,6 +17,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
     }
 
     buildTypes {
@@ -28,6 +29,8 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             buildConfigField("String", "BASE_URL", '"https://r5670326j8.execute-api.ap-northeast-2.amazonaws.com/delivery_server/"')
+            buildConfigField("String", "api_search_key", api_search_key)
+
         }
     }
     compileOptions {

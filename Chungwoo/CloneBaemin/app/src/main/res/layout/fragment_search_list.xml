@@ -3,6 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <variable
+            name="vm"
+            type="com.lcw.study.clonebaemin.feature.search.SearchListViewModel" />
 
     </data>
 
@@ -22,6 +25,16 @@
             app:queryBackground="@null"
             app:queryHint="@string/searchInput"
             app:theme="@style/AppSearchView" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            setSearchItem="@{vm.searchData.restaurants}"
+            android:id="@+id/rv_search_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/search_view"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager">
+
+        </androidx.recyclerview.widget.RecyclerView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

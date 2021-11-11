@@ -1,18 +1,22 @@
 package com.lcw.study.clonebaemin.feature.search
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.util.Log
 import android.view.View
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.chip.Chip
-import com.lcw.study.clonebaemin.MyApplication
 import com.lcw.study.clonebaemin.R
 import com.lcw.study.clonebaemin.databinding.FragmentSearchBinding
 import com.lcw.study.clonebaemin.feature.base.BaseFragment
+import com.lcw.study.clonebaemin.utils.MyApplication
 import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.Observable
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.CompositeDisposable
+import java.util.concurrent.TimeUnit
+
 
 @AndroidEntryPoint
 class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_search) {
@@ -22,12 +26,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
     lateinit var chipView: Chip
     lateinit var chipItem: View
 
-    //핸들러 설정
-    //ui 변경하기
-    val handler = Handler(Looper.getMainLooper()) {
-        setPage()
-        true
-    }
+    val compositeDisposable = CompositeDisposable()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -54,12 +53,12 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                binding.searchView.setQuery("",false)
-                searchViewModel.getSearch(
+                binding.searchView.setQuery("", false)
+                /*      searchViewModel.getSearch(
                     "iGR3hRvQ.K3wPNmJgqSMeY6CehCZmuq7Kg5Hnw3o7",
                     query.toString(),
                     1
-                )
+                )*/
 
                 var list = ArrayList<String>()
                 list.add(query.toString())
@@ -70,6 +69,16 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                 query?.let {
                     addSearchWord(query)
                 }
+
+                val bundle = Bundle()
+                bundle.putString("query", query)
+                findNavController().navigate(
+                    R.id.action_searchFragment_to_searchListFragment,
+                    bundle
+                )
+
+
+
 
 
                 return true
@@ -96,23 +105,25 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         }
 
 
-        //뷰페이저 넘기는 쓰레드
-        val thread = Thread(PagerRunnable())
-        thread.start()
-
-
+        setBannerSlide()
     }
 
-    private fun setPage() {
-        if (currentPosition == 2) currentPosition = 0
-        binding.viewPagerBanner.setCurrentItem(currentPosition, true)
-        currentPosition += 1
+    private fun setBannerSlide() {
+        val subscribe = Observable.interval(3000, TimeUnit.MILLISECONDS)
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                if (currentPosition == 2) currentPosition = 0
+                binding.viewPagerBanner.setCurrentItem(currentPosition, true)
+                currentPosition += 1
+            }
+        compositeDisposable.add(subscribe)
+
     }
 
 
     fun addSearchWord(searchWord: String) {
         chipView.text = searchWord
-        binding.chipgroup.addView(chipItem)
+        //binding.chipgroup.addView(chipItem)
 
 
     }
@@ -122,14 +133,8 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         return arrayListOf<Int>(R.drawable.ic_mybamin, R.drawable.ic_search)
     }
 
-
-    //2초 마다 페이지 넘기기
-    inner class PagerRunnable : Runnable {
-        override fun run() {
-            while (true) {
-                Thread.sleep(2000)
-                handler.sendEmptyMessage(0)
-            }
-        }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        compositeDisposable.dispose()
     }
 }

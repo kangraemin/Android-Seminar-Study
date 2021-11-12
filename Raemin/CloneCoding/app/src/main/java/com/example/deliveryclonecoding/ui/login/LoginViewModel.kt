@@ -2,16 +2,21 @@ package com.example.deliveryclonecoding.ui.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.deliveryclonecoding.data.Repository
-import com.example.deliveryclonecoding.ui.base.BaseViewModel
+import com.example.deliveryclonecoding.data.remote.login.LoginRepository
+import com.example.deliveryclonecoding.data.remote.base.NetworkCallResult
+import com.example.deliveryclonecoding.ui.base.BaseDataBindingViewModelFragment
+import dagger.hilt.android.lifecycle.HiltViewModel
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.subjects.PublishSubject
 import retrofit2.HttpException
+import javax.inject.Inject
 
-class LoginViewModel(
-    private val repository: Repository
-) : BaseViewModel() {
+@HiltViewModel
+class LoginViewModel @Inject constructor(
+    private val loginRepository: LoginRepository
+) : BaseDataBindingViewModelFragment() {
 
     private val _loginResult: MutableLiveData<Boolean> = MutableLiveData()
     val loginResult: LiveData<Boolean> = _loginResult
@@ -20,20 +25,24 @@ class LoginViewModel(
 
     init {
         loginSubject
-            .flatMapCompletable {
-                repository
+            .flatMapSingle {
+                loginRepository
                     .login(it.first, it.second)
+                    .andThen(Single.just(NetworkCallResult<Unit>()))
+                    .onErrorReturn { NetworkCallResult(throwable = it) }
             }
             .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                _loginResult.value = true
-            }, {
-                if (it is HttpException && it.code() == 401) {
-                    _loginResult.value = false
-                } else {
-                    it.printStackTrace()
+            .subscribe {
+                it.throwable?.let { throwable ->
+                    if (throwable is HttpException && throwable.code() == 401) {
+                        _loginResult.value = false
+                    } else {
+                        throwable.printStackTrace()
+                    }
+                } ?: run {
+                    _loginResult.value = true
                 }
-            })
+            }
             .addTo(compositeDisposable)
     }
 

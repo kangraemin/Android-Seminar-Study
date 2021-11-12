@@ -1,16 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    <FrameLayout
+
+    <data>
+
+        <variable
+            name="vm"
+            type="com.example.deliveryclonecoding.ui.search.SearchViewModel" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.SearchFragment">
+        tools:context=".ui.search.SearchFragment">
 
-        <TextView
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="@string/search_fragment_temp_text" />
+            android:layout_height="wrap_content"
+            android:paddingEnd="15dp"
+            app:contentInsetStartWithNavigation="0dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:navigationIcon="@drawable/ic_left_arrow">
 
-    </FrameLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/et_search"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/bg_search_bar"
+                    android:drawableLeft="@drawable/ic_search_bar"
+                    android:drawablePadding="6dp"
+                    android:hint="검색어를 입력해주세요"
+                    android:padding="10dp"
+                    android:paddingStart="15dp"
+                    android:paddingTop="14dp"
+                    android:paddingEnd="36dp"
+                    android:singleLine="true"
+                    android:imeOptions="actionSearch"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/img_search_text_delete"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_marginEnd="10dp"
+                    android:background="@drawable/ic_search_delete_button"
+                    app:layout_constraintBottom_toBottomOf="@id/et_search"
+                    app:layout_constraintEnd_toEndOf="@id/et_search"
+                    app:layout_constraintTop_toTopOf="@id/et_search" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.appcompat.widget.Toolbar>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </layout>

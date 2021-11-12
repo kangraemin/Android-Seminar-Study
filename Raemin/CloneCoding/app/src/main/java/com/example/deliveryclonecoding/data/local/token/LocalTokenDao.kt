@@ -16,4 +16,7 @@ interface LocalTokenDao {
 
     @Query(value = "DELETE FROM token")
     fun deleteAllCachedToken(): Completable
+
+    @Query(value = "UPDATE token SET accessToken = :accessToken")
+    fun updateAccessToken(accessToken: String): Completable
 }

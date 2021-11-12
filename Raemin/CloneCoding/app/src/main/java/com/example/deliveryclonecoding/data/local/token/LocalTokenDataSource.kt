@@ -7,4 +7,5 @@ interface LocalTokenDataSource {
     fun getToken(): Single<LocalTokenItem>
     fun saveToken(tokenItem: LocalTokenItem): Completable
     fun deleteAllCachedToken(): Completable
+    fun updateAccessToken(accessToken: String): Completable
 }

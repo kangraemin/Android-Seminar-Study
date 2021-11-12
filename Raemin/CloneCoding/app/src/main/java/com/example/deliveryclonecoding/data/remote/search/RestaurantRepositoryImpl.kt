@@ -19,8 +19,8 @@ class RestaurantRepositoryImpl @Inject constructor(
             .flatMap {
                 restaurantDataSource
                     .search(query, "Bearer ${it.accessToken}")
+                    .compose(baseNetworkErrorHandler.applyNetworkErrorHandler())
             }
-            .compose(baseNetworkErrorHandler.applyNetworkErrorHandler())
             .onErrorResumeNext { throwable ->
                 if (throwable is EmptyResultSetException) {
                     return@onErrorResumeNext restaurantDataSource.search(query, null)

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.deliveryclonecoding.data.remote.login.LoginRepository
 import com.example.deliveryclonecoding.data.remote.base.NetworkCallResult
-import com.example.deliveryclonecoding.ui.base.BaseViewModel
+import com.example.deliveryclonecoding.ui.base.BaseDataBindingViewModelFragment
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -15,8 +15,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LoginViewModel @Inject constructor(
-    val loginRepository: LoginRepository
-) : BaseViewModel() {
+    private val loginRepository: LoginRepository
+) : BaseDataBindingViewModelFragment() {
 
     private val _loginResult: MutableLiveData<Boolean> = MutableLiveData()
     val loginResult: LiveData<Boolean> = _loginResult

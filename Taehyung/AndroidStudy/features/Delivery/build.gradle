@@ -1,21 +1,24 @@
 plugins {
-    id 'com.android.dynamic-feature'
+    id 'com.android.library'
     id 'kotlin-android'
     id 'androidx.navigation.safeargs.kotlin'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
 }
+
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 android {
     compileSdk 30
 
     defaultConfig {
-        applicationId "com.terry.delivery"
         minSdk 23
         targetSdk 30
-        versionCode 1
-        versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField("String", "searchApiKey", properties.getProperty("search-api-key"))
+
+        testInstrumentationRunner "com.terry.delivery.HiltTestRunner"
     }
 
     buildTypes {
@@ -31,7 +34,6 @@ android {
 }
 
 dependencies {
-    implementation project(":app")
     implementation "androidx.core:core-ktx:$rootProject.androidCoreKtxVersion"
     implementation "androidx.appcompat:appcompat:$rootProject.appCompatVersion"
     implementation "com.google.android.material:material:$rootProject.materialVersion"
@@ -50,7 +52,9 @@ dependencies {
 
     implementation "androidx.room:room-runtime:$rootProject.roomVersion"
     implementation "androidx.room:room-rxjava2:$rootProject.roomVersion"
+    implementation "androidx.room:room-ktx:$rootProject.roomVersion"
     kapt "androidx.room:room-compiler:$rootProject.roomVersion"
+    kapt "org.xerial:sqlite-jdbc:3.34.0"
 
     implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttp3Version"
 
@@ -59,14 +63,26 @@ dependencies {
 
     implementation "androidx.fragment:fragment-ktx:$rootProject.fragmentVersion"
 
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-core-ktx:$rootProject.lifecycleVersion"
 
+    implementation "com.jakewharton.timber:timber:$rootProject.timberVersion"
+
+    implementation "androidx.test:core:$rootProject.testCoreVersion"
     testImplementation "junit:junit:$rootProject.junitVersion"
+    testImplementation "org.hamcrest:hamcrest-all:$rootProject.hamcrestAllVersion"
+    testImplementation "androidx.arch.core:core-testing:$rootProject.archCoreTestingVersion"
+    testImplementation "org.robolectric:robolectric:$rootProject.robolectricVersion"
+    testImplementation "org.mockito:mockito-core:$rootProject.mockitoCoreVersion"
+    testImplementation "com.google.truth:truth:$rootProject.testTruthVersion"
+
+    // Instrumented Unit Tests
+    androidTestImplementation "junit:junit:$rootProject.junitVersion"
+    androidTestImplementation "androidx.arch.core:core-testing:$rootProject.archCoreTestingVersion"
     androidTestImplementation "androidx.test.ext:junit:$rootProject.androidJunitVersion"
     androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.androidExpressoCoreVersion"
-    androidTestImplementation "androidx.annotation:annotation:$rootProject.androidAnnotationVersion"
-
-    testImplementation "org.hamcrest:hamcrest-all:$rootProject.hamcrestAllVersion"
-    testImplementation "org.mockito:mockito-core:$rootProject.mockitoCoreVersion"
-    testImplementation "androidx.arch.core:core-testing:$rootProject.archCoreTestingVersion"
+    androidTestImplementation "org.mockito:mockito-core:$rootProject.mockitoCoreVersion"
+    androidTestImplementation "com.google.truth:truth:$rootProject.testTruthVersion"
+    androidTestImplementation "com.google.dagger:hilt-android-testing:$rootProject.hiltVersion"
+    kaptAndroidTest "com.google.dagger:hilt-compiler:$rootProject.hiltVersion"
 }

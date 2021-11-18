@@ -3,262 +3,328 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/md_grey_200">
+    android:layout_height="match_parent">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/tb_search"
-        android:layout_width="0dp"
+    <ImageView
+        android:id="@+id/iv_back"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="14dp"
+        android:paddingVertical="10dp"
+        android:paddingStart="0dp"
+        android:paddingEnd="14dp"
+        android:src="@drawable/ic_baseline_arrow_back_24"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:navigationIcon="@drawable/ic_close">
+        tools:ignore="ContentDescription" />
 
-        <androidx.appcompat.widget.SearchView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:iconifiedByDefault="false"
-            app:queryHint="@string/hint_search" />
+    <View
+        android:id="@+id/view_search"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="14dp"
+        android:background="@drawable/bg_search_view"
+        app:layout_constraintBottom_toBottomOf="@id/iv_back"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/iv_back"
+        app:layout_constraintTop_toTopOf="@id/iv_back" />
 
-    </androidx.appcompat.widget.Toolbar>
+    <ImageView
+        android:id="@+id/iv_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:src="@drawable/ic_search"
+        app:layout_constraintBottom_toBottomOf="@id/view_search"
+        app:layout_constraintStart_toStartOf="@id/view_search"
+        app:layout_constraintTop_toTopOf="@id/view_search"
+        tools:ignore="ContentDescription" />
+
+    <EditText
+        android:id="@+id/et_search"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="10dp"
+        android:background="@null"
+        android:hint="@string/hint_search"
+        android:imeOptions="actionSearch"
+        android:importantForAutofill="no"
+        android:inputType="text"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="@id/view_search"
+        app:layout_constraintEnd_toStartOf="@id/iv_cancel_search"
+        app:layout_constraintStart_toEndOf="@id/iv_search"
+        app:layout_constraintTop_toTopOf="@id/view_search" />
+
+    <ImageView
+        android:id="@+id/iv_cancel_search"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:paddingHorizontal="10dp"
+        android:src="@drawable/ic_baseline_cancel_24"
+        app:layout_constraintBottom_toBottomOf="@id/view_search"
+        app:layout_constraintEnd_toEndOf="@id/view_search"
+        app:layout_constraintTop_toTopOf="@id/view_search"
+        tools:ignore="ContentDescription" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="14dp"
+        android:background="@color/md_grey_200"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tb_search">
+        app:layout_constraintTop_toBottomOf="@id/iv_back">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layout_search_recent"
+            <View
+                android:id="@+id/view_recent_search"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginBottom="-12dp"
                 android:background="@color/white"
-                android:paddingHorizontal="18dp"
-                android:paddingTop="24dp"
+                app:layout_constraintBottom_toBottomOf="@id/scroll_view_search_history"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <TextView
-                    android:id="@+id/tv_search_recent_history_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/recent_search_word"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/cp_search_delete_all" />
+            <TextView
+                android:id="@+id/tv_search_recent_history_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="14dp"
+                android:text="@string/recent_search_word"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/cp_search_delete_all"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/delete_all"
-                    app:chipMinTouchTargetSize="0dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+            <com.google.android.material.chip.Chip
+                android:id="@+id/cp_search_delete_all"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="14dp"
+                android:text="@string/delete_all"
+                app:chipMinTouchTargetSize="0dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_search_recent_history_title" />
+
+            <HorizontalScrollView
+                android:id="@+id/scroll_view_search_history"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tv_search_recent_history_title"
+                app:layout_constraintTop_toBottomOf="@id/cp_search_delete_all">
 
                 <com.google.android.material.chip.ChipGroup
                     android:id="@+id/cg_search_history"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginBottom="18dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@id/cp_search_delete_all"
+                    android:layoutDirection="rtl"
+                    app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/tv_search_recent_history_title"
-                    app:layout_constraintTop_toBottomOf="@id/cp_search_delete_all">
+                    app:layout_constraintTop_toBottomOf="@id/cp_search_delete_all" />
+
+            </HorizontalScrollView>
+
+            <View
+                android:id="@+id/view_rank_search"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="-12dp"
+                android:layout_marginBottom="-12dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/rv_search_rank_high"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_search_rank_title" />
+
+            <TextView
+                android:id="@+id/tv_search_rank_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/search_recent_title"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/tv_search_recent_history_title"
+                app:layout_constraintTop_toBottomOf="@id/view_recent_search" />
+
+            <TextView
+                android:id="@+id/tv_search_rank_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/md_grey_600"
+                android:textSize="15sp"
+                app:layout_constraintStart_toStartOf="@id/tv_search_rank_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_search_rank_title"
+                tools:text="09.29 20:00 기준" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_search_rank_high"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toStartOf="@id/rv_search_rank_low"
+                app:layout_constraintStart_toStartOf="@id/tv_search_recent_history_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_search_rank_time"
+                tools:itemCount="5"
+                tools:listitem="@layout/item_search_rank" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_search_rank_low"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:orientation="horizontal"
+                app:layout_constraintEnd_toEndOf="@id/cp_search_delete_all"
+                app:layout_constraintStart_toEndOf="@id/rv_search_rank_high"
+                app:layout_constraintTop_toBottomOf="@id/tv_search_rank_time"
+                tools:itemCount="5"
+                tools:listitem="@layout/item_search_rank" />
+
+            <View
+                android:id="@+id/view_bmart"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="-10dp"
+                android:layout_marginBottom="-10dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@id/hsv_bmart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tv_search_bmart_title" />
+
+            <TextView
+                android:id="@+id/tv_search_bmart_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="@string/search_bmart_title"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/tv_search_recent_history_title"
+                app:layout_constraintTop_toBottomOf="@+id/view_rank_search" />
+
+            <HorizontalScrollView
+                android:id="@+id/hsv_bmart"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="14dp"
+                android:scrollbars="none"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/tv_search_recent_history_title"
+                app:layout_constraintTop_toBottomOf="@id/tv_search_bmart_title">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/cg_search_bmart"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content">
 
                     <com.google.android.material.chip.Chip
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="24dp"
-                        android:layout_marginEnd="12dp"
-                        android:text="@string/delete_all"
-                        app:chipMinTouchTargetSize="0dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/tb_search" />
+                        android:backgroundTint="@color/md_teal_50"
+                        android:text="#생필품은 역시!"
+                        android:textColor="@color/md_teal_500"
+                        tools:ignore="HardcodedText" />
+
+                    <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/md_teal_50"
+                        android:text="#캠핑준비끝"
+                        android:textColor="@color/md_teal_500"
+                        tools:ignore="HardcodedText" />
+
+                    <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/md_teal_50"
+                        android:text="#이계절 스킨케어"
+                        android:textColor="@color/md_teal_500"
+                        tools:ignore="HardcodedText" />
+
+                    <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/md_teal_50"
+                        android:text="#스트레스타파"
+                        android:textColor="@color/md_teal_500"
+                        tools:ignore="HardcodedText" />
+
+                    <com.google.android.material.chip.Chip
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="@color/md_teal_50"
+                        android:text="#일교차 대비하기"
+                        android:textColor="@color/md_teal_500"
+                        tools:ignore="HardcodedText" />
 
                 </com.google.android.material.chip.ChipGroup>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            </HorizontalScrollView>
 
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layout_search_rank"
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/vp_ads"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="14dp"
-                android:background="@color/white"
-                android:paddingHorizontal="18dp"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/layout_search_recent">
-
-                <TextView
-                    android:id="@+id/tv_search_rank_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:text="@string/search_recent_title"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/tv_search_rank_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:textColor="@color/md_grey_600"
-                    android:textSize="15sp"
-                    app:layout_constraintStart_toStartOf="@id/tv_search_rank_title"
-                    app:layout_constraintTop_toBottomOf="@id/tv_search_rank_title"
-                    tools:text="09.29 20:00 기준" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_search_rank_high"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toStartOf="@id/rv_search_rank_low"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_search_rank_time"
-                    tools:itemCount="5"
-                    tools:listitem="@layout/item_search_rank" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rv_search_rank_low"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:orientation="horizontal"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/rv_search_rank_high"
-                    app:layout_constraintTop_toBottomOf="@id/tv_search_rank_time"
-                    tools:itemCount="5"
-                    tools:listitem="@layout/item_search_rank" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/layout_search_bmart"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:background="@color/white"
-                android:paddingHorizontal="18dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/layout_search_rank">
-
-                <TextView
-                    android:id="@+id/tv_search_bmart_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    android:text="@string/search_bmart_title"
-                    android:textColor="@color/black"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <HorizontalScrollView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginVertical="14dp"
-                    android:scrollbars="none"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/tv_search_bmart_title">
-
-                    <com.google.android.material.chip.ChipGroup
-                        android:id="@+id/cg_search_bmart"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content">
-
-                        <com.google.android.material.chip.Chip
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/md_teal_50"
-                            android:text="#생필품은 역시!"
-                            android:textColor="@color/md_teal_500"
-                            tools:ignore="HardcodedText" />
-
-                        <com.google.android.material.chip.Chip
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/md_teal_50"
-                            android:text="#캠핑준비끝"
-                            android:textColor="@color/md_teal_500"
-                            tools:ignore="HardcodedText" />
-
-                        <com.google.android.material.chip.Chip
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/md_teal_50"
-                            android:text="#이계절 스킨케어"
-                            android:textColor="@color/md_teal_500"
-                            tools:ignore="HardcodedText" />
-
-                        <com.google.android.material.chip.Chip
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/md_teal_50"
-                            android:text="#스트레스타파"
-                            android:textColor="@color/md_teal_500"
-                            tools:ignore="HardcodedText" />
-
-                        <com.google.android.material.chip.Chip
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@color/md_teal_50"
-                            android:text="#일교차 대비하기"
-                            android:textColor="@color/md_teal_500"
-                            tools:ignore="HardcodedText" />
-
-                    </com.google.android.material.chip.ChipGroup>
-
-                </HorizontalScrollView>
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:background="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/layout_search_bmart">
-
-                <androidx.viewpager2.widget.ViewPager2
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:layout_height="120dp" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_constraintTop_toBottomOf="@id/view_bmart"
+                tools:layout_height="120dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.core.widget.NestedScrollView>
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group_search"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="view_bg_search, rv_search_list, iv_cancel_search"
+        tools:visibility="gone" />
+
+    <View
+        android:id="@+id/view_bg_search"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@color/bg_search_mode"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/rv_search_list" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_search_list"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="14dp"
+        android:background="@color/transparent"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_back"
+        app:layout_constraintVertical_bias="0"
+        tools:itemCount="3"
+        tools:listitem="@layout/item_search" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

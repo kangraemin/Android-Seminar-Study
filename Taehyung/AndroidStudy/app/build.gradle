@@ -32,10 +32,12 @@ android {
     buildFeatures {
         viewBinding true
     }
-    dynamicFeatures = [':features:TestCode', ':features:Delivery']
+    dynamicFeatures = [':features:TestCode']
 }
 
 dependencies {
+    implementation project(":features:Delivery")
+
     implementation "androidx.core:core-ktx:$rootProject.androidCoreKtxVersion"
     implementation "androidx.appcompat:appcompat:$rootProject.appCompatVersion"
     implementation "com.google.android.material:material:$rootProject.materialVersion"

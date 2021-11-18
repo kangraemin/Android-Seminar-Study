@@ -15,8 +15,7 @@ abstract class BaseFragment<B : ViewBinding>(
     private val inflate: FragmentInflater<B>
 ) : Fragment() {
 
-    protected var binding: B? = null
-        private set
+    private var binding: B? = null
 
     protected val disposable = CompositeDisposable()
 
@@ -31,6 +30,8 @@ abstract class BaseFragment<B : ViewBinding>(
 
         return binding.root
     }
+
+    fun getViewBinding() = binding ?: throw Throwable("Binding is null !!")
 
     override fun onDestroyView() {
         disposable.clear()

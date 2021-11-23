@@ -1,5 +1,6 @@
 package android.anjahyun.study.di
 
+import android.anjahyun.study.BuildConfig
 import android.anjahyun.study.network.ApiService
 import dagger.Module
 import dagger.Provides
@@ -30,7 +31,7 @@ class NetworkModule {
             val url = originalHttpUrl.newBuilder().build()
             val requestBuilder = original.newBuilder()
                 .url(url)
-                .addHeader("X-Api-Key", "iGR3hRvQ.K3wPNmJgqSMeY6CehCZmuq7Kg5Hnw3o7")
+                .addHeader("X-Api-Key", "${BuildConfig.WEB_API_KEY}")
             val request = requestBuilder.build()
             chain.proceed(request)
         })

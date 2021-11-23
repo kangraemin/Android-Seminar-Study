@@ -8,13 +8,14 @@ plugins {
 
 Properties properties = new Properties()
 properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
 android {
-    compileSdk 30
+    compileSdk 31
 
     defaultConfig {
         applicationId "android.anjahyun.study"
         minSdk 21
-        targetSdk 30
+        targetSdk 31
         versionCode 1
         versionName "1.0"
 
@@ -46,6 +47,14 @@ android {
     }
     dataBinding {
         enabled = true
+    }
+    //compose
+    buildFeatures {
+        compose true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion composeVersion
+        kotlinCompilerVersion '1.5.10'
     }
 }
 
@@ -85,6 +94,12 @@ dependencies {
     kapt "androidx.room:room-compiler:$rootProject.roomVersion"
     implementation "androidx.room:room-rxjava2:$rootProject.roomVersion"
     kapt "org.xerial:sqlite-jdbc:3.34.0"
+    //Compose
+    implementation "androidx.compose.ui:ui:$composeVersion"
+    implementation 'androidx.activity:activity-compose:1.4.0'
+    implementation "androidx.compose.material:material:$composeVersion"
+    implementation "androidx.compose.ui:ui-tooling:$composeVersion"
+    implementation "androidx.compose.material:material-icons-extended:$composeVersion"
 
     ////Testing dependency
     testImplementation 'junit:junit:4.+'

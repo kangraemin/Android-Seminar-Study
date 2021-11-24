@@ -15,19 +15,6 @@ import javax.inject.Inject
 @HiltViewModel
 class MyViewModel @Inject constructor(private val repository: MyRepository, private val tokenDao: TokenDao): BaseViewModel() {
 
-    private var _isMember = SingleLiveEvent<Boolean>()
-    val isMember : SingleLiveEvent<Boolean> get() = _isMember
 
-    fun isMember() {
-        tokenDao.getToken()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                if (!it.accessToken.isNullOrEmpty()) _isMember.postValue(true)
-                else _isMember.postValue(false)
-            }, {
-            })
-
-    }
 
 }

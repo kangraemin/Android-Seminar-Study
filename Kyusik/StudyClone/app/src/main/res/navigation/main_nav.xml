@@ -6,7 +6,7 @@
     app:startDestination="@id/splashFragment">
     <fragment
         android:id="@+id/splashFragment"
-        android:name="com.clonecodingbm.SplashFragment"
+        android:name="com.clonecodingbm.ui.SplashFragment"
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash">
         <action
@@ -17,9 +17,9 @@
     </fragment>
     <fragment
         android:id="@+id/navFragment"
-        android:name="com.clonecodingbm.NavFragment"
+        android:name="com.clonecodingbm.ui.home.HomeFragment"
         android:label="fragment_nav"
-        tools:layout="@layout/fragment_nav">
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_navFragment_to_searchFragment"
             app:destination="@id/searchFragment"
@@ -48,22 +48,33 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_out" />
+        <action
+            android:id="@+id/action_navFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.clonecodingbm.view.bottom.SearchFragment"
+        android:name="com.clonecodingbm.ui.search.SearchFragment"
         android:label="fragment_search"
-        tools:layout="@layout/fragment_search" />
+        tools:layout="@layout/fragment_search">
+        <action
+            android:id="@+id/action_searchFragment_to_searchListFragment"
+            app:destination="@id/searchListFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out" />
+    </fragment>
     <fragment
         android:id="@+id/orderListFragment"
-        android:name="com.clonecodingbm.view.bottom.OrderListFragment"
+        android:name="com.clonecodingbm.ui.bottom.OrderListFragment"
         android:label="fragment_order_list"
         tools:layout="@layout/fragment_order_list" />
     <fragment
         android:id="@+id/myPageFragment"
-        android:name="com.clonecodingbm.view.bottom.MyPageFragment"
+        android:name="com.clonecodingbm.ui.mypage.MyPageFragment"
         android:label="fragment_my_page"
-        tools:layout="@layout/fragment_my_page" >
+        tools:layout="@layout/fragment_my_page">
         <action
             android:id="@+id/action_myPageFragment_to_loginFragment"
             app:destination="@id/loginFragment"
@@ -71,14 +82,49 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_out" />
+        <action
+            android:id="@+id/action_myPageFragment_to_myInfoFragment"
+            app:destination="@id/myInfoFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_out"/>
     </fragment>
     <fragment
         android:id="@+id/favoriteFragment"
-        android:name="com.clonecodingbm.view.bottom.FavoriteFragment"
+        android:name="com.clonecodingbm.ui.bottom.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" />
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.clonecodingbm.view.mypage.LoginFragment"
+        android:name="com.clonecodingbm.ui.login.LoginFragment"
         android:label="LoginFragment" />
+    <fragment
+        android:id="@+id/searchListFragment"
+        android:name="com.clonecodingbm.ui.search.list.SearchListFragment"
+        android:label="SearchListFragment">
+
+        <argument
+            android:name="query"
+            android:defaultValue=""
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/myInfoFragment"
+        android:name="com.clonecodingbm.ui.mypage.myinfo.MyInfoFragment"
+        android:label="MyInfoFragment" >
+
+        <argument
+            android:name="userName"
+            android:defaultValue=""
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.clonecodingbm.ui.home.detail.DetailsFragment"
+        android:label="DetailsFragment" >
+        <argument
+            android:name="movieId"
+            app:argType="long" />
+    </fragment>
 </navigation>

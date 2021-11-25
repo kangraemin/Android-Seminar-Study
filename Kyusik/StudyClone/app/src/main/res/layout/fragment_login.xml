@@ -2,61 +2,54 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.appcompat.widget.LinearLayoutCompat
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="16dp"
-        tools:context=".view.UserLoginActivity">
+        android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/bt_login_close"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="close"/>
-
-        <EditText
-            android:id="@+id/et_login_idInput"
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:hint="@string/login_id_hint"
-            android:inputType="textEmailAddress"
-            android:maxLength="15"
-            android:text="delivery" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp"
+            tools:context=".ui.UserLoginActivity">
 
-        <EditText
-            android:id="@+id/et_login_pwInput"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:hint="@string/login_password_hint"
-            android:inputType="textPassword"
-            android:maxLength="15"
-            android:text="dev_baemin" />
+            <Button
+                android:id="@+id/bt_login_close"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="close" />
 
-        <TextView
-            android:id="@+id/tv_login_refresh"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:textColor="@color/main"
-            android:textStyle="bold" />
+            <EditText
+                android:id="@+id/et_login_idInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/login_id_hint"
+                android:inputType="textEmailAddress"
+                android:maxLength="15"
+                android:text="delivery" />
 
-        <TextView
-            android:id="@+id/tv_login_access"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:textColor="@color/main"
-            android:textStyle="bold" />
+            <EditText
+                android:id="@+id/et_login_pwInput"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="@string/login_password_hint"
+                android:inputType="textPassword"
+                android:maxLength="15"
+                android:text="dev_baemin" />
 
-        <Button
-            android:id="@+id/bt_login_login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:maxLength="6"
-            android:text="@string/login" />
-    </androidx.appcompat.widget.LinearLayoutCompat>
+            <Button
+                android:id="@+id/bt_login_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:maxLength="6"
+                android:text="@string/login" />
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <include
+            android:id="@+id/pb_loading"
+            layout="@layout/layout_loading" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

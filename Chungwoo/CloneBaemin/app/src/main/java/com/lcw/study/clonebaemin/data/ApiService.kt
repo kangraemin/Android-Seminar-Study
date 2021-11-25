@@ -9,7 +9,7 @@ import retrofit2.http.*
 
 interface ApiService {
     @POST("api/token/")
-    fun requestLogin(@Body requestLoginInfoData: RequestLoginInfoData): Single<LoginData>
+    fun getToken(@Body requestLoginInfoData: RequestLoginInfoData): Single<LoginData>
 
 
     @GET("api/restaurants/query_search/")

@@ -1,5 +1,7 @@
 package com.clonecodingbm.data.di
 
+import com.clonecodingbm.data.remote.home.HomeDataSource
+import com.clonecodingbm.data.remote.home.HomeDataSourceImpl
 import com.clonecodingbm.data.remote.login.LoginDataSource
 import com.clonecodingbm.data.remote.login.LoginDataSourceImpl
 import com.clonecodingbm.data.remote.search.SearchDataSource
@@ -17,4 +19,7 @@ abstract class RemoteDataModule {
 
     @Binds
     abstract fun bindSearchDataSource(searchDataSourceImpl: SearchDataSourceImpl) : SearchDataSource
+
+    @Binds
+    abstract fun bindHomeDataSource(homeDataSourceImpl: HomeDataSourceImpl) : HomeDataSource
 }

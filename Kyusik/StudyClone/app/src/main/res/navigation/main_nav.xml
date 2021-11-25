@@ -17,9 +17,9 @@
     </fragment>
     <fragment
         android:id="@+id/navFragment"
-        android:name="com.clonecodingbm.ui.NavFragment"
+        android:name="com.clonecodingbm.ui.home.HomeFragment"
         android:label="fragment_nav"
-        tools:layout="@layout/fragment_nav">
+        tools:layout="@layout/fragment_home">
         <action
             android:id="@+id/action_navFragment_to_searchFragment"
             app:destination="@id/searchFragment"
@@ -48,6 +48,9 @@
             app:exitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_out" />
+        <action
+            android:id="@+id/action_navFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchFragment"
@@ -115,5 +118,13 @@
             android:name="userName"
             android:defaultValue=""
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.clonecodingbm.ui.home.detail.DetailsFragment"
+        android:label="DetailsFragment" >
+        <argument
+            android:name="movieId"
+            app:argType="long" />
     </fragment>
 </navigation>

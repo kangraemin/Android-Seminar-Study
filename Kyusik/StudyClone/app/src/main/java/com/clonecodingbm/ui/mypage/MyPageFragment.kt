@@ -1,5 +1,6 @@
 package com.clonecodingbm.ui.mypage
 
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -32,7 +33,7 @@ class MyPageFragment : BaseFragment<FragmentMyPageBinding>(R.layout.fragment_my_
 
             checkToken.observe(viewLifecycleOwner, {
                 if (it) {
-                    binding.tvNameLogin.text = "rank + ${viewModel.loginId.value}"
+                    binding.tvNameLogin.text = "rank ${viewModel.loginId.value}"
                     binding.clMyPageRank.visibility = View.VISIBLE
                 } else {
                     binding.tvNameLogin.text = "로그인해주세요"

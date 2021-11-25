@@ -32,24 +32,25 @@ class SearchRepositoryImpl @Inject constructor(
                     .andThen(
                         searchDataSource
                             .searchRestaurants(BuildConfig.RAMS_API_KEY, "Bearer $it", query, page)
+                            .retryWhen { error ->
+                                return@retryWhen error
+                                    .flatMapSingle {
+                                        return@flatMapSingle userDataSource
+                                            .getUser()
+                                            .flatMap { user ->
+                                                loginDataSource
+                                                    .refreshToken(RefreshRequest(user.refresh))
+                                            }
+                                            .flatMap { token ->
+                                                userDataSource
+                                                    .updateAccessToken(token.access)
+                                                    .andThen(Single.just(Unit))
+                                            }
+                                    }
+                            }
                     )
             }
-            .retryWhen { error ->
-                return@retryWhen error
-                    .flatMapSingle {
-                        return@flatMapSingle userDataSource
-                            .getUser()
-                            .flatMap { user ->
-                                loginDataSource
-                                    .refreshToken(RefreshRequest(user.refresh))
-                            }
-                            .flatMap { token ->
-                                userDataSource
-                                    .updateAccessToken(token.access)
-                                    .andThen(Single.just(Unit))
-                            }
-                    }
-            }
+
     }
 
 

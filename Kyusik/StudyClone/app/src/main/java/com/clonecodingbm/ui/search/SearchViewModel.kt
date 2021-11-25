@@ -50,7 +50,8 @@ class SearchViewModel @Inject constructor(
     fun deleteRecentSearchAll() {
         compositeDisposable.add(
             searchRepository
-                .deleteRecentSearchAll().doOnSubscribe { showProgress() }
+                .deleteRecentSearchAll()
+                .doOnSubscribe { showProgress() }
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe({
                     hideProgress()

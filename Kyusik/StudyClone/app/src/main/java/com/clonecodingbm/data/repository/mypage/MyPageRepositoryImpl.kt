@@ -17,23 +17,23 @@ class MyPageRepositoryImpl @Inject constructor(
             .flatMapCompletable { access ->
                 loginDataSource
                     .checkToken("Bearer $access")
-                    .ignoreElement()
-            }
-            .retryWhen { error ->
-                return@retryWhen error
-                    .flatMapSingle {
-                        return@flatMapSingle  userDataSource
-                            .getUser()
-                            .flatMap { user ->
-                                loginDataSource
-                                    .refreshToken(RefreshRequest(user.refresh))
-                            }
-                            .flatMap { token ->
-                                userDataSource
-                                    .updateAccessToken(token.access)
-                                    .andThen(Single.just(Unit))
+                    .retryWhen { error ->
+                        return@retryWhen error
+                            .flatMapSingle {
+                                return@flatMapSingle  userDataSource
+                                    .getUser()
+                                    .flatMap { user ->
+                                        loginDataSource
+                                            .refreshToken(RefreshRequest(user.refresh))
+                                    }
+                                    .flatMap { token ->
+                                        userDataSource
+                                            .updateAccessToken(token.access)
+                                            .andThen(Single.just(Unit))
+                                    }
                             }
                     }
+                    .ignoreElement()
             }
     }
 

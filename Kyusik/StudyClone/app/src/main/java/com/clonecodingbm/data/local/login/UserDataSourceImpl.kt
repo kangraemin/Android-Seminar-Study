@@ -3,6 +3,7 @@ package com.clonecodingbm.data.local.login
 import io.reactivex.rxjava3.core.Completable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
+import java.lang.Exception
 import javax.inject.Inject
 
 class UserDataSourceImpl @Inject constructor(
@@ -30,6 +31,9 @@ class UserDataSourceImpl @Inject constructor(
         return userDao
             .getAccessToken()
             .subscribeOn(Schedulers.io())
+//            .doOnSuccess { throw Exception() }
+//            .onErrorResumeNext {  }
+            .onErrorReturn { "error" }
     }
 
     override fun updateAccessToken(access: String): Completable {

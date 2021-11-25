@@ -11,14 +11,16 @@ android {
 
     defaultConfig {
         applicationId "com.clonecodingbm"
-        minSdkVersion 26
-        targetSdkVersion 30
+        minSdk 26
+        targetSdk 30
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField("String", "RAMS_API_KEY", "\"" + getRamsApiKey() + "\"")
         buildConfigField("String", "RAMS_BASE_URL", "\"https://r5670326j8.execute-api.ap-northeast-2.amazonaws.com/delivery_server/\"")
+        buildConfigField("String", "TMDB_API_KEY", "\"" + getMovieApiKey() + "\"")
+        buildConfigField("String", "TMDB_BASE_URL", "\"https://api.themoviedb.org/3/\"")
     }
 
     buildTypes {
@@ -85,4 +87,7 @@ dependencies {
 }
 def getRamsApiKey() {
     return project.findProperty("rams_api_key")
+}
+def getMovieApiKey() {
+    return project.findProperty("tmdb_api_key")
 }

@@ -15,15 +15,15 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
     private val viewModel by viewModels<LoginViewModel>()
 
     override fun init() {
-        val idWatcher = binding.etLoginIdInput.textChanges().map { "$it" }
-        val pwWatcher = binding.etLoginPwInput.textChanges().map { "$it" }
+        val idWatcher = binding.etLoginIdInput.textChanges()
+        val pwWatcher = binding.etLoginPwInput.textChanges()
         compositeDisposable
             .add(
                 Observable
                     .combineLatest(
                         idWatcher,
                         pwWatcher,
-                        BiFunction { idResult: String, pwResult: String ->
+                        BiFunction { idResult: CharSequence, pwResult: CharSequence ->
                             return@BiFunction idResult.isBlank() || pwResult.isBlank()
                         }
                     )
@@ -37,7 +37,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(R.layout.fragment_login
                 showToast(it)
             })
             loginResult.observe(viewLifecycleOwner, {
-                if (it == true) {
+                if (it) {
                     findNavController().popBackStack()
                 }
             })

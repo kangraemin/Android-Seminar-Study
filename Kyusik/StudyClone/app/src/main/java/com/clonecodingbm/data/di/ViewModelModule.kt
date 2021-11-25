@@ -1,8 +1,10 @@
 package com.clonecodingbm.data.di
 
+import com.clonecodingbm.data.repository.home.HomeRepository
 import com.clonecodingbm.data.repository.login.LoginRepository
 import com.clonecodingbm.data.repository.mypage.MyPageRepository
 import com.clonecodingbm.data.repository.search.SearchRepository
+import com.clonecodingbm.ui.home.HomeViewModel
 import com.clonecodingbm.ui.login.LoginViewModel
 import com.clonecodingbm.ui.mypage.MyPageViewModel
 import com.clonecodingbm.ui.search.SearchViewModel
@@ -25,5 +27,9 @@ object ViewModelModule {
     @Provides
     fun provideSearchViewModel(repository: SearchRepository): SearchViewModel {
         return SearchViewModel(repository)
+    }
+    @Provides
+    fun provideHomeViewModel(repository: HomeRepository): HomeViewModel {
+        return HomeViewModel(repository)
     }
 }

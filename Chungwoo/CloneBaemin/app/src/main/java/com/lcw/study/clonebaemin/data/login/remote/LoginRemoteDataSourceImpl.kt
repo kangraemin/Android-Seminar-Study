@@ -11,7 +11,8 @@ class LoginRemoteDataSourceImpl @Inject constructor(
     private val apiService: ApiService) : LoginDataSource {
 
     override fun requestLogin(username: String, password: String): Single<LoginData> {
-        return apiService.requestLogin(RequestLoginInfoData(username = username, password = password))
+        return apiService
+            .getToken(RequestLoginInfoData(username = username, password = password))
             .subscribeOn(Schedulers.io())
     }
 }

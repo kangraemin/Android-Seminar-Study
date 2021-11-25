@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
-import com.lcw.study.clonebaemin.BuildConfig
 import com.lcw.study.clonebaemin.R
 import com.lcw.study.clonebaemin.databinding.FragmentSearchListBinding
 import com.lcw.study.clonebaemin.feature.base.BaseFragment
@@ -16,7 +15,6 @@ class SearchListFragment : BaseFragment<FragmentSearchListBinding>(R.layout.frag
     private val searchListAdapter = SearchListAdapter()
 
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.vm = searchListViewModel
@@ -24,14 +22,9 @@ class SearchListFragment : BaseFragment<FragmentSearchListBinding>(R.layout.frag
 
         binding.rvSearchList.adapter = searchListAdapter
 
-        searchListViewModel.getSearch(
-            BuildConfig.api_search_key,
-            arguments?.getString("query")!!,
-            1
-        )
 
-        searchListViewModel.searchData.observe(viewLifecycleOwner){
-            Log.d("SearchListFragment","searchData : $it")
+        searchListViewModel.searchData.observe(viewLifecycleOwner) {
+            Log.d("SearchListFragment", "searchData : $it")
         }
     }
 

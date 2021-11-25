@@ -1,4 +1,4 @@
-package com.lcw.study.clonebaemin
+package com.lcw.study.clonebaemin.utils
 
 import android.app.Application
 import com.lcw.study.clonebaemin.data.local.PreferenceUtil

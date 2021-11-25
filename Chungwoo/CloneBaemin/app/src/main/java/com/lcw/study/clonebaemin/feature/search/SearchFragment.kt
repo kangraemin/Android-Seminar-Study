@@ -54,11 +54,7 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 binding.searchView.setQuery("", false)
-                /*      searchViewModel.getSearch(
-                    "iGR3hRvQ.K3wPNmJgqSMeY6CehCZmuq7Kg5Hnw3o7",
-                    query.toString(),
-                    1
-                )*/
+                searchViewModel.getSearch(query.toString(), 1)
 
                 var list = ArrayList<String>()
                 list.add(query.toString())
@@ -76,9 +72,6 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
                     R.id.action_searchFragment_to_searchListFragment,
                     bundle
                 )
-
-
-
 
 
                 return true
@@ -136,5 +129,9 @@ class SearchFragment : BaseFragment<FragmentSearchBinding>(R.layout.fragment_sea
     override fun onDestroyView() {
         super.onDestroyView()
         compositeDisposable.dispose()
+    }
+
+    override fun onDetach() {
+        super.onDetach()
     }
 }
